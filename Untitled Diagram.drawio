@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T18:48:25.787Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="Mo_9l2CODTbAXAVPyRx1" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T18:50:08.857Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="mmuSX3IEF4tEkmlVudmh" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="851" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -37,7 +37,7 @@
             <mxPoint x="490" y="238" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-31" value="member_id&lt;br&gt;member_pw&lt;br&gt;member_nick&lt;br&gt;member_birth" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-30">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-31" value="user_id&lt;br&gt;user_pw&lt;br&gt;user_nick&lt;br&gt;user_birth" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-30">
           <mxGeometry x="0.3448" y="-1" relative="1" as="geometry">
             <mxPoint x="-56.9" y="-31" as="offset" />
           </mxGeometry>
@@ -68,10 +68,10 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-42" value="회원가입처리&lt;br&gt;/member/join.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF0000;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-42" value="회원가입처리&lt;br&gt;/user/join.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF0000;" vertex="1" parent="1">
           <mxGeometry x="490" y="210" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-44" value="회원가입성공&lt;br&gt;/member/join_success.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-44" value="회원가입성공&lt;br&gt;/user/join_success.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="630" y="120" width="150" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-45" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
@@ -80,7 +80,7 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-46" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="630" y="180" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-47" value="회원가입실패&lt;br&gt;/member/join_fail.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-47" value="회원가입실패&lt;br&gt;/user/join_fail.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="630" y="291" width="150" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-48" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
@@ -102,12 +102,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-54" value="member_id&lt;br&gt;member_pw" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-53">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-54" value="user_id&lt;br&gt;user_pw" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-53">
           <mxGeometry x="-0.1933" y="-1" relative="1" as="geometry">
             <mxPoint x="-30" y="-19" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-55" value="로그인입력&lt;br&gt;/member/login.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-55" value="로그인입력&lt;br&gt;/user/login.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="270" y="520" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-56" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
@@ -137,7 +137,7 @@
             <mxPoint x="-14" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-60" value="로그인검사&lt;br&gt;/member/login.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF3333;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-60" value="로그인검사&lt;br&gt;/user/login.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF3333;" vertex="1" parent="1">
           <mxGeometry x="490" y="520" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-61" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
@@ -155,7 +155,7 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-68" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="270" y="170" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-69" value="회원가입&lt;br&gt;/member/join.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-69" value="회원가입&lt;br&gt;/user/join.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="270" y="200" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-70" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
