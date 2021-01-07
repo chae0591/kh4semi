@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T19:03:02.394Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="OgjPrvp1IX9oCyIeQw3x" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T19:03:21.699Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="wpFh2ZOEf0Qfq-qbKrpb" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="851" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="100" y="190" width="140" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-2" value="헤더+메뉴&lt;br&gt;/template/header.jsp" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-2" value="헤더+메뉴+로그인&lt;br&gt;/template/header.jsp" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="110" y="220" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-3" value="배너&lt;br&gt;/template/banner.jsp" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
