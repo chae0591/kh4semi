@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T19:32:31.773Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="wNDFkfLf8nDfZU3geW28" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T19:33:24.169Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="tAQsb74XFgxvayyeARjQ" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="851" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
@@ -270,7 +270,7 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-109" value="로그인 버튼 클릭시&lt;br&gt;드랍으로 내려오며&lt;br&gt;픽스로 고정,&lt;br&gt;배경색 기입 예정" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="815" y="460" width="120" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-110" value="로그인창과 &lt;br&gt;동일한 형식" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-110" value="로그인창과 &lt;br&gt;동일한 형식&lt;br&gt;-&lt;br&gt;회원탈퇴기능도&lt;br&gt;만들것인가?" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="815" y="160" width="120" height="130" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-133" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fontColor=#000000;align=left;arcSize=5;" vertex="1" parent="1">
