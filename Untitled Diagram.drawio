@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T19:29:28.811Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="dZnK5qrT7tWmpC1T3L-a" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T19:31:43.985Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="lLthCeeVoyawjzn84HWl" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="851" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
@@ -471,13 +471,13 @@
             <mxPoint x="-14" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-183" value="특정 글의 정보가 미리 표시 되로록 구성, 글번호가 반드시 필요! 글번호를 이용해서 정보를 불러온 뒤 화면에 표시" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=2" vertex="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-183" value="특정 글의 정보가 미리 표시 되도록 구성&lt;br&gt;글번호를 이용해 정보를 불러온 뒤&lt;br&gt;화면에 표시하도록 한다!" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0;fontColor=#0000FF;" vertex="1" parent="1">
           <mxGeometry x="440" y="913" width="220" height="64" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-184" value="" style="shape=flexArrow;endArrow=classic;html=1;" edge="1" parent="1">
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-184" value="" style="shape=flexArrow;endArrow=classic;html=1;fontColor=#0000FF;strokeColor=#0000FF;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="430" y="945.5" as="sourcePoint" />
-            <mxPoint x="400" y="975.5" as="targetPoint" />
+            <mxPoint x="440" y="945.5" as="sourcePoint" />
+            <mxPoint x="410" y="975.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
