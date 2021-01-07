@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T18:57:08.699Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="x0jtI64tLn9I-QPaUpB9" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T18:59:48.048Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="SXW8nXiJZPNZTdVUcmK2" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="851" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -168,10 +168,10 @@
           <mxGeometry x="270" y="410" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-74" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fontColor=#000000;align=left;arcSize=5;" vertex="1" parent="1">
-          <mxGeometry x="255" y="681" width="550" height="189" as="geometry" />
+          <mxGeometry x="255" y="664" width="550" height="189" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-75" value="3. 게시글 등록-여행꿀팁" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;align=center;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;position2=0.5;size=10;position=0.5;" vertex="1" parent="1">
-          <mxGeometry x="270" y="660" width="140" height="40" as="geometry" />
+          <mxGeometry x="270" y="643" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-76" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="270" y="490" width="120" height="30" as="geometry" />
@@ -188,22 +188,22 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-83" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="270" y="707" width="120" height="30" as="geometry" />
+          <mxGeometry x="270" y="690" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-84" value="게시글입력&lt;br&gt;/tipContent/write.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="270" y="767" width="120" height="60" as="geometry" />
+          <mxGeometry x="270" y="750" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-85" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="270" y="827" width="120" height="30" as="geometry" />
+          <mxGeometry x="270" y="810" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-86" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="270" y="737" width="120" height="30" as="geometry" />
+          <mxGeometry x="270" y="720" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gZ8JV7jaEIuzKvq_sZsB-87" target="gZ8JV7jaEIuzKvq_sZsB-91">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="640" y="776" />
-              <mxPoint x="640" y="776" />
+              <mxPoint x="640" y="759" />
+              <mxPoint x="640" y="759" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -213,15 +213,15 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-87" value="게시글 업로드 처리&lt;br&gt;/tipContent/write.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF3333;" vertex="1" parent="1">
-          <mxGeometry x="480" y="745.5" width="120" height="60" as="geometry" />
+          <mxGeometry x="480" y="728.5" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-88" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3333FF;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="390" y="780" as="sourcePoint" />
-            <mxPoint x="480" y="780" as="targetPoint" />
+            <mxPoint x="390" y="763" as="sourcePoint" />
+            <mxPoint x="480" y="763" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="450" y="780" />
-              <mxPoint x="450" y="780" />
+              <mxPoint x="450" y="763" />
+              <mxPoint x="450" y="763" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -231,34 +231,53 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-90" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="677" y="707" width="120" height="30" as="geometry" />
+          <mxGeometry x="677" y="690" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-91" value="게시글 상세페이지&lt;br&gt;/tipContent/detail.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="677" y="767" width="120" height="60" as="geometry" />
+          <mxGeometry x="677" y="750" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-92" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="677" y="827" width="120" height="30" as="geometry" />
+          <mxGeometry x="677" y="810" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-93" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="677" y="737" width="120" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-100" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="470" y="660" as="sourcePoint" />
-            <mxPoint x="520" y="610" as="targetPoint" />
-          </mxGeometry>
+          <mxGeometry x="677" y="720" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-101" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="110" y="707" width="120" height="30" as="geometry" />
+          <mxGeometry x="110" y="690" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-102" value="카테고리 메인페이지&lt;br&gt;/tipContent/write.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="110" y="767" width="120" height="60" as="geometry" />
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-102" value="카테고리 메인페이지&lt;br&gt;/tipContent/main.jsp" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="750" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-107" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="gZ8JV7jaEIuzKvq_sZsB-103" target="gZ8JV7jaEIuzKvq_sZsB-85">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="170" y="870" />
+              <mxPoint x="330" y="870" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-108" value="게시글 등록하기 버튼 클릭" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-107">
+          <mxGeometry x="-0.27" y="-1" relative="1" as="geometry">
+            <mxPoint x="32" as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-103" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="110" y="827" width="120" height="30" as="geometry" />
+          <mxGeometry x="110" y="810" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-104" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="110" y="737" width="120" height="30" as="geometry" />
+          <mxGeometry x="110" y="720" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-105" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="770" as="sourcePoint" />
+            <mxPoint x="520" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-106" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="770" as="sourcePoint" />
+            <mxPoint x="520" y="720" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
