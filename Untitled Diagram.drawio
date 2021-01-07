@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-07T17:49:15.973Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="CrUciotUHbyHh1M8xOsx" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-07T17:49:41.042Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="LmLTHHBkUrzAZTYa5doa" version="14.1.8" type="github">
   <diagram id="ZsBfRqcbH99QROAvJv4S" name="Page-1">
     <mxGraphModel dx="559" dy="723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -54,19 +54,6 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-37" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="270" y="282" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FF0000;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="gZ8JV7jaEIuzKvq_sZsB-42" target="gZ8JV7jaEIuzKvq_sZsB-44">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="550" y="176" />
-              <mxPoint x="630" y="176" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-39" value="성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-38">
-          <mxGeometry x="0.4599" y="1" relative="1" as="geometry">
-            <mxPoint x="-21" as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gZ8JV7jaEIuzKvq_sZsB-42" target="gZ8JV7jaEIuzKvq_sZsB-47">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -77,6 +64,14 @@
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-41" value="아이디중복" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-40">
           <mxGeometry x="0.3968" relative="1" as="geometry">
             <mxPoint x="-4.45" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="gZ8JV7jaEIuzKvq_sZsB-42" target="gZ8JV7jaEIuzKvq_sZsB-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-66" value="성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gZ8JV7jaEIuzKvq_sZsB-65">
+          <mxGeometry x="0.1679" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-42" value="회원가입처리&lt;br&gt;/member/join.do" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF0000;" vertex="1" parent="1">
@@ -165,6 +160,12 @@
         </mxCell>
         <mxCell id="gZ8JV7jaEIuzKvq_sZsB-63" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="110" y="360" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gZ8JV7jaEIuzKvq_sZsB-64" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="340" as="sourcePoint" />
+            <mxPoint x="540" y="290" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
