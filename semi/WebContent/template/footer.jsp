@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 </section>
 		<footer>
-			<h5 class="center">KH 정보교육원 웹개발 수업자료 &copy;</h5>
+			<h5 class="center">디비go 전국방방곡곡 &copy;</h5>
 			
 			<!-- 
 				로그인 관련된 정보들을 출력(공부용)
