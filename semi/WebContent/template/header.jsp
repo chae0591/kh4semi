@@ -144,7 +144,6 @@
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
 	            <a href="<%=request.getContextPath()%>/user/logout.do">로그아웃</a>
-	            <a href="<%=request.getContextPath()%>/user/my.jsp">내정보</a>
 	            <%} %>
 	            
 	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post">
