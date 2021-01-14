@@ -54,7 +54,7 @@
 	    float: left;
     }
     
-    .login-btn {
+    .log-btn {
         display: inline-block;
         padding: 1rem;
     }
@@ -138,12 +138,12 @@
 	            
 	            <!-- 비회원이 마주할 메뉴 -->
 	            <%if(!isLogin){ %>
-	            <a href="<%=request.getContextPath()%>/user/login.jsp" class="login-btn">로그인</a>
+	            <a href="<%=request.getContextPath()%>/user/login.jsp" class="log-btn">로그인</a>
 	            <a href="<%=request.getContextPath()%>/user/join.jsp" class="join-btn">회원가입</a>
 	            
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
-	            <a href="<%=request.getContextPath()%>/user/logout.do">로그아웃</a>
+	            <a href="<%=request.getContextPath()%>/user/logout.do" class="log-btn">로그아웃</a>
 	            <%} %>
 	            
 	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post">
