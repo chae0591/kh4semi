@@ -6,7 +6,6 @@
 <div class="outbox" style="width:640px">
 	<div class="row center">
 		<h2>환영합니다!</h2>
-		test
 	</div>
 </div>
 			
