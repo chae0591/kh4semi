@@ -133,7 +133,7 @@
 		<header>
 			<div class="right top">
 				<a href="<%=request.getContextPath()%>">
-	            	<img class="logo" alt="디비go" src="https://placehold.it/200x90?text=dibigo">
+	            	<img class="logo" alt="디비go" src="https://placehold.it/200x105?text=dibigo">
 	            </a>
 	            
 	            <!-- 비회원이 마주할 메뉴 -->
@@ -159,7 +159,7 @@
 				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A</a></li>
 			</ul>
 		</nav>
-		<div class="contents">
+		
 		<div class="banner">
 			<ul>
 			
@@ -175,5 +175,5 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	
 		<section>
