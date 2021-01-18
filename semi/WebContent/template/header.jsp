@@ -147,7 +147,7 @@
 	            <%} %>
 	            
 	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post">
-		            <input type="text" class="input input-inline">
+		            <input type="text" name="keyword" placeholder="검색어 입력" class="input input-inline">
 		            <input type="submit" value="검색" class="input input-inline">
 	            </form>
             </div>
