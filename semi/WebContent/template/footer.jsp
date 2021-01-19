@@ -10,7 +10,7 @@
 				- check : 세션에 사용자의 번호를 저장하기 위한 값이며, 모든 페이지에서 유/무를 확인하여 로그인 처리 수행
 			 -->
 			 <h5 class="center">Session ID : <%=session.getId()%></h5>
-			 <h5 class="center">check : <%=session.getAttribute("check")%></h5>
+			 <h5 class="center">check : <%=session.getAttribute("check")%></h5> 
 		</footer>
 	</main>
 </body>
