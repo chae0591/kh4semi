@@ -27,8 +27,9 @@ public class MemberLoginServlet extends HttpServlet {
 			boolean login = dao.login(dto);
 			
 			if(login) {
-				MemberDto m = dao.find(dto.getMember_id());
-				req.getSession().setAttribute("check", m.getMember_nick());
+				MemberDto no = dao.find(dto.getMember_id()); // 회원번호로 세션 불러오기 check == member_no
+				req.getSession().setAttribute("check", no.getMember_no());
+				req.getSession().setAttribute("nick", no.getMember_nick());
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 			}
 			else {
