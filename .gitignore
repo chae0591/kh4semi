@@ -1,3 +1,10 @@
+
+# project setting file
+semi/.settings/
+
+# project setting file
+semi/*.classpath
+
 # Compiled class file
 *.class
 
