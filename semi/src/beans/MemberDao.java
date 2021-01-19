@@ -68,4 +68,31 @@ public class MemberDao {
 		
 		con.close(); 
 	}
+	
+	//단일검색 
+	public MemberDto find(int member_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from member where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, member_no);
+		ResultSet rs = ps.executeQuery();
+		
+		MemberDto dto;
+		if(rs.next()) {
+			dto = new MemberDto();
+			dto.setMember_no(rs.getInt("member_no"));
+			dto.setMember_id(rs.getString("member_id"));
+			dto.setMember_pw(rs.getString("member_pw"));
+			dto.setMember_nick(rs.getString("member_nick"));
+			dto.setMember_join(rs.getDate("member_join"));
+		}
+		else {
+			dto = null; 
+		}
+		
+		con.close();
+		
+		return dto;		
+	}
 }
