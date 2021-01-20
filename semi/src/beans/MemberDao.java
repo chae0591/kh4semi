@@ -144,4 +144,22 @@ public class MemberDao {
 		return count > 0;
 	}
 	
+	//비밀번호 찾기 DAO
+	public boolean findpw(MemberDto dto) throws Exception {
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+			String sql = "select * from member where member_id=? and member_nick=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getMember_id());
+			ps.setString(2, dto.getMember_nick());
+			ResultSet rs = ps.executeQuery();
+		
+
+			boolean result = rs.next();
+			
+			con.close();
+			
+			return result; 
+			
+	}
 }
