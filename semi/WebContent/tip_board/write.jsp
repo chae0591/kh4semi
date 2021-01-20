@@ -11,14 +11,12 @@
 	
 	<form action="write.do" method="post">
 	<div class="row">
-		<label>말머리</label>
-		<select name="board_header" class="input">
-			<option value="">말머리를 선택하세요</option>
-			<option value="정보">정보</option>
-			<option value="공지">공지</option>
-			<option value="유머">유머</option>
-			<option value="자유">자유</option>
-		</select>	
+		<label>시작일</label>
+		<input type="date" name="start_date"
+       min="1900-01-01" max="2100-12-31" required>
+		<label>종료일</label>
+		<input type="date" name="end_date"
+       min="1900-01-01" max="2100-12-31" required>
 	</div>
 	
 	<div class="row">
