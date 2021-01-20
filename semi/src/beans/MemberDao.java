@@ -56,10 +56,7 @@ public class MemberDao {
 	
 	
 	//회원가입
-<<<<<<< HEAD
-	
-	
-=======
+
 	public void register(MemberDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
@@ -72,9 +69,8 @@ public class MemberDao {
 		
 		con.close(); 
 	}
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/main
-=======
+
+
 	
 	//단일검색 
 	public MemberDto find(int member_no) throws Exception {
@@ -151,5 +147,4 @@ public class MemberDao {
 		return count > 0;
 	}
 	
->>>>>>> refs/remotes/origin/main
 }
