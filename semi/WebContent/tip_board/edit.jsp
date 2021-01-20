@@ -26,11 +26,11 @@
 		<label>시작일</label>
 		<input type="date" name="start_date"
 		value="<%=boardDto.getStart_date() %>"
-       min="1900-01-01" max="2100-12-31">
+       min="1900-01-01" max="2100-12-31" required>
 		<label>종료일</label>
 		<input type="date" name="end_date"
 		value="<%=boardDto.getEnd_date() %>"
-       min="1900-01-01" max="2100-12-31">
+       min="1900-01-01" max="2100-12-31" required>
 	</div>
 	
 	
