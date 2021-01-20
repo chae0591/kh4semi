@@ -41,20 +41,6 @@
 	}
 </style>
 
-<script>
-	$(function(){
-		//.write-btn을 누르면 글쓰기 페이지로 이동
-		$(".write-btn").click(function(){
-			location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
-		});
-		
-		//.detail-enter를 누르면 상세 페이지로 이동
-		$(".detail-enter").click(function(){
-			location.href = "<%=request.getContextPath()%>/qna_board/detail.jsp";
-		});
-	});
-</script>
-
 <div class="outbox">
 
 	<!-- 상단 부분 -->
@@ -79,8 +65,8 @@
 		<%for(QnaBoardDto dto : list){ %>
 			<div class="row">
 				<h4>질문</h4>
-				<h4 class="detail-enter"><%=dto.getBoard_title()%></h4>
-				<p class="detail-enter"><%=dto.getBoard_content()%></p>
+				<h4 class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_title()%></a></h4>
+				<p class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></a></p>
 				<p><%=dto.getRegist_time()%></p>
 				<p><%=dto.getBoard_writer()%>님의 질문입니다</p>
 			</div>

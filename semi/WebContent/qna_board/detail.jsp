@@ -21,24 +21,6 @@
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<script>
-
-	$(function(){
-		//수정 버튼 - edit.jsp로 번호를 첨부하여 전송
-		$(".edit-btn").click(function(){
-			location.href = "edit.jsp?board_no=<%=board_no%>";
-		});
-		
-		//삭제 버튼 - delete.jsp로 번호를 첨부하여 전송
-		$(".delete-btn").click(function(){
-			if(confirm("정말 지우시겠습니까?")){
-				location.href = "delete.jsp?board_no=<%=board_no%>";
-			}
-		});
-	});
-
-
-</script>
 
 <div class="out box">
 
