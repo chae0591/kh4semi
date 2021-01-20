@@ -25,9 +25,9 @@ public class TipOpinionInsertServlet extends HttpServlet{
 			tipOpinionDto.setOpinion_text(req.getParameter("opinion_text"));
 			tipOpinionDto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
 			
-			String member_nick = (String)req.getSession().getAttribute("nick");
+			int member_no = (int)req.getSession().getAttribute("check");
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.find(member_nick);
+			MemberDto memberDto = memberDao.find(member_no);
 			
 			tipOpinionDto.setOpinion_writer(memberDto.getMember_id());
 			
@@ -35,7 +35,7 @@ public class TipOpinionInsertServlet extends HttpServlet{
 			TipOpinionDao tipOpinionDao = new TipOpinionDao();
 			tipOpinionDao.insert(tipOpinionDto);
 			 
-//			출력 : 상세보기 글로 다시 돌아가도록 처리
+//			출력 : 상세보기 글로 다시 돌아가도록 처리o
 			resp.sendRedirect("detail.jsp?board_no="+tipOpinionDto.getBoard_no());
 		}
 		catch(Exception e) {

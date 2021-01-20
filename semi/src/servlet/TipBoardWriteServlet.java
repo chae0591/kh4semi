@@ -42,9 +42,9 @@ public class TipBoardWriteServlet extends HttpServlet{
 		
 		
 //		현재 로그인한 사용자 정보를 불러오는 코드
-		String member_nick = (String)req.getSession().getAttribute("nick");
+		int member_no = (int)req.getSession().getAttribute("check");
 		MemberDao memberDao = new MemberDao();
-		MemberDto memberDto = memberDao.find(member_nick);
+		MemberDto memberDto = memberDao.find(member_no);
 		
 //		memberDto의 member_id를 boardDto의 board_writer에 설정
 		boardDto.setBoard_writer(memberDto.getMember_id());

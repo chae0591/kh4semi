@@ -30,13 +30,16 @@
 	if(auth != null) isAdmin = auth.equals("관리자");
 	
 	//int member_no = (int)session.getAttribute("check");
-	String member_nick;
-	member_nick = (String)session.getAttribute("nick");
-	boolean isOwner = false;
+	int member_no;
+	boolean isOwner;
 	MemberDto memberDto = null;
-	if(member_nick != null){
-		memberDto = memberDao.find(member_nick);
+
+	try{
+		member_no = (int)session.getAttribute("check");
+		memberDto = memberDao.find(member_no);
 		isOwner = memberDto.getMember_id().equals(boardDto.getBoard_writer());
+	}catch(Exception e) {
+		isOwner = false;
 	}
 %>
 

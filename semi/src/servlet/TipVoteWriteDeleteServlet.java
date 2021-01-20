@@ -24,11 +24,12 @@ public class TipVoteWriteDeleteServlet extends HttpServlet{
 			
 			TipVoteDto tipVoteDto = new TipVoteDto();
 			tipVoteDto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
-			
-			String member_nick = (String)req.getSession().getAttribute("nick");
-			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.find(member_nick);
-			tipVoteDto.setMember_no(memberDto.getMember_no());
+
+			int member_no = (int)req.getSession().getAttribute("check");
+//			MemberDao memberDao = new MemberDao();
+//			MemberDto memberDto = memberDao.find(member_no);
+//			tipVoteDto.setMember_no(memberDto.getMember_no());
+			tipVoteDto.setMember_no(member_no);
 			
 			TipBoardDao tipBoardDao = new TipBoardDao();
 //			계산 : 댓글 테이블에 등록
