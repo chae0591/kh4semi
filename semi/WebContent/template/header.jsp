@@ -1,3 +1,6 @@
+<%@page import="beans.TipBoardDto"%>
+<%@page import="java.util.List"%>
+<%@page import="beans.TipBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
@@ -140,7 +143,7 @@
 	            <%if(!isLogin){ %>
 	            <a href="<%=request.getContextPath()%>/member/login.jsp" class="log-btn">로그인</a>
 	          <%--   <a href="<%=request.getContextPath()%>/user/join.jsp" class="join-btn">회원가입</a> --%>
-	            
+	             
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
 	            <a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
@@ -156,7 +159,7 @@
 			<ul class="menu center">
 				<li><a href="<%=request.getContextPath()%>">추천 콘텐츠</a></li>
 				<li><a href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a></li>
-				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A</a></li>
+				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a></li>
 			</ul>
 		</nav>
 		

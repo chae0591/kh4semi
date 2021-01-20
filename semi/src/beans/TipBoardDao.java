@@ -1,7 +1,6 @@
 package beans;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -63,6 +62,38 @@ public class TipBoardDao {
 		con.close();
 		return list;
 	}
+	
+	//검색 결과 DAO
+		public List<TipSearchVO> select(String keyword) throws Exception {
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+			String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+							+ "select * from("
+								+ "select T.board_title, T.board_no, M.member_nick from "
+								+ "tip_board T inner join member M "
+								+ "on M.member_id = T.board_writer "
+								+ "where instr(board_title, ?) > 0 order by board_no desc)"
+							+ ")TMP"
+							+ ") where rn between 1 and 8";
+					
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+				
+			List<TipSearchVO> list = new ArrayList<>();
+			while(rs.next()) {
+				TipSearchVO tipsearchVO = new TipSearchVO();
+				tipsearchVO.setBoard_no(rs.getInt("board_no"));
+				tipsearchVO.setBoard_title(rs.getString("board_title"));
+				tipsearchVO.setMember_nick(rs.getString("member_nick"));
+				list.add(tipsearchVO);
+			}
+				
+				con.close();
+				
+				return list;
+			}
 	
 	
 }
