@@ -5,9 +5,13 @@
 	<div class="row center">
 		<h2>게시글 작성</h2>
 	</div>
-	<div class="row center">상대방에 대한 인신공격은 예고 없이 삭제될 수 있습니다</div>
 	
 	<form action="write.do" method="post">
+	
+	<div class="row">
+		<label>작성자</label>
+		<input type="text" class="input" name="board_writer" required>
+	</div>
 	
 	<div class="row">
 		<label>제목</label>
