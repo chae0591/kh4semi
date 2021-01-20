@@ -25,7 +25,7 @@ public class TipVoteWriteDeleteServlet extends HttpServlet{
 			TipVoteDto tipVoteDto = new TipVoteDto();
 			tipVoteDto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
 			
-			String member_nick = (String)req.getSession().getAttribute("check");
+			String member_nick = (String)req.getSession().getAttribute("nick");
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.find(member_nick);
 			tipVoteDto.setMember_no(memberDto.getMember_no());

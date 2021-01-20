@@ -31,7 +31,7 @@
 	
 	//int member_no = (int)session.getAttribute("check");
 	String member_nick;
-	member_nick = (String)session.getAttribute("check");
+	member_nick = (String)session.getAttribute("nick");
 	boolean isOwner = false;
 	MemberDto memberDto = null;
 	if(member_nick != null){
