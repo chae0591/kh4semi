@@ -1,9 +1,9 @@
 
 # project setting file
-# semi/.settings/
+semi/.settings/
 
 # project setting file
-# semi/*.classpath
+semi/*.classpath
 
 # Compiled class file
 *.class
