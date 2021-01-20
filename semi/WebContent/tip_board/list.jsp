@@ -103,7 +103,6 @@
 <div class="outbox" style="width:640px">
 	<div class="row center">
 		<h2>환영합니다!</h2>
-		<%=list.size() %>
 		<%for(TipBoardOpinionCountVO dto : list){ %>
 		<div>
 			
