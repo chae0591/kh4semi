@@ -32,7 +32,6 @@ public class QnaBoardDao {
 			dto.setBoard_title(rs.getString("board_title"));
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
-			dto.setVote(rs.getInt("vote"));
 		}
 		con.close();
 		

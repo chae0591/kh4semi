@@ -9,11 +9,6 @@
 	<form action="write.do" method="post">
 	
 	<div class="row">
-		<label>작성자</label>
-		<input type="text" class="input" name="board_writer" required>
-	</div>
-	
-	<div class="row">
 		<label>제목</label>
 		<input type="text" class="input" name="board_title" required>
 	</div>

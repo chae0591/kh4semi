@@ -40,9 +40,10 @@
 
 </script>
 
-<div>
+<div class="out box">
 
 작성자 : <%=dto.getBoard_writer()%>
+<br><br>
 제목 : <%=dto.getBoard_title()%>
 <br><br>
 내용 : <%=dto.getBoard_content()%>
