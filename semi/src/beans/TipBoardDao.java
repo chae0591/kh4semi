@@ -287,6 +287,136 @@ public class TipBoardDao {
 		
 		return list;
 	}
+
+	
+
+//	페이징 + 댓글개수까지 불러오는 목록 메소드
+	public List<TipBoardOpinionCountVO> orderedPagingReplyCountList(int orderColomn, int orderType, int startRow, int endRow) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		String orderSql = "";
+		switch (orderColomn) {
+			case 1:
+				orderSql += "count(R.opinion_no)";
+				break;
+			default:
+				orderSql += "B.board_no";
+				break;
+		}
+		switch (orderType) {
+			case 1:
+				orderSql += " asc ";
+				break;
+			default:
+				orderSql += " desc ";
+				break;
+		}
+		
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select "
+								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+								+ "B.regist_time, B.vote, "
+								+ "B.start_date, B.end_date, "
+								+ "count(R.opinion_no) opinion_count "
+							+ "from "
+							+ "tip_board B left outer join tip_opinion R on B.board_no = R.board_no "
+							+ "group by "
+								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+								+ "B.regist_time, B.vote, "
+								+ "B.start_date, B.end_date "
+							+ "order by #1 "
+						+ ")TMP "
+					+ ") where rn between ? and ?";
+		sql = sql.replace("#1", orderSql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, startRow);
+		ps.setInt(2, endRow);
+		ResultSet rs = ps.executeQuery();
+		
+		List<TipBoardOpinionCountVO> list = new ArrayList<>();
+		while(rs.next()) {
+			TipBoardOpinionCountVO vo = new TipBoardOpinionCountVO();
+			vo.setBoard_no(rs.getInt("board_no"));
+			vo.setBoard_writer(rs.getString("board_writer"));
+			vo.setBoard_title(rs.getString("board_title"));
+			vo.setBoard_content(rs.getString("board_content"));
+			vo.setRegist_time(rs.getDate("regist_time"));
+			vo.setVote(rs.getInt("vote"));
+			vo.setStart_date(rs.getDate("start_date"));
+			vo.setEnd_date(rs.getDate("end_date"));
+			vo.setOpinion_count(rs.getInt("opinion_count"));
+			list.add(vo);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
+	public List<TipBoardOpinionCountVO> orderedPagingReplyCountList(int orderColomn, int orderType, String type, String key, int startRow, int endRow) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		String orderSql = "";
+		switch (orderColomn) {
+			case 1:
+				orderSql += "count(R.opinion_no)";
+				break;
+			default:
+				orderSql += "B.board_no";
+				break;
+		}
+		switch (orderType) {
+			case 1:
+				orderSql += " asc ";
+				break;
+			default:
+				orderSql += " desc ";
+				break;
+		}
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+							+ "select "
+								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+								+ "B.regist_time, B.vote, "
+								+ "B.start_date, B.end_date, "
+								+ "count(R.opinion_no) opinion_count "
+							+ "from "
+							+ "tip_board B left outer join tip_opinion R on B.board_no = R.board_no "
+							+ "where instr(#1, ?) > 0 "
+							+ "group by "
+								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+								+ "B.regist_time, B.vote, "
+								+ "B.start_date, B.end_date "
+							+ "order by #2 "
+						+ ")TMP "
+					+ ") where rn between ? and ?";
+		
+		sql = sql.replace("#1", type);
+		sql = sql.replace("#2", orderSql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, key);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
+		ResultSet rs = ps.executeQuery();
+		
+		List<TipBoardOpinionCountVO> list = new ArrayList<>();
+		while(rs.next()) {
+			TipBoardOpinionCountVO vo = new TipBoardOpinionCountVO();
+			vo.setBoard_no(rs.getInt("board_no"));
+			vo.setBoard_writer(rs.getString("board_writer"));
+			vo.setBoard_title(rs.getString("board_title"));
+			vo.setBoard_content(rs.getString("board_content"));
+			vo.setRegist_time(rs.getDate("regist_time"));
+			vo.setVote(rs.getInt("vote"));
+			vo.setStart_date(rs.getDate("start_date"));
+			vo.setEnd_date(rs.getDate("end_date"));
+			vo.setOpinion_count(rs.getInt("opinion_count"));
+			list.add(vo);
+		}
+		
+		con.close();
+		
+		return list;
+	}
 	
 
 	//상세보기(단일조회)

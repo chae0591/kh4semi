@@ -33,6 +33,20 @@
 
 
 <%
+	int orderColumn;
+	int orderType;
+	try{
+		orderColumn = Integer.parseInt(request.getParameter("orderColumn"));
+	}
+	catch(Exception e){
+		orderColumn = 0;
+	}
+	try{
+		orderType= Integer.parseInt(request.getParameter("orderType"));
+	}
+	catch(Exception e){
+		orderType = 0;
+	}
 	// 	목록,검색을 위해 필요한 프로그래밍 코드
 // 	type : 분류 , key : 검색어
 	String type = request.getParameter("type");
@@ -42,10 +56,10 @@
 	TipBoardDao dao = new TipBoardDao();
 	List<TipBoardOpinionCountVO> list; 
 	if(isSearch){
-		list = dao.pagingReplyCountList(type, key, startRow, endRow);  
+		list = dao.orderedPagingReplyCountList(orderColumn, orderType, type, key, startRow, endRow);  
 	}
 	else{
-		list = dao.pagingReplyCountList(startRow, endRow); 
+		list = dao.orderedPagingReplyCountList(orderColumn, orderType, startRow, endRow); 
 	}
 
 	//TipBoardDao dao = new TipBoardDao();
@@ -85,6 +99,13 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <script>
+	function setUrlParam(key, value){
+		console.log(key, value);
+		var urlParams = new URLSearchParams(window.location.search);
+		urlParams.set(key, value);
+		window.location.search = urlParams;
+	}
+
 	$(function(){
 		//.write-btn을 누르면 글쓰기 페이지로 이동
 		$(".write-btn").click(function(){
@@ -103,6 +124,8 @@
 <div class="outbox" style="width:640px">
 	<div class="row center">
 		<h2>환영합니다!</h2>
+		<a href="#" onclick="setUrlParam('orderColumn', '0'); return false;">최신순</a>
+		<a href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
 		<%for(TipBoardOpinionCountVO dto : list){ %>
 		<div>
 			
