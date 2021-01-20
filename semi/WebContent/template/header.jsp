@@ -58,12 +58,6 @@
         display: inline-block;
         padding: 1rem;
     }
-    
-    .join-btn {
-    	display: inline-block;
-        padding: 1rem;
-        margin-right: 1rem;
-    }
 	
 	.menu,
     .menu ul {
@@ -146,7 +140,7 @@
 	            <a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
 	            <%} %>
 	            
-	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post">
+	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 1rem">
 		            <input type="text" name="keyword" placeholder="검색어 입력" class="input input-inline">
 		            <input type="submit" value="검색" class="input input-inline">
 	            </form>
