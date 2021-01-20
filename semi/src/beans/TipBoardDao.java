@@ -14,6 +14,27 @@ public class TipBoardDao {
 	public static final String USERNAME = "project5";
 	public static final String PASSWORD = "project5";
 
+//	조회수 증가 기능 : 성공/실패를 반환할 필요가 없음
+	public void plusVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		String sql = "update tip_board set vote=vote+1 where board_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+//		int count = ps.executeUpdate();
+		con.close();
+	}
+//	조회수 증가 기능 : 성공/실패를 반환할 필요가 없음
+	public void minusVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		String sql = "update tip_board set vote=vote-1 where board_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+//		int count = ps.executeUpdate();
+		con.close();
+	}
+	
 //	삭제 기능
 	public boolean delete(int board_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);

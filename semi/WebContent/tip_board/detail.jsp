@@ -73,6 +73,13 @@
 				//location.href = "<%=request.getContextPath()%>/tip_board/delete.do?board_no=<%=board_no%>";
 			}
 		});
+
+		//목록 버튼을 누르면 list.jsp로 보낸다
+		$(".vote-btn").click(function(){
+			location.href = "vote_insert_delete.do?board_no=<%=board_no%>";
+			//location.href = "<%=request.getContextPath()%>/tip_board/vote_insert_delete.do?board_no=<%=board_no%>";
+		});
+		
 		
 		//목록 버튼을 누르면 list.jsp로 보낸다
 		$(".list-btn").click(function(){
@@ -144,6 +151,10 @@
 				<tr>
 					<th>작성일</th>
 					<td class="left"><%=boardDto.getRegist_time()%></td>
+				</tr>
+				<tr>
+					<th>좋아요</th>
+					<td class="left"><%=boardDto.getVote()%></td>
 				</tr>
 				
 				<!-- 댓글 목록 -->
@@ -241,6 +252,7 @@
 						<button class="input input-inline edit-btn">수정</button>
 						<button class="input input-inline delete-btn">삭제</button>
 						<%} %>
+						<button class="input input-inline vote-btn">좋아요</button>
 						<button class="input input-inline list-btn">목록</button>
 					</th>
 				</tr>
