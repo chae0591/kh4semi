@@ -7,13 +7,6 @@
 	QnaBoardDao dao = new QnaBoardDao();
 	List<QnaBoardDto> list = dao.select();
 %>
-<%
-	//페이지 네비게이터 계산 코드
-	int startBlock = 1;
-	int endBlock = 10;	
-
-	int total = 0;
-%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -27,18 +20,19 @@
 		float: left;
 		width: 20%;
 		height: 100%;
-		border: 1px solid black;
 	}
 	
 	.article {
 		float: right;
 		width: 80%;
 		height: 100%;
+	}
+	.article > .row {
 		border: 1px solid black;
 	}
 	
 	.pagination {
-	text-align: center;
+		text-align: center;
 	}
 	
 	.pagination > ul> li {
@@ -55,7 +49,7 @@
 		});
 		
 		//.detail-enter를 누르면 상세 페이지로 이동
-		@(".detail-enter").click(function(){
+		$(".detail-enter").click(function(){
 			location.href = "<%=request.getContextPath()%>/qna_board/detail.jsp";
 		});
 	});
@@ -86,8 +80,8 @@
 			<div class="row">
 				<h4>질문</h4>
 				<h4 class="detail-enter"><%=dto.getBoard_title()%></h4>
-				<a class="detail-enter"><%=dto.getBoard_content()%></a>
-				<a><%=dto.getRegist_time()%></a>
+				<p class="detail-enter"><%=dto.getBoard_content()%></p>
+				<p><%=dto.getRegist_time()%></p>
 				<p><%=dto.getBoard_writer()%>님의 질문입니다</p>
 			</div>
 		<%} %>
@@ -99,10 +93,17 @@
 		<!-- 페이지 네비게이션 -->
 		<div class="pagination">
 			<ul>
-				<li><a href="">이전</a></li>
-			<%for(int i = startBlock; i <= endBlock; i++) {%>
-				<li><a href=""><%total += i;%>total</a>
-			<%} %>
+				<li><a href="list.jsp?">이전</a></li>
+			 	<li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li><a href="#">10</a></li>
 				<li><a href="">다음</a></li>
 			</ul>
 		</div>
