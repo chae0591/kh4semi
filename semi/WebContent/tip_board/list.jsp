@@ -147,7 +147,7 @@
 	</div>
 	
 	<!-- 검색창 -->
-	<form action="list.jsp" method="post">
+	<form action="list.jsp" method="get">
 	<div class="row">
 		<select name="type" class="input input-inline">
 			<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
