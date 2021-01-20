@@ -48,6 +48,7 @@
 
 <%if(!tipList.isEmpty()){ %>
 <div class="container">
+
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
 	<div class="item">
 		<a href="<%=request.getContextPath()%>/tip_board/list.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
@@ -59,6 +60,7 @@
 		</a>
 	</div>
 	<%} %>
+	
 </div>
 
 <div class="center">
@@ -80,6 +82,7 @@
 
 <%if(!qnaList.isEmpty()){%>
 <div class="container">
+
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item">
 		<a href="<%=request.getContextPath()%>/qna_board/list.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
@@ -90,20 +93,19 @@
 			<span><%=qnasearchVO.getMember_nick()%> 여행작가</span>
 		</a>
 	</div>
+	<%} %>
 	
+</div>
+
 	<div class="center">
 		<a href="" class="btn-more input">
 			<span>여행Q&amp;A</span>
 			<span>더보기&gt;</span>
 		</a>
 	</div>
-	<%} %>
-</div>
+
 <%} else{%>
 	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
 <%} %>
 	
-
-	
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
