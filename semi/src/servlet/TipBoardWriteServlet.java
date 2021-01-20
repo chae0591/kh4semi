@@ -31,13 +31,13 @@ public class TipBoardWriteServlet extends HttpServlet{
 		boardDto.setBoard_content(req.getParameter("board_content"));
 
 		
-		//now test //later dev
-	    String str="2015-03-31";  
-	    Date date=new java.sql.Date(System.currentTimeMillis());//converting string into sql date  
-//		boardDto.setStart_date(req.getParameter("start_date"));
-//		boardDto.setEnd_date(req.getParameter("end_date"));
-		boardDto.setStart_date(date);
-		boardDto.setEnd_date(date);
+//	    String str="2015-03-31";  
+//	    Date date=new java.sql.Date.valueOf(req.getParameter("start_date"))(System.currentTimeMillis());//converting string into sql date  
+//		boardDto.setStart_date(date);
+//		boardDto.setEnd_date(date);
+		
+		boardDto.setStart_date(Date.valueOf(req.getParameter("start_date")));
+		boardDto.setEnd_date(Date.valueOf(req.getParameter("end_date")));
 		
 		
 		

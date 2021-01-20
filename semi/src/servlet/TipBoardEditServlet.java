@@ -23,13 +23,14 @@ public class TipBoardEditServlet extends HttpServlet{
 			boardDto.setBoard_title(req.getParameter("board_title"));
 			boardDto.setBoard_content(req.getParameter("board_content"));
 
-			//now test //later dev
-		    String str="2015-03-31";  
-		    Date date=Date.valueOf(str);//converting string into sql date  
-//			boardDto.setStart_date(req.getParameter("start_date"));
-//			boardDto.setEnd_date(req.getParameter("end_date"));
-			boardDto.setStart_date(date);
-			boardDto.setEnd_date(date);
+//		    String str="2015-03-31";  
+//		    Date date=Date.valueOf(str);//converting string into sql date  
+//			boardDto.setStart_date(date);
+//			boardDto.setEnd_date(date);
+
+			boardDto.setStart_date(Date.valueOf(req.getParameter("start_date")));
+			boardDto.setEnd_date(Date.valueOf(req.getParameter("end_date")));
+			
 			
 //			처리 : 수정
 			TipBoardDao boardDao = new TipBoardDao();

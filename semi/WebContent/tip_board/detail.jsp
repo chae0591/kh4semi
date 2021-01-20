@@ -144,6 +144,14 @@
 					<td class="left"><%=boardDto.getBoard_writer()%></td>
 				</tr>
 				<tr>
+					<th>시작일</th>
+					<td class="left"><%=boardDto.getStart_date()%></td>
+				</tr>
+				<tr>
+					<th>종료일</th>
+					<td class="left"><%=boardDto.getEnd_date()%></td>
+				</tr>
+				<tr>
 					<th width="20%">제목</th>
 					<td class="left"><%=boardDto.getBoard_title()%></td>
 				</tr>
