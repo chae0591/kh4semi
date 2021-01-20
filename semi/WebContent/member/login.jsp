@@ -8,7 +8,6 @@
 </head>
 <body>
 <form method="post" action="login.do">
-
 	<div>
 		<h3>디비고 로그인 하기</h3>
 			<div>
@@ -29,7 +28,7 @@
 	        <div>
 	        	디비고<a href="join.jsp"> 회원가입하기</a>
 	        </div>
-			</div>
+	</div>
 </form>
 </body>
 </html>
