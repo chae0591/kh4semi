@@ -143,4 +143,36 @@ public class QnaBoardDao {
 			
 			return dto;
 		}
+	
+	//검색 결과 DAO
+	public List<QnaSearchVO> select(String keyword) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+						+ "select * from("
+							+ "select Q.board_title, Q.board_no, M.member_nick from "
+							+ "qna_board Q inner join member M "
+							+ "on M.member_id = Q.board_writer "
+							+ "where instr(board_title, ?) > 0 order by board_no desc)"
+						+ ")TMP"
+						+ ") where rn between 1 and 8";
+				
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+			
+		List<QnaSearchVO> list = new ArrayList<>();
+		while(rs.next()) {
+			QnaSearchVO qnasearchVO = new QnaSearchVO();
+			qnasearchVO.setBoard_no(rs.getInt("board_no"));
+			qnasearchVO.setBoard_title(rs.getString("board_title"));
+			qnasearchVO.setMember_nick(rs.getString("member_nick"));
+			list.add(qnasearchVO);
+		}
+			
+			con.close();
+			
+			return list;
+		}
 }
