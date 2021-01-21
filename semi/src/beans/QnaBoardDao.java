@@ -3,6 +3,8 @@ package beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import util.JdbcUtil;
 
@@ -112,5 +114,33 @@ public class QnaBoardDao {
 			con.close();
 			
 			return dto;
+		}
+	//메인 선택글
+	public List<QnaBoardDto> selectMain() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+		String sql = "select * from (select rownum rn, TMP.* from ("
+								+ "select * from qna_board order by board_no desc"
+								+ ")TMP"
+								+ ")where rn between 1 and 4";
+				
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+			
+		List<QnaBoardDto> list = new ArrayList<>();
+		while(rs.next()) {
+			QnaBoardDto qnaboardDto = new QnaBoardDto();
+			qnaboardDto.setBoard_no(rs.getInt("board_no"));
+			qnaboardDto.setBoard_writer(rs.getString("board_writer"));
+			qnaboardDto.setBoard_title(rs.getString("board_title"));
+			qnaboardDto.setBoard_content(rs.getString("board_content"));
+			qnaboardDto.setRegist_time(rs.getDate("regist_time"));
+			qnaboardDto.setVote(rs.getInt("vote"));
+			list.add(qnaboardDto);
+		}
+			
+			con.close();
+			
+			return list;
 		}
 }

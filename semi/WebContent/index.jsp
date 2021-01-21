@@ -1,18 +1,43 @@
+<%@page import="beans.QnaBoardDto"%>
+<%@page import="beans.QnaBoardDao"%>
+<%@page import="java.util.List"%>
+<%@page import="beans.TipBoardDto"%>
+<%@page import="beans.TipBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	//여행꿀팁
+	TipBoardDao tipboardDao = new TipBoardDao();
+	List<TipBoardDto> tipList = tipboardDao.selectMain();
+	
+	//여행qna
+	QnaBoardDao qnaboardDao = new QnaBoardDao();
+	List<QnaBoardDto> qnaList = qnaboardDao.selectMain();
+%>
 
 <style>
+	div{ box-sizing: border-box; }
+
 	.container-tip{
 		display: grid;
-		grid-template-rows: repeat(2,300px);
-		grid-template-columns: repeat(3,1fr);
+		grid-template-columns: repeat(4,1fr);
+		grid-auto-rows: minmax(10em, auto);
+		grid-gap: 0.5rem;
+		justify-items: start;
+		align-items: start;		
 		padding: 10px 0 0 ;
 	}
 	
 	.container-qna{
 		display: grid;
-		grid-template-rows: repeat(2,200px);
 		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(10em, auto);
+		grid-gap: 0.5rem;
+		justify-items: start;
+		align-items: start;		
 		padding: 10px 0 0 ;
 	}	
 	
@@ -85,12 +110,18 @@
 <div class="bigTitle">여행꿀팁</div>
 
 <div class="container-tip">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">6</div>
+  	<%for(TipBoardDto tipboardDto : tipList){ %>
+	<div class="item">
+  	
+	  	<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipboardDto.getBoard_no()%>">
+				<img src="https://placeimg.com/200/200/any"></img>
+				<br>
+				<span><%=tipboardDto.getBoard_title() %></span>
+				<br>
+				<span><%=tipboardDto.getBoard_writer() %> 여행작가</span>
+		</a>
+	</div>
+	<%} %>
 </div>
 
 <div class="btn-box center">
@@ -100,10 +131,17 @@
 <div class="bigTitle">여행Q&A</div>
 
 <div class="container-qna">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
+  	<%for(QnaBoardDto qnaboardDto : qnaList){ %>
+	<div class="item">
+		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnaboardDto.getBoard_no()%>">
+			<img src="https://placeimg.com/430/140/any"></img>
+			<br>
+			<span><%=qnaboardDto.getBoard_title() %></span>
+			<br>
+			<span><%=qnaboardDto.getBoard_writer() %> 여행작가</span>
+		</a>
+	</div>
+	<%} %>
 </div>
 
 <div class="btn-box center">
