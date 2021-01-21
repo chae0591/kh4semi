@@ -7,7 +7,9 @@
 		<h3>회원가입이 완료되었습니다 ! </h3>
 	</div>
 	
-	<a href="../index.jsp">홈으로 돌아기기</a>
+	<a href="../index.jsp">홈으로 돌아기기</a><br>
+	<a href="../member/login.jsp">로그인하기</a>
+	
 	
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>		
