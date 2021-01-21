@@ -1,3 +1,6 @@
+<%@page import="beans.TipBoardDto"%>
+<%@page import="java.util.List"%>
+<%@page import="beans.TipBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
@@ -82,6 +85,25 @@
 	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
 	.banner ul li {float: left; width: 1100px; height: 320px; margin:0; padding:0;}
         
+    /* dropdown style */
+    .dropdown {
+	  position: relative;
+	  display: inline-block;
+	}
+	
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #f9f9f9;
+	  min-width: 160px;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  padding: 12px 16px;
+	  z-index: 1;
+	}
+	
+	.dropdown:hover .dropdown-content {
+	  display: block;
+	}
    
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -133,11 +155,19 @@
 	            <!-- 비회원이 마주할 메뉴 -->
 	            <%if(!isLogin){ %>
 	            <a href="<%=request.getContextPath()%>/member/login.jsp" class="log-btn">로그인</a>
-	          <%--   <a href="<%=request.getContextPath()%>/user/join.jsp" class="join-btn">회원가입</a> --%>
-	            
+
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
-	            <a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
+	            <div class="dropdown">
+	            	<span>  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
+	            	<div class="dropdown-content">
+	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
+	            		</p>
+	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a>
+	            		</p>
+	            	</div>
+	            </div>
+	            
 	            <%} %>
 	            
 	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 1rem">
@@ -150,7 +180,7 @@
 			<ul class="menu center">
 				<li><a href="<%=request.getContextPath()%>">추천 콘텐츠</a></li>
 				<li><a href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a></li>
-				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A</a></li>
+				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a></li>
 			</ul>
 		</nav>
 		
