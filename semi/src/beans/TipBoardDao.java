@@ -481,18 +481,33 @@ public class TipBoardDao {
 		
 		return dto;
 	}
+	
+	//메인 선택글(최신순8개)
+	public List<TipBoardDto> selectMain() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+		String sql = "select * from (select rownum rn, TMP.* from ("
+							+ "select * from tip_board order by board_no desc"
+							+ ")TMP"
+							+ ")where rn between 1 and 8";
+				
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+			
+		List<TipBoardDto> list = new ArrayList<>();
+		while(rs.next()) {
+			TipBoardDto tipboardDto = new TipBoardDto();
+			tipboardDto.setBoard_no(rs.getInt("board_no"));
+			tipboardDto.setBoard_writer(rs.getString("board_writer"));
+			tipboardDto.setBoard_title(rs.getString("board_title"));
+			tipboardDto.setBoard_content(rs.getString("board_content"));
+			tipboardDto.setRegist_time(rs.getDate("regist_time"));
+			tipboardDto.setVote(rs.getInt("vote"));
+			list.add(tipboardDto);
+		}
+			
+			con.close();
+			
+			return list;
+		}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
