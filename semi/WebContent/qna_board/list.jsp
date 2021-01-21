@@ -7,15 +7,13 @@
 	QnaBoardDao dao = new QnaBoardDao();
 	List<QnaBoardDto> list = dao.select();
 %>
-
-<jsp:include page="/template/header.jsp"></jsp:include>
-
 <style>
-	.outbox {
-		width: 100%;
-		margin: 0;
+	html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 	}
-	
 	.aside {
 		float: left;
 		width: 20%;
@@ -27,10 +25,16 @@
 		width: 80%;
 		height: 100%;
 	}
-	.article > .row {
+	.article > .row > .text-box {
 		border: 1px solid black;
+		height: 140px;
+		magine: 0;
+		padding: 0.5rem;
 	}
-	
+	.article > .row > .text-box > p{
+		magine: 0;
+		padding: 0.5rem;
+	}
 	.pagination {
 		text-align: center;
 	}
@@ -41,11 +45,13 @@
 	}
 </style>
 
-<div class="outbox">
+<jsp:include page="/template/header.jsp"></jsp:include>
 
 	<!-- 상단 부분 -->
 	<div>
-		<h5>전체 > 여행Q&A</h5>
+		<a href="/semi">전체</a>
+		<span> > </span>
+		<a href="/semi/qna_board/list.jsp">여행Q&A</a>
 	</div>
 	
 	<!-- 최신순, 댓글순 -->
@@ -61,14 +67,21 @@
 		<h5>답변을 기다려요!</h5>
 	</div>
 	
-	<div class="aticle">
+	<div class="article">
 		<%for(QnaBoardDto dto : list){ %>
 			<div class="row">
-				<h4>질문</h4>
-				<h4 class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_title()%></a></h4>
-				<p class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></a></p>
-				<p><%=dto.getRegist_time()%></p>
-				<p><%=dto.getBoard_writer()%>님의 질문입니다</p>
+				<div class="text-box">
+					<div><p><%=dto.getRegist_time()%></p></div>
+					<div>
+						<h4>질문</h4>
+						<h4 class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_title()%></a></h4>
+					</div>
+					
+					<div><p class="detail-enter"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></a></p></div>
+					
+					
+					<div><p><%=dto.getBoard_writer()%>님의 질문입니다</p></div>
+				</div>
 			</div>
 		<%} %>
 		
@@ -76,7 +89,9 @@
 			<button class="write-btn">글쓰기</button>
 		</div>
 	
-		<!-- 페이지 네비게이션 -->
+	</div>
+	
+	<!-- 페이지 네비게이션 -->
 		<div class="pagination">
 			<ul>
 				<li><a href="list.jsp?">이전</a></li>
@@ -93,9 +108,5 @@
 				<li><a href="">다음</a></li>
 			</ul>
 		</div>
-	
-	</div>
-	
-</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
