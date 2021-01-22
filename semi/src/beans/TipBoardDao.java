@@ -482,14 +482,18 @@ public class TipBoardDao {
 		return dto;
 	}
 	
-	//메인 선택글(최신순8개)
+	//메인 선택글(최신순6개)
 	public List<TipBoardDto> selectMain() throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 			
-		String sql = "select * from (select rownum rn, TMP.* from ("
-							+ "select * from tip_board order by board_no desc"
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+						+ "select * from("
+							+ "select T.board_title, T.board_content, T.board_no, T.regist_time, T.start_date, T.end_date, M.member_nick from "
+							+ "tip_board T inner join member M on M.member_id = T.board_writer "
+							+ "order by board_no desc)"
 							+ ")TMP"
-							+ ")where rn between 1 and 8";
+							+ ") where rn between 1 and 6";
 				
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -498,11 +502,12 @@ public class TipBoardDao {
 		while(rs.next()) {
 			TipBoardDto tipboardDto = new TipBoardDto();
 			tipboardDto.setBoard_no(rs.getInt("board_no"));
-			tipboardDto.setBoard_writer(rs.getString("board_writer"));
 			tipboardDto.setBoard_title(rs.getString("board_title"));
 			tipboardDto.setBoard_content(rs.getString("board_content"));
 			tipboardDto.setRegist_time(rs.getDate("regist_time"));
-			tipboardDto.setVote(rs.getInt("vote"));
+			tipboardDto.setStart_date(rs.getDate("start_date"));
+			tipboardDto.setEnd_date(rs.getDate("end_date"));
+			tipboardDto.setMember_nick(rs.getString("member_nick"));
 			list.add(tipboardDto);
 		}
 			
