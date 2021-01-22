@@ -1,3 +1,5 @@
+<%@page import="beans.QnaSearchVO"%>
+<%@page import="beans.TipSearchVO"%>
 <%@page import="beans.QnaBoardDto"%>
 <%@page import="beans.QnaBoardDao"%>
 <%@page import="java.util.List"%>
@@ -11,11 +13,11 @@
 
 	//여행꿀팁
 	TipBoardDao tipboardDao = new TipBoardDao();
-	List<TipBoardDto> tipList = tipboardDao.selectMain();
+	List<TipSearchVO> tipList = tipboardDao.selectMain();
 	
 	//여행qna
 	QnaBoardDao qnaboardDao = new QnaBoardDao();
-	List<QnaBoardDto> qnaList = qnaboardDao.selectMain();
+	List<QnaSearchVO> qnaList = qnaboardDao.selectMain();
 %>
 
 <style>
@@ -111,15 +113,15 @@
 <div class="bigTitle">여행꿀팁</div>
 
 <div class="container-tip">
-  	<%for(TipBoardDto tipboardDto : tipList){ %>
+  	<%for(TipSearchVO tipsearchVO : tipList){ %>
 	<div class="item">
-  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipboardDto.getBoard_no()%>">
+  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
 			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipboardDto.getBoard_title() %></span>
-			<span style="float:right"><%=tipboardDto.getRegist_time() %></span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
+			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span style="float:left; font-size:14px;">일정 <%=tipboardDto.getStart_date()%> ~ <%=tipboardDto.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipboardDto.getMember_nick() %> 여행작가</span>
+			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
@@ -132,14 +134,14 @@
 <div class="bigTitle">여행Q&amp;A</div>
 
 <div class="container-qna">
-  	<%for(QnaBoardDto qnaboardDto : qnaList){ %>
+  	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item">
-		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnaboardDto.getBoard_no()%>">
+		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
 			<span style="float:left; color:red;">Q&A&nbsp;</span>
-			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnaboardDto.getBoard_title() %></span>
-			<span style="float:right"><%=qnaboardDto.getRegist_time() %></span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnasearchVO.getBoard_title() %></span>
+			<span style="float:right"><%=qnasearchVO.getRegist_time() %></span>
 			<br><br>
-			<span style="color:#8C8C8C"><%=qnaboardDto.getMember_nick() %> 님의 질문입니다</span>
+			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick() %> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
