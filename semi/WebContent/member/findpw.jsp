@@ -98,7 +98,7 @@
 		    height: 300px;
 		
 		    /* Center form on page horizontally & vertically */
-		    top: 30%;
+		    top: 20%;
 		    left: 50%;
 		    margin-top: -150px;
 		    margin-left: -150px;
