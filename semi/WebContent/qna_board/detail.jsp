@@ -19,24 +19,62 @@
 	QnaBoardDao dao = new QnaBoardDao();
 	QnaBoardDto dto = dao.find(board_no);
 %>
+<style>
+	html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	}
+	.aside {
+		border: 1px solid black;
+		float: left;
+		width: 20%;
+		height: 800px;
+	}
+	.aside li{
+		list-style: none;
+	}
+	.article {
+		border: 1px solid black;
+		float: right;
+		width: 80%;
+		height: 800px;
+	}
+</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<!-- 상단 부분 -->
+	<div>
+		<a href="/semi">전체</a>
+		<span> > </span>
+		<a href="/semi/qna_board/list.jsp">여행Q&A</a>
+	</div>
+	
+	<!-- 최신순, 댓글순 -->
+	<div class="aside">
+		<ul>
+			<li><a href="/semi/qna_board/list.jsp">목록으로</a></li>
+		</ul>
+	</div>
+	
+	<div class="article">
 
-<div class="out box">
+		<div class="out box">
+			작성자 : <%=dto.getBoard_writer()%>
+			<br><br>
+			제목 : <%=dto.getBoard_title()%>
+			<br><br>
+			내용 : <%=dto.getBoard_content()%>
+			<br><br>
+			작성일 : <%=dto.getRegist_time()%>
+			<br><br>
+			좋아요 : <%=dto.getVote()%>
+		</div>
+		
+	</div>
 
-작성자 : <%=dto.getBoard_writer()%>
-<br><br>
-제목 : <%=dto.getBoard_title()%>
-<br><br>
-내용 : <%=dto.getBoard_content()%>
-<br><br>
-작성일 : <%=dto.getRegist_time()%>
-<br><br>
-좋아요 : <%=dto.getVote()%>
-
-</div>
-
-<button class="input edit-btn">수정</button>
-<button class="input delete-btn">삭제</button>
+<button class="input edit-btn"><a href="/semi/qna_board/edit.jsp">수정</a></button>
+<button class="input delete-btn"><a href="/semi/qna_board/list.jsp">삭제</a></button>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
