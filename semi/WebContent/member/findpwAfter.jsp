@@ -1,10 +1,13 @@
+<%@page import="beans.MemberDto"%>
+<%@page import="beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login page</title>
+<title>Insert title here</title>
+
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -97,7 +100,7 @@
 		    height: 300px;
 		
 		    /* Center form on page horizontally & vertically */
-		    top: 20%;
+		    top: 30%;
 		    left: 50%;
 		    margin-top: -150px;
 		    margin-left: -150px;
@@ -114,57 +117,88 @@
 		}
 </style>
 
+
+<script language="JavaScript"> 
+	
+	function Timer() { 
+	setTimeout("locateLogin()",5000); 
+	 } 
+	function locateLogin(){
+	 location.replace("../member/login.jsp");
+	}
+	
+	cnt = 5; // 카운트다운 시간 초단위로 표시
+	function countdown() {
+	 if(cnt == 0){
+	        // 시간이 0일경우
+	       locateLogin();
+	 }else {
+	       // 시간이 남았을 경우 카운트다운을 지속한다.
+	      document.all.JunDiv.innerHTML = cnt + "초후에 로그인 페이지로 이동";
+	      setTimeout("countdown()",1000);
+		  cnt--;
+	 }
+	}
+</script> 
+ 
+
 </head>
 
 
-<body>
+<%
+	int member_no = (int)session.getAttribute("check");
+	String member_pw = (String)session.getAttribute("pw");
+
+	MemberDao dao = new MemberDao();
+	MemberDto dto = dao.find(member_no); 
+	
+	
+%>
+
+<body  onLoad="Timer()">
 
   <div class="login_div">
         <div class="form login_form" >
+        <div id="JunDiv" class="text-center"></div>
+		
 		
 			  <div >
 			      <div class="myform">
                         <div>
                            <div class="col-md-12 text-center">
-                              <h1>Dibigo Login</h1>
-                           </div><br>
+                              <h1>Here's Your Password!</h1>
+                           </div>
+                           
+                           
+							<div class="form-group"><br>
+								<p class="text-center"><a>회원님의 비밀번호는 <%=dto.getMember_pw()%></a> </p>
+								<script>countdown();</script>
+						        
+								
+							</div>
+							
+						
+                           
                         </div>
-                        <form method ="post" action="login.do" >
-                           <div class="form-group">
-                              <label>아이디</label>
-                              <input type="text"  name="member_id" class="form-control" placeholder="Enter Your ID" maxlength='20' required>
-                           </div>
-                           <div class="form-group">
-                              <label>비밀번호</label>
-                              <input type="password"  name="member_pw" class="form-control" placeholder="Enter Your Password" maxlength='20' required>
-                           </div>
-                          
-                          	<%if(request.getParameter("error")!=null){ %>
-							<script>alert('로그인 실패! \n아이디와 비밀번호를 확인해주세요.');</script>
-							<%} %>
-				                          
-                           <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">로그인</button>
-                           </div>
-                           <div class="col-md-12 ">
-                              <div class="form-group">
-                                 <p class="text-center"><a href="join.jsp" id="signin">회원가입하기 </a></p>
-                              </div>
-                           </div>
-                            <div class="col-md-12 ">
-                              <div class="form-group">
-                                 <p class="text-center"><a href="findpw.jsp" style="color:red">비밀번호 찾기 </a></p>
-                              </div>
-                           </div>
-                              <div class="col-md-12 ">
-                              <div class="form-group">
-                                 <p class="text-center"><a href="../index.jsp">디비고로 돌아가기 </a></p>
-                              </div>
-                           </div>
-                        </form>
+                      
                      </div>
 			</div>
 		</div>
       </div>   
 </body>
+
+
+<%-- 
+<body onLoad="Timer()">
+<div id="JunDiv"></div>
+
+<script>countdown();</script>
+
+	<div>
+		회원님의 비밀번호는 <%=dto.getMember_pw()%>
+	</div>
+</body>
+ --%>
+
+
 </html>
