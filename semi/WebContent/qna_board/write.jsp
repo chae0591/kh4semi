@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="beans.*" %>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="outbox" style="width:800px">
 	<div class="row center">

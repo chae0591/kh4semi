@@ -16,8 +16,16 @@
 	int board_no = Integer.parseInt(request.getParameter("board_no"));
 
 	//단일검색
-	QnaBoardDao dao = new QnaBoardDao();
-	QnaBoardDto dto = dao.find(board_no);
+	QnaBoardDao boardDao = new QnaBoardDao();
+	QnaBoardDto boardDto = boardDao.find(board_no);
+	
+	//회원만 수정, 삭제가능하도록 구현
+	MemberDao memberDao = new MemberDao();
+	MemberDto writerDto = memberDao.find(boardDto.getBoard_writer());
+	
+	int member_no = (int)session.getAttribute("check");
+	MemberDto memberDto = memberDao.find(member_no);
+	boolean isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer());
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -72,20 +80,20 @@
 	<div class="article">
 
 		<div class="out box">
-			작성자 : <%=dto.getBoard_writer()%>
+			작성자 : <%=boardDto.getBoard_writer()%>
 			<br><br>
-			제목 : <%=dto.getBoard_title()%>
+			제목 : <%=boardDto.getBoard_title()%>
 			<br><br>
-			내용 : <%=dto.getBoard_content()%>
+			내용 : <%=boardDto.getBoard_content()%>
 			<br><br>
-			작성일 : <%=dto.getRegist_time()%>
+			작성일 : <%=boardDto.getRegist_time()%>
 			<br><br>
-			좋아요 : <%=dto.getVote()%>
+			좋아요 : <%=boardDto.getVote()%>
 		</div>
 		
 	</div>
-
+<%if(isMember){ %>
 <button class="input edit-btn">수정</button>
 <button class="input delete-btn">삭제</button>
-
+<%} %>
 <jsp:include page="/template/footer.jsp"></jsp:include>

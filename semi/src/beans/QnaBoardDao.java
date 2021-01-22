@@ -90,7 +90,7 @@ public class QnaBoardDao {
 	public boolean update(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "update qna_board"
+		String sql = "update qna_board "
 				+ "set board_title=?, board_content=?"
 				+ "where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
