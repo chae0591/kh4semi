@@ -95,24 +95,40 @@
 	</div>
 	
 	<div class="article">
-
-		<div class="out box">
-			작성자 : <%=boardDto.getBoard_writer()%>
-			<br><br>
-			제목 : <%=boardDto.getBoard_title()%>
-			<br><br>
-			내용 : <%=boardDto.getBoard_content()%>
-			<br><br>
-			작성일 : <%=boardDto.getRegist_time()%>
-			<br><br>
-			좋아요 : <%=boardDto.getVote()%>
-		</div>
+		<table>
+			<tbody>
+			<!-- 게시글 -->
+				<tr>
+					<td><%=boardDto.getBoard_writer()%><%=boardDto.getRegist_time()%></td>
+				</tr>
+			
+				<tr>
+					<td><p>질문</p><%=boardDto.getBoard_title()%></h4></td>
+				</tr>
+			
+				<tr>
+					<td><%=boardDto.getBoard_content()%></td>
+				</tr>
+			
+				<tr>
+					<td>좋아요<%=boardDto.getVote() %></td>
+				</tr>
+			
+			<!-- 댓글 목록 -->	
+				<tr>
+				
+				</tr>
+			</tbody>
+			<tfoot>
+				<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
+				<%if(isMember){ %>
+					<button class="input edit-btn">수정</button>
+					<button class="input delete-btn">삭제</button>
+				<%} %>
+			</tfoot>
+		</table>
 		
 	</div>
-<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
-<%if(isMember){ %>
-<button class="input edit-btn">수정</button>
-<button class="input delete-btn">삭제</button>
-<%} %>
+
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
