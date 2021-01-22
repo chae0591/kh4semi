@@ -15,17 +15,32 @@
 	//번호 받기 - QnaBoardDao 연결
 	int board_no = Integer.parseInt(request.getParameter("board_no"));
 
-	//단일검색
+	//단일검색 - 게시글 정보 조회
 	QnaBoardDao boardDao = new QnaBoardDao();
 	QnaBoardDto boardDto = boardDao.find(board_no);
 	
-	//회원만 수정, 삭제가능하도록 구현
-	MemberDao memberDao = new MemberDao();
-	MemberDto writerDto = memberDao.find(boardDto.getBoard_writer());
+	//회원만 수정, 삭제 가능 하도록 구현
+	/* int member_no = (int)session.getAttribute("check");
 	
-	int member_no = (int)session.getAttribute("check");
+	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto = memberDao.find(member_no);
-	boolean isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer());
+	
+	boolean isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer()); */
+	
+	int member_no;
+	boolean isMember;
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto;
+
+	try{
+		//로그인한 회원이면
+		member_no = (int)session.getAttribute("check");
+		memberDto = memberDao.find(member_no);
+		isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer());
+	}catch(Exception e) {
+		//로그인 안했다면
+		isMember = false;
+	}
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -53,12 +68,14 @@
 </style>
 <script>
 	$(function(){
+		//수정버튼 -> edit.jsp
 		$(".edit-btn").click(function(){
-			location.href = "edit.jsp?board_no=<%=board_no%>";
+			location.href = "edit.jsp?board_no=<%=board_no%>";//절대경로
 		});
 		
+		//삭제버튼 -> delete.do
 		$(".delete-btn").click(function(){
-			location.href = "delete.do?board_no=<%=board_no%>";
+			location.href = "delete.do?board_no=<%=board_no%>";//절대경로
 		});
 	});
 
@@ -92,8 +109,10 @@
 		</div>
 		
 	</div>
+<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
 <%if(isMember){ %>
 <button class="input edit-btn">수정</button>
 <button class="input delete-btn">삭제</button>
 <%} %>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>
