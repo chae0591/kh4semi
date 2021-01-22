@@ -29,7 +29,6 @@ public class TipBoardWriteServlet extends HttpServlet{
 		
 		boardDto.setBoard_title(req.getParameter("board_title"));
 		boardDto.setBoard_content(req.getParameter("board_content"));
-
 		
 //	    String str="2015-03-31";  
 //	    Date date=new java.sql.Date.valueOf(req.getParameter("start_date"))(System.currentTimeMillis());//converting string into sql date  
