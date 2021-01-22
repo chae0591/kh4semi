@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="beans.*" %>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 <div class="outbox" style="width:800px">
 	<div class="row center">
 		<h2>게시글 작성</h2>
 	</div>
-	<div class="row center">상대방에 대한 인신공격은 예고 없이 삭제될 수 있습니다</div>
 	
 	<form action="write.do" method="post">
 	
