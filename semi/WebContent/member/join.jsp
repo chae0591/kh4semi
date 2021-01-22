@@ -99,7 +99,7 @@
 		    height: 300px;
 		
 		    /* Center form on page horizontally & vertically */
-		    top: 30%;
+		    top: 20%;
 		    left: 50%;
 		    margin-top: -150px;
 		    margin-left: -150px;
@@ -139,8 +139,6 @@
 		 .hidden {
 		 /* display: none;  */
 		 }
-		 
-				
 </style>
 
 <script>
@@ -171,7 +169,6 @@
                 }
                 else{
                     $("input[name=result1]").val("5~20자리의 영문 대소문자와 숫자로만 입력"); //불만족
-                    return false; 
                 }
                
             });
@@ -187,21 +184,26 @@
                 }
                 else{
                     $("input[name=result2]").val("5~20자리의 영문 대소문자와 숫자로만 입력");
-                    return false;
                 }
             }); 
-            
-            
-            
-            //폼 전송 차단
-           /*  $(".regist-form").submit(function(e){
-                e.preventDefault();
-            	});  */
+             
+             
+         	$(".regist-form").submit(function(e){
+    			
+                var idn = document.getElementById("idn");
+                var pwn = document.getElementById("pwn");
+
+                var idPattern =/^[a-zA-Z0-9]{5,20}$/;
+                var pwPattern = /^[a-zA-Z0-9]{5,20}$/;
+
+                if(idPattern.test(idn.value) == true && pwPattern.test(pwn.value) == true){
+                	return true 
+                }else {
+                	e.preventDefault();
+                }
+    		})
         });
-
-	
 </script>
-
 <body>
 	 <div class="login_div">
         <div class="form login_form" >
@@ -268,18 +270,3 @@
       </div>   
 </body>
 </html>
-
-
-
-<!-- 	<form method="post" action="join.do">
-			<div>
-				<input type ="text" placeholder="아이디" name ="member_id" maxlength='20' required>
-			</div><br>
-			<div>
-		        <input type ="password" placeholder="비밀번호" name ="member_pw" maxlength='20' required>
-			</div><br>
-			<div>
-				<input type ="text" placeholder="닉네임" name ="member_nick" maxlength='20' required>
-			</div><br>
-			<input type="submit" value="회원가입">
-		</form> -->
