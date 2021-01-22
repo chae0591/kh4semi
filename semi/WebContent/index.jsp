@@ -119,7 +119,7 @@
 			<span style="float:right"><%=tipboardDto.getRegist_time() %></span>
 			<br><br>
 			<span style="float:left; font-size:14px;">일정 <%=tipboardDto.getStart_date()%> ~ <%=tipboardDto.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipboardDto.getBoard_writer() %> 여행작가</span>
+			<span style="float:right; color:#8C8C8C;"><%=tipboardDto.getMember_nick() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
@@ -139,7 +139,7 @@
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnaboardDto.getBoard_title() %></span>
 			<span style="float:right"><%=qnaboardDto.getRegist_time() %></span>
 			<br><br>
-			<span style="color:#8C8C8C"><%=qnaboardDto.getBoard_writer() %> 님의 질문입니다</span>
+			<span style="color:#8C8C8C"><%=qnaboardDto.getMember_nick() %> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
