@@ -96,6 +96,7 @@ public class QnaBoardDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, dto.getBoard_title());
 		ps.setString(2, dto.getBoard_content());
+		ps.setInt(3, dto.getBoard_no());
 		int count = ps.executeUpdate();
 		
 		con.close();

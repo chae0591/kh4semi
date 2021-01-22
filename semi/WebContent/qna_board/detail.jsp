@@ -19,6 +19,7 @@
 	QnaBoardDao dao = new QnaBoardDao();
 	QnaBoardDto dto = dao.find(board_no);
 %>
+<jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 	html, body{
 	width: 100%;
@@ -42,8 +43,18 @@
 		height: 800px;
 	}
 </style>
-<jsp:include page="/template/header.jsp"></jsp:include>
+<script>
+	$(function(){
+		$(".edit-btn").click(function(){
+			location.href = "edit.jsp?board_no=<%=board_no%>";
+		});
+		
+		$(".delete-btn").click(function(){
+			location.href = "delete.do?board_no=<%=board_no%>";
+		});
+	});
 
+</script>
 <!-- 상단 부분 -->
 	<div>
 		<a href="/semi">전체</a>
@@ -74,7 +85,7 @@
 		
 	</div>
 
-<button class="input edit-btn"><a href="/semi/qna_board/edit.jsp">수정</a></button>
-<button class="input delete-btn"><a href="/semi/qna_board/list.jsp">삭제</a></button>
+<button class="input edit-btn">수정</button>
+<button class="input delete-btn">삭제</button>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

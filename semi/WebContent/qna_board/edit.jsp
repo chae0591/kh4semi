@@ -33,7 +33,7 @@
 	</div>
 	
 	<div class="row">
-		<input type="submit" class="input" value="등록">
+		<input type="submit" class="input" value="수정">
 	</div>
 	 
 	</form>
