@@ -200,7 +200,7 @@ public class TipBoardDao {
 			String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
 							+ "select * from("
-								+ "select T.board_title, T.board_content, T.regist_time, T.board_no, M.member_nick from "
+								+ "select T.board_title, T.board_content, T.regist_time, T.start_date, T.end_date, T.board_no, M.member_nick from "
 								+ "tip_board T inner join member M "
 								+ "on M.member_id = T.board_writer "
 								+ "where instr(board_title, ?) > 0 order by board_no desc)"
@@ -219,6 +219,8 @@ public class TipBoardDao {
 				tipsearchVO.setBoard_content(rs.getString("board_content"));
 				tipsearchVO.setRegist_time(rs.getDate("regist_time"));
 				tipsearchVO.setMember_nick(rs.getString("member_nick"));
+				tipsearchVO.setStart_date(rs.getDate("start_date"));
+				tipsearchVO.setEnd_date(rs.getDate("end_date"));
 				list.add(tipsearchVO);
 			}
 				
@@ -488,7 +490,7 @@ public class TipBoardDao {
 		public List<TipSearchVO> select1(String keyword) throws Exception {
 				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 					
-				String sql = "select T.board_title, T.board_content, T.regist_time, T.board_no, M.member_nick from "
+				String sql = "select T.board_title, T.board_content, T.regist_time, T.start_date, T.end_date, T.board_no, M.member_nick from "
 								+ "tip_board T inner join member M on "
 								+ "M.member_id = T.board_writer "
 								+ "where instr(board_title, ?) > 0 order by board_no desc";
@@ -505,6 +507,8 @@ public class TipBoardDao {
 					tipsearchVO.setBoard_content(rs.getString("board_content"));
 					tipsearchVO.setRegist_time(rs.getDate("regist_time"));
 					tipsearchVO.setMember_nick(rs.getString("member_nick"));
+					tipsearchVO.setStart_date(rs.getDate("start_date"));
+					tipsearchVO.setEnd_date(rs.getDate("end_date"));
 					list.add(tipsearchVO);
 				}
 					

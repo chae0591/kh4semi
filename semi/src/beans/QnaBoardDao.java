@@ -154,12 +154,12 @@ public class QnaBoardDao {
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
 						+ "select * from("
-							+ "select Q.board_title, Q.board_no, M.member_nick from "
+							+ "select Q.board_title, Q.board_content, Q.board_no, Q.regist_time, M.member_nick from "
 							+ "qna_board Q inner join member M "
 							+ "on M.member_id = Q.board_writer "
 							+ "where instr(board_title, ?) > 0 order by board_no desc)"
 						+ ")TMP"
-						+ ") where rn between 1 and 8";
+						+ ") where rn between 1 and 6";
 				
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -170,6 +170,7 @@ public class QnaBoardDao {
 			QnaSearchVO qnasearchVO = new QnaSearchVO();
 			qnasearchVO.setBoard_no(rs.getInt("board_no"));
 			qnasearchVO.setBoard_title(rs.getString("board_title"));
+			qnasearchVO.setRegist_time(rs.getDate("regist_time"));
 			qnasearchVO.setMember_nick(rs.getString("member_nick"));
 			list.add(qnasearchVO);
 		}

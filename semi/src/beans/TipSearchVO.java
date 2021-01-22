@@ -8,6 +8,8 @@ public class TipSearchVO {
 	private String board_title;
 	private String board_content;
 	private Date regist_time;
+	private Date start_date;
+	private Date end_date;
 	private String member_nick;
 	
 	public TipSearchVO() {
@@ -46,6 +48,22 @@ public class TipSearchVO {
 		this.regist_time = regist_time;
 	}
 
+	public Date getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
 	public String getMember_nick() {
 		return member_nick;
 	}
@@ -53,5 +71,5 @@ public class TipSearchVO {
 	public void setMember_nick(String member_nick) {
 		this.member_nick = member_nick;
 	}
-	 
+
 }

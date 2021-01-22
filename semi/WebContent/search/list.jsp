@@ -17,16 +17,74 @@
 <!DOCTYPE html>
 <style>
 	div{ box-sizing: border-box; }
-	
-	.container{
+
+	.container-tip{
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-auto-rows: minmax(10em, auto);
-		grdi-gap: 0.5rem;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 1rem;
 		justify-items: start;
 		align-items: start;		
+		padding: 10px 0 0 ;
 	}
-	.btn-more{
+	
+	.container-qna{
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 0.5rem;
+		justify-items: start;
+		align-items: start;	
+		padding: 10px 0 0 ;	
+	}	
+
+	.item{
+		padding: 1rem;
+		width: 440px;
+	}
+	
+	.contents{
+		min-height: 50px;
+    	margin: 0 auto;
+    	padding: 10px 0 0 ;
+    	border-bottom: 1px solid #eeeeee;
+    }
+    
+    .contents span{
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color : #bbbbbb;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    
+    .contents a{
+    	display: block;
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color: #666666;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    
+    .bigTitle{
+    	position: relative;
+    	height: 60px;
+    	line-height: 70px;
+    	font-size: 25px;
+    	font-weight: 700;
+    	border-bottom: 3px solid #242424;
+    }
+    
+    .btn-box{
+    	margin-top: 15px;
+    }
+    
+    .btn-more{
     	padding: 0 35px;
     	height: 35px;
     	line-height: 35px;
@@ -40,33 +98,40 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<div class="contents left">
+	<a href="<%=request.getContextPath()%>">전체</a>
+	<span> &gt; </span> 
+	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
+</div>
+
+
 <div>
 	<h1>여행꿀팁</h1>
 </div>
 
-<hr size="3" color="black">
+<div class="bigTitle">여행꿀팁</div>
 
 <%if(!tipList.isEmpty()){ %>
-<div class="container">
+<div class="container-tip">
 
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
 	<div class="item">
-		<a href="<%=request.getContextPath()%>/tip_board/list.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<img src="https://placeimg.com/200/200/any" width="200" height="200"></img>
-			<br>
-			<span><%=tipsearchVO.getBoard_title()%></span>
-			<br>
-			<span><%=tipsearchVO.getMember_nick() %> 여행작가</span>
+  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
+			<span style="float:left; color:blue;">Tip&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
+			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<br><br>
+			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
 	
 </div>
 
-<div class="center">
-	<a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>" class="btn-more input">
-		<span>여행꿀팁</span>
-		<span>더보기&gt;</span>
+<div class="btn-box center">
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>" class="btn-more input">
+		<span>여행꿀팁 더보기&gt;</span>
 	</a>
 </div>
 
@@ -74,35 +139,28 @@
 	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
 <%} %>
 
-<div>
-	<h1>여행Q&amp;A</h1>
-</div>
-
-<hr size="3" color="black">
+<div class="bigTitle">여행Q&amp;A</div>
 
 <%if(!qnaList.isEmpty()){%>
-<div class="container">
+<div class="container-qna">
 
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item">
-		<a href="<%=request.getContextPath()%>/qna_board/list.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
-			<img src="https://placeimg.com/200/200/any" width="200" height="200"></img>
-			<br>
-			<span><%=qnasearchVO.getBoard_title()%></span>
-			<br>
-			<span><%=qnasearchVO.getMember_nick()%> 여행작가</span>
+		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
+			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnasearchVO.getBoard_title()%></span>
+			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
+			<br><br>
+			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
 	
 </div>
 
-	<div class="center">
-		<a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keword=<%=keyword%>" class="btn-more input">
-			<span>여행Q&amp;A</span>
-			<span>더보기&gt;</span>
-		</a>
-	</div>
+<div class="btn-box center">
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
+</div>
 
 <%} else{%>
 	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
