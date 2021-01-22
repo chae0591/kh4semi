@@ -56,10 +56,11 @@ public class MemberDao {
 	
 	
 	//회원가입
+
 	public void register(MemberDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into member values (member_seq.nextval, ?, ?, ?, sysdate)";
+		String sql = "insert into member values (pj5_member_seq.nextval, ?, ?, ?, sysdate)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, dto.getMember_id());
 		ps.setString(2, dto.getMember_pw());
@@ -68,6 +69,8 @@ public class MemberDao {
 		
 		con.close(); 
 	}
+
+
 	
 	//단일검색 
 	public MemberDto find(int member_no) throws Exception {

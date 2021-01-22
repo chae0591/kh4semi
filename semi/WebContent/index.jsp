@@ -104,7 +104,7 @@
 
 <div class="contents left">
 	<a href="<%=request.getContextPath()%>">전체</a>
-	<span> > </span> 
+	<span> &gt; </span> 
 	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
 </div>
 
@@ -126,10 +126,10 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기&gt;</a>
 </div>
 
-<div class="bigTitle">여행Q&A</div>
+<div class="bigTitle">여행Q&amp;A</div>
 
 <div class="container-qna">
   	<%for(QnaBoardDto qnaboardDto : qnaList){ %>
@@ -146,7 +146,7 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A 더보기</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A 더보기&amp;</a>
 </div>
 
 			

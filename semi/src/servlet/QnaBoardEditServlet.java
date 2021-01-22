@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.QnaBoardDao;
-import beans.QnaBoardDto;
+import beans.*;
 
 @WebServlet(urlPatterns = "/qna_board/edit.do")
 public class QnaBoardEditServlet extends HttpServlet{

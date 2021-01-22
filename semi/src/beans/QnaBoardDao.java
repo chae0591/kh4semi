@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import util.JdbcUtil;
 
 public class QnaBoardDao {
@@ -13,18 +14,43 @@ public class QnaBoardDao {
 	public static final String USERNAME = "project5";
 	public static final String PASSWORD = "project5";
 	
+	//목록 기능
+	public List<QnaBoardDto> select() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from qna_board order by board_no desc";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<QnaBoardDto> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			QnaBoardDto dto = new QnaBoardDto();
+			dto.setBoard_no(rs.getInt("board_no"));
+			dto.setBoard_writer(rs.getString("board_writer"));
+			dto.setBoard_title(rs.getString("board_title"));
+			dto.setBoard_content(rs.getString("board_content"));
+			dto.setRegist_time(rs.getDate("regist_time"));
+			list.add(dto);
+		}
+		con.close();
+		
+		return list;
+	}
+	
 	//등록 기능 - QnaBoardWriteServlet
-	public void Write(QnaBoardDto dto) throws Exception {
+	public void write(QnaBoardDto qnadto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 
-		String sql = "insert iuto qna_board("
+		String sql = "insert into qna_board("
 				+ "board_no, board_writer, board_title, board_content"
-				+ ") values(board_seq.nextval, ?, ?, ?)";
-				
+				+ ") values(qna_board_seq.nextval, ?, ?, ?)";
+		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, dto.getBoard_writer());
-		ps.setString(2, dto.getBoard_title());
-		ps.setString(3, dto.getBoard_content());
+		ps.setString(1, qnadto.getBoard_writer());
+		ps.setString(2, qnadto.getBoard_title());
+		ps.setString(3, qnadto.getBoard_content());
 		ps.execute();
 		
 		con.close();
@@ -48,12 +74,13 @@ public class QnaBoardDao {
 	public void writeWithPrimaryKey(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate)";
+		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getBoard_no());
 		ps.setString(2, dto.getBoard_writer());
 		ps.setString(3, dto.getBoard_title());
 		ps.setString(4, dto.getBoard_content());
+		ps.setInt(5, dto.getVote());
 		ps.execute();
 		
 		con.close();
@@ -63,12 +90,13 @@ public class QnaBoardDao {
 	public boolean update(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "update qna_board"
+		String sql = "update qna_board "
 				+ "set board_title=?, board_content=?"
 				+ "where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, dto.getBoard_title());
 		ps.setString(2, dto.getBoard_content());
+		ps.setInt(3, dto.getBoard_no());
 		int count = ps.executeUpdate();
 		
 		con.close();
@@ -106,6 +134,7 @@ public class QnaBoardDao {
 			dto.setBoard_title(rs.getString("board_title"));
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
+			dto.setVote(rs.getInt("vote"));
 		}
 		else {//결과가 없다면 잘못된 번호니까 null이라는 값을 반환하겠다
 			dto = null;
@@ -154,12 +183,12 @@ public class QnaBoardDao {
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
 						+ "select * from("
-							+ "select Q.board_title, Q.board_no, M.member_nick from "
+							+ "select Q.board_title, Q.board_content, Q.board_no, Q.regist_time, M.member_nick from "
 							+ "qna_board Q inner join member M "
 							+ "on M.member_id = Q.board_writer "
 							+ "where instr(board_title, ?) > 0 order by board_no desc)"
 						+ ")TMP"
-						+ ") where rn between 1 and 8";
+						+ ") where rn between 1 and 6";
 				
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -170,6 +199,7 @@ public class QnaBoardDao {
 			QnaSearchVO qnasearchVO = new QnaSearchVO();
 			qnasearchVO.setBoard_no(rs.getInt("board_no"));
 			qnasearchVO.setBoard_title(rs.getString("board_title"));
+			qnasearchVO.setRegist_time(rs.getDate("regist_time"));
 			qnasearchVO.setMember_nick(rs.getString("member_nick"));
 			list.add(qnasearchVO);
 		}
