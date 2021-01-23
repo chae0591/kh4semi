@@ -20,9 +20,9 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			//2개는 파라미터에서 가져온다(board_title, board_content)
 			//1개는 세션의 정보를 이용하여 구한다(member_id -> board_writer)
 			req.setCharacterEncoding("UTF-8");
-			QnaBoardDto dto = new QnaBoardDto();
-			dto.setBoard_title(req.getParameter("board_title"));
-			dto.setBoard_content(req.getParameter("board_content"));
+			QnaBoardDto qnaboardDto = new QnaBoardDto();
+			qnaboardDto.setBoard_title(req.getParameter("board_title"));
+			qnaboardDto.setBoard_content(req.getParameter("board_content"));
 			
 			//현재 로그인한 사용자 정보를 불러오는 코드
 			int member_no = (int)req.getSession().getAttribute("check");
@@ -30,19 +30,18 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			MemberDto memberDto = memberDao.find(member_no);
 			
 			//memberDto의 member_id를 boardDto의 board_writer에 설정
-			dto.setBoard_writer(memberDto.getMember_id());
+			qnaboardDto.setBoard_writer(memberDto.getMember_id());
 		
 			//처리 : 게시글 등록(BoardDao를 사용)
 			//1. 시퀀스 번호 생성 = .getSequence()
 			//2. 등록 = .writeWithPrimaryKey()
-			QnaBoardDao dao = new QnaBoardDao();
-			int board_no = dao.getSequence();		//시퀀스 번호 생성
-			dto.setBoard_no(board_no);				//생성된 번호를 DTO에 설정
-			dao.writeWithPrimaryKey(dto); 			//설정된 정보를 등록
+			QnaBoardDao qnaboardDao = new QnaBoardDao();
+			int board_no = qnaboardDao.getSequence();		//시퀀스 번호 생성
+			qnaboardDto.setBoard_no(board_no);				//생성된 번호를 DTO에 설정
+			qnaboardDao.writeWithPrimaryKey(qnaboardDto); 			//설정된 정보를 등록
 			
 			//출력 : 상세페이지로 이동
-			//resp.sendRedirect("detail.jsp?board_no="+board_no);
-			resp.sendRedirect("/semi/qna_board/detail.jsp?board_no="+board_no);
+			resp.sendRedirect("detail.jsp?board_no="+board_no);
 		}
 		catch(Exception e){
 			e.printStackTrace();

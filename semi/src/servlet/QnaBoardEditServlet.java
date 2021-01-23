@@ -28,7 +28,7 @@ public class QnaBoardEditServlet extends HttpServlet{
 			dao.update(dto);
 			
 			//출력 : 상세페이지로 이동
-			resp.sendRedirect(req.getContextPath()+"/qna_board/detail.jsp?board_no="+dto.getBoard_no());
+			resp.sendRedirect("detail.jsp?board_no="+dto.getBoard_no());
 			
 		}
 		catch(Exception e){

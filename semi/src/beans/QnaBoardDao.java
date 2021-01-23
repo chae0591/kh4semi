@@ -45,7 +45,7 @@ public class QnaBoardDao {
 
 		String sql = "insert into qna_board("
 				+ "board_no, board_writer, board_title, board_content"
-				+ ") values(qna_board_seq.nextval, ?, ?, ?)";
+				+ ") values(qna_board_seq.nextval, ?, ?, ?, sysdate, 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, qnadto.getBoard_writer());
@@ -74,13 +74,12 @@ public class QnaBoardDao {
 	public void writeWithPrimaryKey(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, ?)";
+		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getBoard_no());
 		ps.setString(2, dto.getBoard_writer());
 		ps.setString(3, dto.getBoard_title());
 		ps.setString(4, dto.getBoard_content());
-		ps.setInt(5, dto.getVote());
 		ps.execute();
 		
 		con.close();

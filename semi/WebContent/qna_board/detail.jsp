@@ -20,13 +20,6 @@
 	QnaBoardDto boardDto = boardDao.find(board_no);
 	
 	//회원만 수정, 삭제 가능 하도록 구현
-	/* int member_no = (int)session.getAttribute("check");
-	
-	MemberDao memberDao = new MemberDao();
-	MemberDto memberDto = memberDao.find(member_no);
-	
-	boolean isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer()); */
-	
 	int member_no;
 	boolean isMember;
 	MemberDao memberDao = new MemberDao();

@@ -4,9 +4,28 @@
 <%@ page import="java.util.*" %>
 
 <%
-	QnaBoardDao dao = new QnaBoardDao();
-	List<QnaBoardDto> list = dao.select();
+	QnaBoardDao qnaboardDao = new QnaBoardDao();
+	QnaBoardDto qnaboardDto = new QnaBoardDto();
+	List<QnaBoardDto> list = qnaboardDao.select();
+		
+	int member_no;
+	boolean isMember;
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto;
+
+	try{
+		//로그인한 회원이면
+		member_no = (int)session.getAttribute("check");
+		memberDto = memberDao.find(member_no);
+		isMember = memberDto.getMember_id().equals(qnaboardDto.getBoard_writer());
+	}catch(Exception e) {
+		//로그인 안했다면
+		isMember = false;
+	}
 %>
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+
 <style>
 	html, body{
 	width: 100%;
@@ -45,7 +64,25 @@
 	}
 </style>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
+<script>
+	$(function(){
+		//글쓰기 버튼 눌렀을때
+		$(".write-btn").click(function(){
+			//로그인한 회원이 누르면 write.jsp로 이동
+			boolean isMember;
+			
+			if(isMember){
+				location.href = "write.jsp"
+			}
+			else{
+				location.href = "member/login.jsp"
+			}
+		});
+		
+	});
+
+</script>
+
 
 	<!-- 상단 부분 -->
 	<div>
@@ -86,7 +123,7 @@
 	</div>
 	
 	<div class="row right">
-		<button class="write-btn"><a href="write.jsp">글쓰기</a></button>
+		<button class="write-btn">글쓰기</button>
 	</div>
 	
 	<!-- 페이지 네비게이션 -->
