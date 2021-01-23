@@ -23,9 +23,9 @@
 
 	.container-tip{
 		display: grid;
-		grid-template-columns: repeat(4,1fr);
-		grid-auto-rows: minmax(10em, auto);
-		grid-gap: 0.5rem;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 1rem;
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
@@ -34,15 +34,16 @@
 	.container-qna{
 		display: grid;
 		grid-template-columns: repeat(2,1fr);
-		grid-auto-rows: minmax(10em, auto);
+		grid-auto-rows: minmax(1em, auto);
 		grid-gap: 0.5rem;
 		justify-items: start;
-		align-items: start;		
-		padding: 10px 0 0 ;
+		align-items: start;	
+		padding: 10px 0 0 ;	
 	}	
-	
+
 	.item{
-		padding: 10px 0 0;
+		padding: 1rem;
+		width: 440px;
 	}
 	
 	.contents{
@@ -112,13 +113,13 @@
 <div class="container-tip">
   	<%for(TipBoardDto tipboardDto : tipList){ %>
 	<div class="item">
-  	
-	  	<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipboardDto.getBoard_no()%>">
-				<img src="https://placeimg.com/200/200/any"></img>
-				<br>
-				<span><%=tipboardDto.getBoard_title() %></span>
-				<br>
-				<span><%=tipboardDto.getBoard_writer() %> 여행작가</span>
+  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipboardDto.getBoard_no()%>">
+			<span style="float:left; color:blue;">Tip&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipboardDto.getBoard_title() %></span>
+			<span style="float:right"><%=tipboardDto.getRegist_time() %></span>
+			<br><br>
+			<span style="float:left; font-size:14px;">일정 <%=tipboardDto.getStart_date()%> ~ <%=tipboardDto.getEnd_date() %></span>
+			<span style="float:right; color:#8C8C8C;"><%=tipboardDto.getBoard_writer() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
@@ -134,11 +135,11 @@
   	<%for(QnaBoardDto qnaboardDto : qnaList){ %>
 	<div class="item">
 		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnaboardDto.getBoard_no()%>">
-			<img src="https://placeimg.com/430/140/any"></img>
-			<br>
-			<span><%=qnaboardDto.getBoard_title() %></span>
-			<br>
-			<span><%=qnaboardDto.getBoard_writer() %> 여행작가</span>
+			<span style="float:left; color:red;">Q&A&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnaboardDto.getBoard_title() %></span>
+			<span style="float:right"><%=qnaboardDto.getRegist_time() %></span>
+			<br><br>
+			<span style="color:#8C8C8C"><%=qnaboardDto.getBoard_writer() %> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>

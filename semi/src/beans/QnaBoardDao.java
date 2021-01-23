@@ -143,14 +143,18 @@ public class QnaBoardDao {
 			
 			return dto;
 		}
-	//메인 선택글
+	//메인 선택글(최신순6개)
 	public List<QnaBoardDto> selectMain() throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 			
-		String sql = "select * from (select rownum rn, TMP.* from ("
-								+ "select * from qna_board order by board_no desc"
-								+ ")TMP"
-								+ ")where rn between 1 and 4";
+		String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+						+ "select * from("
+							+ "select Q.board_title, Q.board_content, Q.board_no, Q.regist_time, M.member_nick from "
+							+ "qna_board Q inner join member M on M.member_id = Q.board_writer "
+							+ "order by board_no desc)"
+							+ ")TMP"
+							+ ") where rn between 1 and 6";
 				
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -159,11 +163,10 @@ public class QnaBoardDao {
 		while(rs.next()) {
 			QnaBoardDto qnaboardDto = new QnaBoardDto();
 			qnaboardDto.setBoard_no(rs.getInt("board_no"));
-			qnaboardDto.setBoard_writer(rs.getString("board_writer"));
 			qnaboardDto.setBoard_title(rs.getString("board_title"));
 			qnaboardDto.setBoard_content(rs.getString("board_content"));
 			qnaboardDto.setRegist_time(rs.getDate("regist_time"));
-			qnaboardDto.setVote(rs.getInt("vote"));
+			qnaboardDto.setMember_nick(rs.getString("member_nick"));
 			list.add(qnaboardDto);
 		}
 		
