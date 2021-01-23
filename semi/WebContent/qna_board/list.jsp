@@ -8,7 +8,7 @@
 	QnaBoardDto qnaboardDto = new QnaBoardDto();
 	List<QnaBoardDto> list = qnaboardDao.select();
 		
-	int member_no;
+	/* int member_no;
 	boolean isMember;
 	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto;
@@ -21,7 +21,7 @@
 	}catch(Exception e) {
 		//로그인 안했다면
 		isMember = false;
-	}
+	} */
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -69,14 +69,15 @@
 		//글쓰기 버튼 눌렀을때
 		$(".write-btn").click(function(){
 			//로그인한 회원이 누르면 write.jsp로 이동
-			boolean isMember;
+			location.href = "write.jsp"
+			/* boolean isMember;
 			
 			if(isMember){
 				location.href = "write.jsp"
 			}
 			else{
 				location.href = "member/login.jsp"
-			}
+			} */
 		});
 		
 	});
