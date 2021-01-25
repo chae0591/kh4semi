@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import oracle.jdbc.proxy.annotation.Pre;
 import util.JdbcUtil;
 
 public class QnaBoardDao {
