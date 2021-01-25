@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="beans.*" %>
@@ -34,6 +35,11 @@
 		//로그인 안했다면
 		isMember = false;
 	}
+%>
+<%
+	//댓글 목록 구하기
+	QnaOpinionDao opinionDao = new QnaOpinionDao();
+	List<QnaOpinionDto> opinionList = opinionDao.select(board_no);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -109,7 +115,21 @@
 			
 			<!-- 댓글 목록 -->	
 				<tr>
-				
+					<td>
+						<div class="opinion-box">
+							<%for(QnaOpinionDto opinionDto : opinionList){ %>
+								<div><%=opinionDto.getOpinion_writer()%></div>
+								<div><%=opinionDto.getOpinion_content()%></div>
+								<div>
+									<% 
+										SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd h:mm:ss");
+										String timeFormat = f.format(opinionDto.getRegist_time());
+									%>
+									<%=timeFormat%>
+								</div>
+							<%} %>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>
