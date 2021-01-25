@@ -42,19 +42,20 @@ public class QnaOpinionDao {
 		
 		int seq = rs.getInt(1);
  
-		con.close(); return seq;
-		}
+		con.close();
+		return seq;
+	}
 	
 	//번호까지 함께 등록하는 기능
-	public void writeWithPrimaryKey(QnaOpinionDto dto) throws Exception {
+	public void writeWithPrimaryKey(QnaOpinionDto opinionDto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 	
 		String sql = "insert into qna_opinion values(?, ?, sysdate, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, dto.getOpinion_no());
-		ps.setString(2, dto.getOpinion_content());
-		ps.setInt(3, dto.getBoard_no());
-		ps.setString(4, dto.getOpinion_writer());
+		ps.setInt(1, opinionDto.getOpinion_no());
+		ps.setString(2, opinionDto.getOpinion_content());
+		ps.setInt(3, opinionDto.getBoard_no());
+		ps.setString(4, opinionDto.getOpinion_writer());
 		ps.execute();
 	
 		con.close();
