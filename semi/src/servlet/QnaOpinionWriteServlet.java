@@ -35,7 +35,7 @@ public class QnaOpinionWriteServlet extends HttpServlet{
 			QnaOpinionDao dao = new QnaOpinionDao();
 			dao.insert(dto);
 			
-			//츨력 : 상세보기 글로 다시 돌아가기
+			//츨력 : detail.jsp(상세페이지)로 이동
 			resp.sendRedirect("detail.jsp?board_no="+dto.getBoard_no());
 		}
 		catch(Exception e){
