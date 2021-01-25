@@ -16,6 +16,7 @@ public class TipBoardDto {
 	private int vote;
 	private Date start_date;
 	private Date end_date;
+	private String member_nick;
 	
 	public TipBoardDto() {
 		super();
@@ -85,5 +86,13 @@ public class TipBoardDto {
 		this.end_date = end_date;
 	}
 
+	
+	public String getMember_nick() {
+		return member_nick;
+	}
+
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
+	}
 	
 }

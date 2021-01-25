@@ -9,6 +9,7 @@ public class QnaBoardDto {
 	private String board_content;
 	private Date regist_time;
 	private int vote;
+	private String member_nick;
 	
 	public QnaBoardDto() {
 		super();
@@ -60,6 +61,15 @@ public class QnaBoardDto {
 
 	public void setVote(int vote) {
 		this.vote = vote;
+	}
+	
+	public String getMember_nick() {
+		return member_nick;
+	}
+
+
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
 	}
 	
 }

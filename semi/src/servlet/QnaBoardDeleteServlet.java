@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.MemberDao;
+import beans.MemberDto;
 import beans.QnaBoardDao;
 
 @WebServlet(urlPatterns = "/qna_board/delete.do")

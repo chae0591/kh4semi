@@ -1,23 +1,51 @@
+<%@page import="beans.QnaSearchVO"%>
+<%@page import="beans.TipSearchVO"%>
+<%@page import="beans.QnaBoardDto"%>
+<%@page import="beans.QnaBoardDao"%>
+<%@page import="java.util.List"%>
+<%@page import="beans.TipBoardDto"%>
+<%@page import="beans.TipBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	//여행꿀팁
+	TipBoardDao tipboardDao = new TipBoardDao();
+	List<TipSearchVO> tipList = tipboardDao.selectMain();
+	
+	//여행qna
+	QnaBoardDao qnaboardDao = new QnaBoardDao();
+	List<QnaSearchVO> qnaList = qnaboardDao.selectMain();
+%>
 
 <style>
+	div{ box-sizing: border-box; }
+
 	.container-tip{
 		display: grid;
-		grid-template-rows: repeat(2,300px);
-		grid-template-columns: repeat(3,1fr);
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 1rem;
+		justify-items: start;
+		align-items: start;		
 		padding: 10px 0 0 ;
 	}
 	
 	.container-qna{
 		display: grid;
-		grid-template-rows: repeat(2,200px);
 		grid-template-columns: repeat(2,1fr);
-		padding: 10px 0 0 ;
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 0.5rem;
+		justify-items: start;
+		align-items: start;	
+		padding: 10px 0 0 ;	
 	}	
-	
+
 	.item{
-		padding: 10px 0 0;
+		padding: 1rem;
+		width: 440px;
 	}
 	
 	.contents{
@@ -78,36 +106,49 @@
 
 <div class="contents left">
 	<a href="<%=request.getContextPath()%>">전체</a>
-	<span> > </span> 
+	<span> &gt; </span> 
 	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
 </div>
 
 <div class="bigTitle">여행꿀팁</div>
 
 <div class="container-tip">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">6</div>
+  	<%for(TipSearchVO tipsearchVO : tipList){ %>
+	<div class="item">
+  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
+			<span style="float:left; color:blue;">Tip&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
+			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<br><br>
+			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick() %> 여행작가</span>
+		</a>
+	</div>
+	<%} %>
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기&gt;</a>
 </div>
 
-<div class="bigTitle">여행Q&A</div>
+<div class="bigTitle">여행Q&amp;A</div>
 
 <div class="container-qna">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
+  	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
+	<div class="item">
+		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
+			<span style="float:left; color:red;">Q&A&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnasearchVO.getBoard_title() %></span>
+			<span style="float:right"><%=qnasearchVO.getRegist_time() %></span>
+			<br><br>
+			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick() %> 님의 질문입니다</span>
+		</a>
+	</div>
+	<%} %>
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A 더보기</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&A 더보기&amp;</a>
 </div>
 
 			

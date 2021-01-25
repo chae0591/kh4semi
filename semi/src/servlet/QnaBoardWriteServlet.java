@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.MemberDao;
-import beans.MemberDto;
-import beans.QnaBoardDao;
-import beans.QnaBoardDto;
+import beans.*;
 
 @WebServlet(urlPatterns = "/qna_board/write.do")
 public class QnaBoardWriteServlet extends HttpServlet{
@@ -22,7 +19,7 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			//준비 : board_writer, board_title, board_content
 			//2개는 파라미터에서 가져온다(board_title, board_content)
 			//1개는 세션의 정보를 이용하여 구한다(member_id -> board_writer)
-			resp.setCharacterEncoding("UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			QnaBoardDto dto = new QnaBoardDto();
 			dto.setBoard_title(req.getParameter("board_title"));
 			dto.setBoard_content(req.getParameter("board_content"));
@@ -45,7 +42,7 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			
 			//출력 : 상세페이지로 이동
 			//resp.sendRedirect("detail.jsp?board_no="+board_no);
-			resp.sendRedirect(req.getContextPath()+"/qna_board/detail.jsp?board_no="+board_no);
+			resp.sendRedirect("/semi/qna_board/detail.jsp?board_no="+board_no);
 		}
 		catch(Exception e){
 			e.printStackTrace();
