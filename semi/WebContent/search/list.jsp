@@ -104,11 +104,6 @@
 	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
 </div>
 
-
-<div>
-	<h1>여행꿀팁</h1>
-</div>
-
 <div class="bigTitle">여행꿀팁</div>
 
 <%if(!tipList.isEmpty()){ %>
@@ -120,6 +115,8 @@
 			<span style="float:left; color:blue;">Tip&nbsp;</span>
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
 			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<br><br>
+			<span style="float:left"><%=tipsearchVO.getBoard_content() %></span>
 			<br><br>
 			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
 			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
@@ -150,6 +147,8 @@
 			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnasearchVO.getBoard_title()%></span>
 			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
+			<br><br>
+			<span style="float:left"><%=qnasearchVO.getBoard_title()%></span>
 			<br><br>
 			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
 		</a>
