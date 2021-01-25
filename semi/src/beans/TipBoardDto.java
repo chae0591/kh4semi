@@ -1,6 +1,10 @@
 package beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TipBoardDto {
 
@@ -81,6 +85,5 @@ public class TipBoardDto {
 		this.end_date = end_date;
 	}
 
-	
 	
 }
