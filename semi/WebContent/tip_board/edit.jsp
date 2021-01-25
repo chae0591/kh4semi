@@ -24,37 +24,40 @@ function copyContent () {
 }
 
 $(document).ready(function() {
-	
-    // process the form
-    $('#imgUploadForm').submit(function(evt) {
-        evt.preventDefault();
-        var formData = new FormData($(this)[0]);
+
+    $('#btn-upload').click(function(e){
+        e.preventDefault();
+        $('#file').click();
+    });
+    
+	document.getElementById("file").onchange = function(evt) {
+	    //document.getElementById("imgUploadForm").submit();
+        var formData = new FormData($('#imgUploadForm')[0]);
 	     $.ajax({
 	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
 	        data: formData,
 	        dataType : "json",
-            type: "POST",
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            timeout: 10000,
-            success: function (data) {
-            	console.log(data);
+           type: "POST",
+           enctype: 'multipart/form-data',
+           processData: false,
+           contentType: false,
+           cache: false,
+           timeout: 10000,
+           success: function (data) {
+           		console.log(data);
+           		//alert("이미지가 업로드 되었습니다.");
                 state.file_no_list.push(data.file_no);
 			    var editer = document.getElementById('textEditor');
 			    var filePath = data.imgUrl;
 			    editer.focus();
 			    document.execCommand('InsertImage', false, filePath);
-            },
-            error: function (e) {
-            	alert("이미지 업로드에 실패하였습니다.");
-                console.log("ERROR : ", e);
-            }
+           },
+           error: function (e) {
+           	alert("이미지 업로드에 실패하였습니다.");
+               console.log("ERROR : ", e);
+           }
 	     });
-	     return false;
-    });
-
+	};
 });
 </script>
 <style>
@@ -96,6 +99,9 @@ $(document).ready(function() {
 	
 	<div class="row">
 		<label>내용</label>
+		<div>
+			<button id='btn-upload'>이미지 업로드</button>
+		</div>
 		<textarea style="display:none;" id="board_content" name="board_content" class="input"></textarea>
 		<div id="textEditor" class="input" contenteditable="true">
 			<%=boardDto.getBoard_content()%>
@@ -107,12 +113,15 @@ $(document).ready(function() {
 	</div>
 	 
 	</form>
-	<div class="row">
+	
+	<div style="display:none;">
 		<label>이미지 업로드</label>
 		<form id="imgUploadForm" action="<%=request.getContextPath()%>/tip_tmp_file/receive.do" method="post" enctype="multipart/form-data">
 			<input id="file" type="file" name="f" accept=".jpg , .png , .gif">
+			<!-- 
 			<br><br>
-			<input type="submit" value="업로드">
+			<input type="submit" value="업로드">			
+			-->
 		</form>
 	</div>
 </div>
