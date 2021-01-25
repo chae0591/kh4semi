@@ -75,14 +75,17 @@ public class QnaOpinionDao {
 			QnaOpinionDto dto = new QnaOpinionDto();
 			dto.setOpinion_no(rs.getInt("opinion_no"));
 			dto.setOpinion_content(rs.getString("opinion_content"));
-			dto.setRegist_time(rs.getDate("regist_date"));
+			dto.setRegist_time(rs.getDate("regist_time"));
 			dto.setBoard_no(rs.getInt("board_no"));
 			dto.setOpinion_writer(rs.getString("opinion_writer"));
+			list.add(dto);
+
 		}
 		con.close();
 		return list;
+		
 	}
-	
+
 	//댓글 삭제 기능
 	public void delete(int opinion_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
