@@ -142,7 +142,7 @@
 									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글 작성"></textarea>
 								</div>
 								<div>
-									<input type="submit" value="댓글 작성" class="input">
+									<input type="submit" value="댓글 등록" class="input">
 								</div>
 							</form>
 						</div>
