@@ -131,6 +131,23 @@
 						</div>
 					</td>
 				</tr>
+				
+				<!-- 댓글 작성란 -->
+				<tr>
+					<td>
+						<div>
+							<form action="opinion_write.do" method="post">
+								<input type="hidden" name="board_no" value="<%=board_no%>">
+								<div>
+									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글 작성"></textarea>
+								</div>
+								<div>
+									<input type="submit" value="댓글 작성" class="input">
+								</div>
+							</form>
+						</div>
+					</td>
+				</tr>
 			</tbody>
 			<tfoot>
 				<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
