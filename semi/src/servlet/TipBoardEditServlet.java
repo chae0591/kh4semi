@@ -37,7 +37,6 @@ public class TipBoardEditServlet extends HttpServlet{
 			TipBoardDao boardDao = new TipBoardDao();
 			boardDao.update(boardDto);
 			
-			System.out.println(req.getParameter("file_no_list"));
 			String s_file_no_list = req.getParameter("file_no_list");
 			TipTmpFileDao tipTmpFileDao = new TipTmpFileDao();
 			if(s_file_no_list != null && s_file_no_list.length() > 0) {
