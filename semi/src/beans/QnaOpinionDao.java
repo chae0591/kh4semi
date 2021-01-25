@@ -30,26 +30,35 @@ public class QnaOpinionDao {
 		con.close();
 	}
 	
-	/*
-	 * //시퀀스 번호를 미리 생성하는 기능 public int getSequence() throws Exception { Connection
-	 * con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-	 * 
-	 * String sql = "select qna_opinion_seq.nextval from dual"; PreparedStatement ps
-	 * = con.prepareStatement(sql); ResultSet rs = ps.executeQuery(); rs.next(); int
-	 * seq = rs.getInt(1);
-	 * 
-	 * con.close(); return seq; }
-	 * 
-	 * //번호까지 함께 등록하는 기능 public void writeWithPrimaryKey(QnaOpinionDto dto) throws
-	 * Exception { Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-	 * 
-	 * String sql = "insert into qna_opinion values(?, ?, sysdate, ?, ?)";
-	 * PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1,
-	 * dto.getOpinion_no()); ps.setString(2, dto.getOpinion_content()); ps.setInt(3,
-	 * dto.getBoard_no()); ps.setString(4, dto.getOpinion_writer()); ps.execute();
-	 * 
-	 * con.close(); }
-	 */
+
+	//시퀀스 번호를 미리 생성하는 기능
+	public int getSequence() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+ 
+		String sql = "select qna_opinion_seq.nextval from dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int seq = rs.getInt(1);
+ 
+		con.close(); return seq;
+		}
+	
+	//번호까지 함께 등록하는 기능
+	public void writeWithPrimaryKey(QnaOpinionDto dto) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	
+		String sql = "insert into qna_opinion values(?, ?, sysdate, ?, ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, dto.getOpinion_no());
+		ps.setString(2, dto.getOpinion_content());
+		ps.setInt(3, dto.getBoard_no());
+		ps.setString(4, dto.getOpinion_writer());
+		ps.execute();
+	
+		con.close();
+	}
 	
 	//댓글 리스트
 	public List<QnaOpinionDto> select(int board_no) throws Exception {
