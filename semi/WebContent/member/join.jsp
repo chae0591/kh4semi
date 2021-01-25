@@ -224,8 +224,6 @@
                               <div>
                               	<input type="text" name="result1" size="40" style="border:none; font-size:12px; color:red">
                               </div>
-   						      
-                             
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">비밀번호</label>
@@ -235,7 +233,6 @@
                               <div>
                               	<input type="text" name="result2" size="40" style="border:none; font-size:12px; color:red">
                               </div>
-                              
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">닉네임</label>
@@ -245,7 +242,7 @@
                              <div class="col-md-12 ">
                               <div class="form-group">
                                  	<label style="font-size:12px">
-                                 		<input type="checkbox" id="myCheck" onclick="myFunction()"  required>
+                                 		<input type="checkbox" id="myCheck" onclick="myFunction()" required>
                                  		<span >디비고 사이트 이용약관에 동의하십니까?</span>
                                  		  <textarea class="text-center scroll" style="font-size:12px;" rows="4" cols="30">디비고에 오신걸 환영합니다.
 												디비고 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 디비고 서비스의 이용과 관련하여 디비고 서비스를 제공하는 디비고 주식회사(이하 ‘디비고’)와 이를 이용하는 디비고 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 디비고 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
