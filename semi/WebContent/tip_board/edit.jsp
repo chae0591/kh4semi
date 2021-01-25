@@ -12,11 +12,14 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script>
 
+var state = {
+	file_no_list: []
+};
+
 function copyContent () {
-	console.log('copyCon');
-    document.getElementById("board_content").value =  
+    document.getElementsByName("file_no_list")[0].value = state.file_no_list
+    document.getElementsByName("board_content")[0].value =  
         document.getElementById("textEditor").innerHTML;
-    console.log(document.getElementById("board_content").value);
     return true;
 }
 
@@ -24,11 +27,10 @@ $(document).ready(function() {
 	
     // process the form
     $('#imgUploadForm').submit(function(evt) {
-    	console.log('start');
         evt.preventDefault();
         var formData = new FormData($(this)[0]);
 	     $.ajax({
-	        url: '<%=request.getContextPath()%>/file/receive.do',
+	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
 	        data: formData,
 	        dataType : "json",
             type: "POST",
@@ -38,17 +40,15 @@ $(document).ready(function() {
             cache: false,
             timeout: 10000,
             success: function (data) {
-                console.log("data : ", data);
-                //var img = $('<img>'); 
-				//img.attr('src', data.imgUrl);
-				//img.appendTo('#texteditor');
-
+            	console.log(data);
+                state.file_no_list.push(data.file_no);
 			    var editer = document.getElementById('textEditor');
 			    var filePath = data.imgUrl;
 			    editer.focus();
 			    document.execCommand('InsertImage', false, filePath);
             },
             error: function (e) {
+            	alert("이미지 업로드에 실패하였습니다.");
                 console.log("ERROR : ", e);
             }
 	     });
@@ -73,7 +73,10 @@ $(document).ready(function() {
 	
 	<!-- 사용자 몰래 번호를 첨부 -->
 	<input type="hidden" name="board_no" value="<%=boardDto.getBoard_no()%>">
-	
+			
+	<!-- 사용자 몰래 번호를 첨부 -->
+	<input type="hidden" name="file_no_list">
+		
 	<div class="row">
 		<label>시작일</label>
 		<input type="date" name="start_date"
@@ -106,7 +109,7 @@ $(document).ready(function() {
 	</form>
 	<div class="row">
 		<label>이미지 업로드</label>
-		<form id="imgUploadForm" action="<%=request.getContextPath()%>/file/receive.do" method="post" enctype="multipart/form-data">
+		<form id="imgUploadForm" action="<%=request.getContextPath()%>/tip_tmp_file/receive.do" method="post" enctype="multipart/form-data">
 			<input id="file" type="file" name="f" accept=".jpg , .png , .gif">
 			<br><br>
 			<input type="submit" value="업로드">

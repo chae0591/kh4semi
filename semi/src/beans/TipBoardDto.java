@@ -80,5 +80,7 @@ public class TipBoardDto {
 	public void setEnd_date(Date end_date) {
 		this.end_date = end_date;
 	}
+
+	
 	
 }

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.TmpFileDao;
-import beans.TmpFileDto;
+import beans.TipTmpFileDao;
+import beans.TipTmpFileDto;
 
 /**
  *	사용자가 파일번호를 알려주며 다운로드를 요청하면 그에 맞는 파일을 불러서 사용자에게 전송
@@ -20,8 +20,8 @@ import beans.TmpFileDto;
  *	= 파일은 무조건 하나씩만 전송이 가능하다
  *	= 사용자에게 필요한 정보들을 추가적으로 알려줘야 한다
  */
-@WebServlet(urlPatterns = "/file/download.do")
-public class FileDownloadServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/tip_tmp_file/download.do")
+public class TipFileDownloadServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -30,8 +30,8 @@ public class FileDownloadServlet extends HttpServlet{
 			
 //			계산 : 파일번호로 파일정보를 불러오고 파일명을 이용해서 실제 파일을 불러온다
 //			(번호 --> DTO --> 파일 --> byte[])
-			TmpFileDao tmpFileDao = new TmpFileDao();
-			TmpFileDto tmpFileDto = tmpFileDao.find(file_no);
+			TipTmpFileDao tmpFileDao = new TipTmpFileDao();
+			TipTmpFileDto tmpFileDto = tmpFileDao.find(file_no);
 			
 			String path = "C:/upload";
 			File target = new File(path, tmpFileDto.getSave_name());

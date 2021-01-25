@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import beans.TmpFileDao;
-import beans.TmpFileDto;
+import beans.TipTmpFileDao;
+import beans.TipTmpFileDto;
 
 /**
  *	파일업로드를 테스트하기 위한 서블릿
@@ -21,8 +21,8 @@ import beans.TmpFileDto;
  *	= 기존 방식이 아닌 변경된 방식(multipart/form-data)로 전송되어 오므로 req를 이용한 데이터 수신이 불가능하다.
  *	= 라이브러리(cos.jar)를 이용한 Multipart 방식의 요청을 수신할 수 있는 도구를 생성해야 한다
  */
-@WebServlet(urlPatterns = "/file/receive.do")
-public class FileUploadServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/tip_tmp_file/receive.do")
+public class TipFileUploadServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -46,25 +46,26 @@ public class FileUploadServlet extends HttpServlet{
 //			= 저장된 파일 객체를 꺼내는 명령은 mRequest.getFile("파라미터명")
 //			= 파일 유형은 mRequest.getContentType("파라미터명") 으로 수신
 			
-			TmpFileDto tmpFileDto = new TmpFileDto();
+			TipTmpFileDto tmpFileDto = new TipTmpFileDto();
 			tmpFileDto.setSave_name(mRequest.getFilesystemName("f"));
 			tmpFileDto.setUpload_name(mRequest.getOriginalFileName("f"));
 			File target = mRequest.getFile("f");
 			tmpFileDto.setFile_size(target.length());
 			tmpFileDto.setFile_type(mRequest.getContentType("f"));
 			
-			TmpFileDao tmpFileDao = new TmpFileDao();
+			TipTmpFileDao tmpFileDao = new TipTmpFileDao();
 			int file_no = tmpFileDao.getSequence();
 			tmpFileDto.setFile_no(file_no);
 			tmpFileDao.writeWithPrimaryKey(tmpFileDto);
 			
-			String imgUrl = req.getContextPath() + "/file/download.do?file_no=" + file_no;
+			String imgUrl = req.getContextPath() + "/tip_tmp_file/download.do?file_no=" + file_no;
 
 //			resp.sendRedirect(imgUrl);
 			//http://localhost:8888/semi/file/download.do?file_no=1
 //			출력 : 다른 페이지
 			String json = "{ "
 //					+ "\"isSuccess\":\"true\", "
+					+ "\"file_no\": \"" + file_no + "\"" + ","
 					+ "\"imgUrl\": \"" + imgUrl + "\""
 					+ "}";
 			
