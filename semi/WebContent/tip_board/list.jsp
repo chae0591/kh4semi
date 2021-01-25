@@ -128,7 +128,14 @@
 		<a href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
 		<%for(TipBoardOpinionCountVO dto : list){ %>
 		<div>
-			
+			<%
+				List<String> imgSrcList = dto.getImgSrcList();
+				if(imgSrcList != null && imgSrcList.size() > 0){
+			%>
+				<img src="<%=imgSrcList.get(0)%>">
+			<%	}else{ %>
+				<img width="100px" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+			<%	} %>
 			<!-- 글 제목을 누르면 상세 페이지로 이동하도록 번호를 첨부하여 링크 설정 -->		
 			<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>">				
 				<%=dto.getBoard_title()%>

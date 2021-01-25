@@ -50,7 +50,6 @@ public class TipBoardDao {
 	//수정 기능
 	public boolean update(TipBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-		
 		String sql = "update tip_board "
 						+ "set board_title=?, board_content=?,"
 						+ "start_date=?, end_date=? "
