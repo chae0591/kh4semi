@@ -30,7 +30,8 @@
 	int startBlock = (p-1) / blockSize * blockSize + 1;
 	int endBlock = startBlock + blockSize - 1;
 
-	List<TipSearchVO> tipList = tipboardDao.searchPagingList(keyword, startRow, endRow);
+	//List<TipSearchVO> tipList1 = tipboardDao.searchPagingList(keyword, startRow, endRow);
+	List<TipSearchVO> tipList = tipboardDao.select1(keyword);
 %>
 <!DOCTYPE html>
 <style>
