@@ -43,7 +43,52 @@
 	QnaOpinionDao opinionDao = new QnaOpinionDao();
 	List<QnaOpinionDto> list = opinionDao.select(board_no);
 %>
+<%-- 
+<%
+ 	//댓글 목록 페이지 분할 계산 코드를 작성
+	int boardSize = 5;
 
+	int p;
+	try{
+		p = Integer.parseInt(request.getParameter("p"));
+		if(p <= 0) throw new Exception();//강제예외
+	}
+	catch(Exception e){
+		p = 1;
+	}
+	
+ 	//p의 값에 따라 시작 row번호와 종료 row번호를 계산
+	int endRow = p * boardSize;
+	int startRow = endRow - boardSize + 1;
+%>
+
+<%
+ 	//페이지 네비게이터 계산 코드를 작성
+	
+ 	//블록 크기를 설정
+	int blockSize = 10;
+ 	
+	//페이지 번호에 따라 시작블록과 종료블럭을 계산
+	int startBlock = (p-1) / blockSize * blockSize + 1;
+	int endBlock = startBlock + blockSize - 1;
+	
+ 	//endBlock이 마지막 페이지 번호보다 크면 안된다 = 데이터베이스에서 게시글 수를 구해와야 한다.
+ 	//int count = 목록개수 or 검색개수;
+	int count;
+	if(isSearch){
+		count = opinionDao.getCount(type, key); 
+	}
+	else{
+		count = opinionDao.getCount();
+	}
+ 	//페이지 개수 = (게시글수 + 9) / 10 = (게시글수 + 페이지크기 - 1) / 페이지크기
+	int pageSize = (count + boardSize - 1) / boardSize;
+	
+	if(endBlock > pageSize){
+		endBlock = pageSize;
+	}
+%>
+ --%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
