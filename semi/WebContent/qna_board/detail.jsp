@@ -21,25 +21,26 @@
 	QnaBoardDto boardDto = boardDao.find(board_no);
 	
 	//회원만 수정, 삭제 가능 하도록 구현
+	MemberDao memberDao = new MemberDao();
+	MemberDto writerDto = memberDao.find(boardDto.getBoard_writer());
+
+	//게시글 작성한 회원, 본인인가?
 	int member_no;
 	boolean isMember;
-	MemberDao memberDao = new MemberDao();
-	MemberDto memberDto;
+	MemberDto memberDto = null;
 
 	try{
-		//로그인한 회원이면
 		member_no = (int)session.getAttribute("check");
 		memberDto = memberDao.find(member_no);
 		isMember = memberDto.getMember_id().equals(boardDto.getBoard_writer());
 	}catch(Exception e) {
-		//로그인 안했다면
 		isMember = false;
 	}
 %>
-<%
+<% 
 	//댓글 목록 구하기
 	QnaOpinionDao opinionDao = new QnaOpinionDao();
-	List<QnaOpinionDto> opinionList = opinionDao.select(board_no);
+	List<QnaOpinionDto> list = opinionDao.select(board_no);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -76,6 +77,25 @@
 		$(".delete-btn").click(function(){
 			location.href = "delete.do?board_no=<%=board_no%>";//절대경로
 		});
+		
+		<!-- 댓글 버튼 -->
+		//최초에 수정화면 숨김 처리
+		$(".opinion-edit").hide();
+		
+		//수정 버튼을 누르면 일반화면을 숨기고 수정화면 표시
+		$(".opinion-edit-btn").click(function(){
+			e.preventDefault();
+			
+			$(this).parents.(".opinion-normal").hide();
+			$(this).parents.(".opinion-normal").next().show();
+		});	
+		
+		//작성 취소 버튼을 누르면 수정화면을 숨기고 일반화면 표시
+		$(".opinion-edit-cancel-btn").click(function(){
+			$(this).parents(".opinion-edit").hide();
+			$(this).parents(".opinion-edit").prev().show();
+		});
+	
 	});
 
 </script>
@@ -117,7 +137,10 @@
 				<tr>
 					<td>
 						<div class="opinion-box">
-							<%for(QnaOpinionDto opinionDto : opinionList){ %>
+							<%for(QnaOpinionDto opinionDto : list){ %>
+							
+							<!-- 일반 출력 화면 -->
+							<div class="opinion-normal">
 								<div><%=opinionDto.getOpinion_writer()%></div>
 								<div><%=opinionDto.getOpinion_content()%></div>
 								<div>
@@ -127,6 +150,44 @@
 									%>
 									<%=timeFormat%>
 								</div>
+								<div>	
+									<!-- 수정은 댓글 작성자만, 삭제는 댓글 작성자, 게시글 작성자 가능 -->
+									<%
+										//댓글 작성자
+										boolean isReplyWriter;
+										try{
+											isReplyWriter = memberDto.getMember_id().equals(opinionDto.getOpinion_writer());
+										}catch(Exception e){
+											isReplyWriter = false;
+										}
+									%>
+									<%if(isReplyWriter){ %>
+									<a href="#" class="opinion-edit-btn">수정</a> |
+									<%} %>
+									
+									<%if(isReplyWriter || isMember){ %>
+									<a href="opinion_delete.do?opinion_no=<%=opinionDto.getOpinion_no()%>&board_no=<%=board_no%>" class="opinion-delete-btn">삭제</a>
+									<%} %>
+								</div>
+							</div>
+							
+							<!-- 수정을 위한 화면 : 댓글 작성자에게만 나오도록 조건 설정 -->
+							<%if(isReplyWriter){ %>
+							<div class="opinion-edit">
+								<form action="opinion_edit.do" method="post">
+									<input type="hidden" name="opinion_no" value="<%=opinionDto.getOpinion_no()%>">
+									<input type="hidden" name="board_no" value="<%=board_no%>">
+									<div class="row">
+										<textarea class="input" name="opinion_content" required rows="5" 
+											placeholder="댓글 작성"><%=opinionDto.getOpinion_content()%></textarea>
+									</div>
+									<div class="row">
+										<input type="submit" value="댓글 수정" class="input input-inline opinion-re-edit-btn">
+										<input type="button" value="작성 취소" class="input input-inline opinion-edit-cancel-btn">
+									</div>
+								</form>
+							</div>
+							<%} %>
 							<%} %>
 						</div>
 					</td>
@@ -135,26 +196,30 @@
 				<!-- 댓글 작성란 -->
 				<tr>
 					<td>
-						<div>
 							<form action="opinion_write.do" method="post">
 								<input type="hidden" name="board_no" value="<%=board_no%>">
-								<div>
+								<div class="row">
 									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글 작성"></textarea>
 								</div>
-								<div>
+								<div class="row">
 									<input type="submit" value="댓글 등록" class="input">
 								</div>
 							</form>
-						</div>
 					</td>
 				</tr>
 			</tbody>
 			<tfoot>
-				<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
-				<%if(isMember){ %>
-					<button class="input edit-btn">수정</button>
-					<button class="input delete-btn">삭제</button>
-				<%} %>
+			
+				<tr>
+					<th>
+					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
+					<%if(isMember){ %>
+						<button class="input edit-btn">수정</button>
+						<button class="input delete-btn">삭제</button>
+					<%} %>
+					</th>
+				</tr>
+				
 			</tfoot>
 		</table>
 		
