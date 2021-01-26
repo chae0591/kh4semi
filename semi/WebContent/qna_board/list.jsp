@@ -100,9 +100,6 @@
 	thead{
 		text-align:center;
 	}
-	tr {
-	 	height: 40px;
-	}
 	td {
 		text-overflow:ellipsis; 
 		overflow:hidden; 

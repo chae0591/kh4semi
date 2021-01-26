@@ -23,6 +23,15 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
 <style>
 	/* 화면 레이아웃 스타일 */
+	html, body {
+		width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+	}
+	* {
+        box-sizing: border-box
+       }
 	
 	/* 모든 영역은 점선으로 테두리가 표시되게 한다(테스트용) */
 	main, header, nav, section, 
@@ -35,6 +44,7 @@
 	main {
 		width:1100px;
 		margin:auto;
+		min-height: 700px;
 	}
 	
 	/* 각각의 레이아웃 영역에 여백을 설정한다 */
@@ -192,6 +202,14 @@
 	
 	.dropdown:hover .dropdown-content {
 	  display: block;
+	}
+	
+	footer {
+		width: 100%;
+		height: 50px;
+		position:relative;
+		bottom: 0;
+		text-align: center;
 	}
    
 </style>

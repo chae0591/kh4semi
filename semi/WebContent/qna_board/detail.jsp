@@ -43,10 +43,10 @@
 	QnaOpinionDao opinionDao = new QnaOpinionDao();
 	List<QnaOpinionDto> list = opinionDao.select(board_no);
 %>
-<%-- 
+
 <%
  	//댓글 목록 페이지 분할 계산 코드를 작성
-	int boardSize = 5;
+	int opinionSize = 10;
 
 	int p;
 	try{
@@ -58,9 +58,9 @@
 	}
 	
  	//p의 값에 따라 시작 row번호와 종료 row번호를 계산
-	int endRow = p * boardSize;
-	int startRow = endRow - boardSize + 1;
-%>
+	int endRow = p * opinionSize;
+	int startRow = endRow - opinionSize + 1;
+%>  
 
 <%
  	//페이지 네비게이터 계산 코드를 작성
@@ -75,50 +75,87 @@
  	//endBlock이 마지막 페이지 번호보다 크면 안된다 = 데이터베이스에서 게시글 수를 구해와야 한다.
  	//int count = 목록개수 or 검색개수;
 	int count;
-	if(isSearch){
-		count = opinionDao.getCount(type, key); 
-	}
-	else{
-		count = opinionDao.getCount();
-	}
+
+	count = opinionDao.getCount();
  	//페이지 개수 = (게시글수 + 9) / 10 = (게시글수 + 페이지크기 - 1) / 페이지크기
-	int pageSize = (count + boardSize - 1) / boardSize;
+	int pageSize = (count + opinionSize - 1) / opinionSize;
 	
 	if(endBlock > pageSize){
 		endBlock = pageSize;
 	}
 %>
- --%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
-	html, body{
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	}
-	.aside {
+	
+	.outbox {
+		width:100%;
+		height: auth;
+		min-height: 700px;
+		position: relative;
 		border: 1px solid black;
+		overflow: auto;
+	}
+	aside {
+		border: 1px solid blue;
 		float: left;
 		width: 20%;
-		height: 800px;
+		height: auth;
+		min-height: 700px;
+		padding: 1.5rem;
+		position: relative;
 	}
-	.aside li{
+	aside li{
 		list-style: none;
 	}
-	.article {
-		border: 1px solid black;
+	article {
+		border: 1px solid red;
 		float: right;
 		width: 80%;
-		height: 800px;
+		height: auth;
+		min-height: 700px;
+		padding: 1rem;
+		position: relative;
 	}
-	.content-box {
+	.table-box {
 		width: 100%;
+		text-aligh: left;
+	}
+	.all-content-box {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.text-box {
+		margin-bottom: 10px;
+	}
+	.opinion-input-box {
+		width: 100%;
+		border: 1px solid black;
+		border-radius: 6px;
+	}
+	.opinion-input-box > .content-box {
+		outline: none;
+	}
+	.opinion-input-box > .input-btn {
+		float: right;
+		display: block;
+	}
+	.opinion-list-box {
+		width: 100%;
+	}
+	.opinion-list-box > .opinion-normal {
+		width: 100%;
+		border: 1px solid black;
+		margin-bottom: 10px;
 	}
 </style>
 <script>
 	$(function(){
+		//글쓰기버튼 -> write.jsp
+		$(".write-btn").click(function(){
+			location.href = "write.jsp";
+		});
+		
 		//수정버튼 -> edit.jsp
 		$(".edit-btn").click(function(){
 			location.href = "edit.jsp?board_no=<%=board_no%>";//절대경로
@@ -151,44 +188,61 @@
 	});
 
 </script>
-<!-- 상단 부분 -->
+	<!-- 상단 부분 -->
 	<div>
 		<a href="/semi">전체</a>
 		<span> > </span>
 		<a href="/semi/qna_board/list.jsp">여행Q&A</a>
 	</div>
 	
-	<!-- 최신순, 댓글순 -->
-	<div class="aside">
+	
+	<div class="outbox">
+	<!-- 목록으로 -->
+	<aside>
 		<ul>
 			<li><a href="/semi/qna_board/list.jsp">목록으로</a></li>
 		</ul>
-	</div>
+	</aside>
 	
-	<div class="article">
-		<table class="content-box">
+	<article>
+		<table class="table-box">
 			<tbody>
 			<!-- 게시글 -->
 				<tr>
-					<td><%=boardDto.getBoard_writer()%><%=boardDto.getRegist_time()%></td>
+					<td>
+						<div class="all-content-box">
+						<div class="text-box">
+							<p><%=boardDto.getBoard_writer()%><%=boardDto.getRegist_time()%></p>
+					
+							<span>질문</span><span><%=boardDto.getBoard_title()%></span>
+					
+							<p><%=boardDto.getBoard_content()%></p>
+						
+							<p>좋아요</p><%=boardDto.getVote() %>
+						</div>
+			<!-- 댓글 작성란 -->
+						<div class="opinion-box">
+							<form action="opinion_write.do" method="post">
+							<div class="row">
+								<input type="hidden" name="board_no" value="<%=board_no%>">
+							</div>
+							<div class="row opinion-input-box">
+								<textarea class="input content-box" name="opinion_content" style="border:none" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
+							</div>
+							<div class="row input-btn">
+								<input type="submit" value="댓글 등록" class="input">
+							</div>
+							</form>
+						</div>
+						</div>
+					</td>
 				</tr>
-			
-				<tr>
-					<td><p>질문</p><%=boardDto.getBoard_title()%></h4></td>
-				</tr>
-			
-				<tr>
-					<td><%=boardDto.getBoard_content()%></td>
-				</tr>
-			
-				<tr>
-					<td>좋아요<%=boardDto.getVote() %></td>
-				</tr>
-			
+					
+				
 			<!-- 댓글 목록 -->	
 				<tr>
 					<td>
-						<div class="opinion-box">
+						<div class="opinion-list-box">
 							<%for(QnaOpinionDto opinionDto : list){ %>
 							
 							<!-- 일반 출력 화면 -->
@@ -242,23 +296,27 @@
 							<%} %>
 							<%} %>
 						</div>
+						<!-- 페이지 네비게이션 -->
+						<div class="row">
+							<ul class="pagination center">
+							
+								<li><a href="list.jsp?p=<%=startBlock-1%>">&lt;</a></li>
+							
+								<%for(int i=startBlock; i<=endBlock; i++){ %>
+									<%if(i == p){ %>
+										<li class="active">
+									<%}else{ %>
+										<li>
+									<%} %>
+										</li>
+								<%} %>
+								
+								<li><a href="list.jsp?p=<%=endBlock+1%>">&gt;</a></li>
+							</ul>
+						</div>
 					</td>
 				</tr>
 				
-				<!-- 댓글 작성란 -->
-				<tr>
-					<td>
-							<form action="opinion_write.do" method="post">
-								<input type="hidden" name="board_no" value="<%=board_no%>">
-								<div class="row">
-									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
-								</div>
-								<div class="row">
-									<input type="submit" value="댓글 등록" class="input">
-								</div>
-							</form>
-					</td>
-				</tr>
 			</tbody>
 			<tfoot>
 			
@@ -266,8 +324,9 @@
 					<th>
 					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
 					<%if(isMember){ %>
-						<button class="input edit-btn">수정</button>
-						<button class="input delete-btn">삭제</button>
+						<button class="write-btn">글쓰기</button>
+						<button class="edit-btn">수정</button>
+						<button class="delete-btn">삭제</button>
 					<%} %>
 					</th>
 				</tr>
@@ -275,6 +334,7 @@
 			</tfoot>
 		</table>
 		
+	</article>
 	</div>
 
 

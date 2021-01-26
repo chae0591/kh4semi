@@ -110,4 +110,47 @@ public class QnaOpinionDao {
 		
 		con.close();
 	}
-}
+	
+	//페이징을 이용한 목록
+	public List<QnaOpinionDto> pagingList(int startRow, int endRow) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+		String sql = 	"select * from(" + 
+							"select rownum rn, TMP.* from(" + 
+								"select * from qna_opinion order by opinion_no desc" + 
+							")TMP" + 
+						") where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, startRow);
+		ps.setInt(2, endRow);
+		ResultSet rs = ps.executeQuery();
+				
+		List<QnaOpinionDto> list = new ArrayList<>();
+		while(rs.next()) {
+			QnaOpinionDto dto = new QnaOpinionDto();
+			dto.setOpinion_no(rs.getInt("opinion_no"));
+			dto.setOpinion_content(rs.getString("opinion_content"));
+			dto.setRegist_time(rs.getDate("regist_time"));
+			dto.setBoard_no(rs.getInt("board_no"));
+			dto.setOpinion_writer(rs.getString("opinion_writer"));
+			list.add(dto);
+
+			}
+			con.close();
+				
+			return list; 
+	}
+			
+	//목록개수를 구하는 메소드 
+	public int getCount() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+		String sql = "select count(*) from qna_opinion";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		con.close();
+		return count; 
+		}
+	}

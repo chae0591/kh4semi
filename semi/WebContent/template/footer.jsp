@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 </section>
 		<footer>
 			<h5 class="center">디비go 전국방방곡곡 &copy;</h5>
