@@ -37,11 +37,14 @@
 		isMember = false;
 	}
 %>
+
 <% 
 	//댓글 목록 구하기
 	QnaOpinionDao opinionDao = new QnaOpinionDao();
 	List<QnaOpinionDto> list = opinionDao.select(board_no);
 %>
+
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 	html, body{
