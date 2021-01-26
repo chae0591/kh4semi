@@ -65,6 +65,9 @@
 		width: 80%;
 		height: 800px;
 	}
+	.content-box {
+		width: 100%;
+	}
 </style>
 <script>
 	$(function(){
@@ -83,11 +86,12 @@
 		$(".opinion-edit").hide();
 		
 		//수정 버튼을 누르면 일반화면을 숨기고 수정화면 표시
-		$(".opinion-edit-btn").click(function(){
+		//a태그이므로 기본이벤트를 차단해야한다
+		$(".opinion-edit-btn").click(function(e){
 			e.preventDefault();
 			
-			$(this).parents.(".opinion-normal").hide();
-			$(this).parents.(".opinion-normal").next().show();
+			$(this).parents(".opinion-normal").hide();
+			$(this).parents(".opinion-normal").next().show();
 		});	
 		
 		//작성 취소 버튼을 누르면 수정화면을 숨기고 일반화면 표시
@@ -114,7 +118,7 @@
 	</div>
 	
 	<div class="article">
-		<table>
+		<table class="content-box">
 			<tbody>
 			<!-- 게시글 -->
 				<tr>
@@ -199,7 +203,7 @@
 							<form action="opinion_write.do" method="post">
 								<input type="hidden" name="board_no" value="<%=board_no%>">
 								<div class="row">
-									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글 작성"></textarea>
+									<textarea class="input" name="opinion_content" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
 								</div>
 								<div class="row">
 									<input type="submit" value="댓글 등록" class="input">
