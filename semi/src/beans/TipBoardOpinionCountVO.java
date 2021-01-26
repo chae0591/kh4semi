@@ -1,6 +1,10 @@
 package beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //게시글(BoardDto)에 댓글개수가 포함된 VO
 public class TipBoardOpinionCountVO {
@@ -110,6 +114,35 @@ public class TipBoardOpinionCountVO {
 		this.opinion_count = opinion_count;
 	}
 
+
+	
+	public List<String> getImgSrcList() {
+		
+		String htmlStr = this.board_content;
+		if( htmlStr == null ){
+			return null;
+		}
+		
+		String img = "";  
+        Pattern p_image;  
+        Matcher m_image;  
+        List<String> pics = new ArrayList<String>();
+        
+        String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";  
+        p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);  
+        m_image = p_image.matcher(htmlStr);  
+        while (m_image.find()) {  
+            img = img + "," + m_image.group();  
+            // Matcher m =  
+                         // Pattern.compile ( "src = \" (*) (\ "|> | \\ s +)"?.?) Matcher (img);. // src match  
+            Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
+            
+            while (m.find()) {  
+                pics.add(m.group(1));  
+            }  
+        }  
+        return pics;
+	}
 
 	
 	
