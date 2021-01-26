@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class QnaOpinionDto {
 	private int opinion_no;
-	private String opinion_text;
+	private String opinion_content;
 	private Date regist_time;
 	private int board_no;
 	private String opinion_writer;
@@ -17,11 +17,11 @@ public class QnaOpinionDto {
 	public void setOpinion_no(int opinion_no) {
 		this.opinion_no = opinion_no;
 	}
-	public String getOpinion_text() {
-		return opinion_text;
+	public String getOpinion_content() {
+		return opinion_content;
 	}
-	public void setOpinion_text(String opinion_text) {
-		this.opinion_text = opinion_text;
+	public void setOpinion_content(String opinion_content) {
+		this.opinion_content = opinion_content;
 	}
 	public Date getRegist_time() {
 		return regist_time;

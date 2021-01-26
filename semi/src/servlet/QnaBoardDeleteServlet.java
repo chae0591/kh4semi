@@ -26,7 +26,7 @@ public class QnaBoardDeleteServlet extends HttpServlet{
 			dao.delete(board_no);
 			
 			//출력 : 목록으로 이동
-			resp.sendRedirect(req.getContextPath()+"/qna_board/list.jsp");
+			resp.sendRedirect("list.jsp");
 		}
 		catch(Exception e){
 			e.printStackTrace();
