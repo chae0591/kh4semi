@@ -61,9 +61,16 @@ $(document).ready(function() {
 });
 </script>
 <style>
-#textEditor div {
-	border:none !important;
+
+label, div, span, a {
+	border: none !important;
 }
+
+
+#textEditor {
+	border: 1px solid #ccc !important;
+}
+
 </style>
 
 <div class="outbox" style="width:800px">

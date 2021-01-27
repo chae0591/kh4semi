@@ -250,13 +250,17 @@ td {
 			</div>
 			<br>
 			<h3>
-				<%=memberDto.getMember_nick()%>
+				<%
+				MemberDto memberDtoByBoardNo = new MemberDto();
+				memberDtoByBoardNo = memberDao.find(boardDto.getBoard_writer()); 
+				%>
+				<%=memberDtoByBoardNo.getMember_nick()%>
 			</h3>
 			<div class="gray">여행작가</div>
 			<div>
 				<a class="gray"
-					href="list.jsp?type=board_writer&key=<%=memberDto.getMember_id()%>">
-					작성글 (<%=boardDao.getCount("board_writer", memberDto.getMember_id())%>)
+					href="list.jsp?type=board_writer&key=<%=boardDto.getBoard_writer()%>">
+					작성글 (<%=boardDao.getCount("board_writer", boardDto.getBoard_writer())%>)
 				</a>
 			</div>
 		</div>
@@ -283,7 +287,7 @@ td {
 			</div>
 
 			<hr>
-			<div class="container-content padding-top-20 padding-bottom-20 "><%=boardDto.getBoard_content()%></div>
+			<div style="word-break: break-all;" class="container-content padding-top-20 padding-bottom-20 "><%=boardDto.getBoard_content()%></div>
 
 
 			<hr>
@@ -344,7 +348,7 @@ td {
 								String timeFormat = f.format(tipOpDto.getRegist_time());
 						%>
 						<span class="gray">
-						 | <%=timeFormat%> | 
+						 | <%=timeFormat%>
 						</span>
 						
 						<%
@@ -355,15 +359,16 @@ td {
 						<%
 							if (isReplyOwner) {
 						%>
+						<span class="gray"> | </span>
 						<a href="#" class="reply-edit-btn gray">수정</a>
 						<%
 							}
 						%>
 
-						<span class="gray"> | </span>
 						<%
 							if (isAdmin || isReplyOwner) {
 						%>
+						<span class="gray"> | </span>
 						<a class="gray" href="opinion_delete.do?opinion_no=<%=tipOpDto.getOpinion_no()%>&board_no=<%=board_no%>">삭제</a>
 						<%
 							}
