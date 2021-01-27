@@ -158,7 +158,7 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
 </div>
 
 <%} else{%>

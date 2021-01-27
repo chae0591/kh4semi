@@ -586,4 +586,21 @@ public class TipBoardDao {
 			
 			return list;
 	}
+	
+	//검색 개수 구하는 메소드
+	public int searchCount(String keyword) throws Exception{
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select count(*) from tip_board where instr(board_title, ?) > 0";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		int count = rs.getInt(1);
+		con.close();
+		
+		return count;
+		
+	}
 }

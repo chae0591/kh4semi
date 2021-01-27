@@ -7,7 +7,7 @@
 	String keyword = request.getParameter("keyword");
 	
 	//여행꿀팁
-	TipBoardDao tipboardDao = new TipBoardDao();
+	QnaBoardDao qnaboardDao = new QnaBoardDao();
 	
 
 	//페이지 분할 코드
@@ -30,7 +30,7 @@
 	int startBlock = (p-1) / blockSize * blockSize + 1;
 	int endBlock = startBlock + blockSize - 1;
 	
-	int count = tipboardDao.searchCount(keyword);
+	int count = qnaboardDao.searchCount(keyword);
 	
 	// 페이지 개수
 	int	pageSize = (count + boardSize - 1) / boardSize;
@@ -38,8 +38,7 @@
 		endBlock = pageSize;
 	}
 
-	List<TipSearchVO> tipList = tipboardDao.searchPagingList(keyword, startRow, endRow);
-	//List<TipSearchVO> tipList = tipboardDao.select1(keyword);
+	List<QnaSearchVO> qnaList = qnaboardDao.searchPagingList(keyword, startRow, endRow);
 %>
 <h2>startBlock=<%=startBlock%>, endBlock=<%=endBlock%>, pageSize=<%=pageSize%></h2>
 <!DOCTYPE html>
@@ -126,46 +125,38 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<div class="contents left">
-	<a href="<%=request.getContextPath()%>">전체</a>
-	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
-</div>
+<div class="bigTitle">여행Q&amp;A</div>
 
-<div class="bigTitle">여행꿀팁</div>
+<div class="container-qna outbox">
 
-<div class="container-tip outbox">
-
-	<%for(TipSearchVO tipsearchVO : tipList){ %>
+	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item">
-  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+  		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
+			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=qnasearchVO.getBoard_title()%></span>
+			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
 			<br><br>
-			<span style="float:left"><%=tipsearchVO.getBoard_content() %></span>
+			<span style="float:left"><%=qnasearchVO.getBoard_title()%></span>
 			<br><br>
-			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
+			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
 </div>
 	
 	 <ul class="pagination center">
-	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
+	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
 	 <%for(int i=startBlock ; i <=  endBlock ; i++){ %>
-	 	
 	 	<%if(p == i){ %>
-       		<li class="active"><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
+       		<li class="active"><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
         <%} else{%>
-        	<li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
+        	<li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
         <%} %>	
       <%} %>
       
       <%if(endBlock != pageSize){ %>
-      	<li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
+      	<li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
       <%}%>	 
     </ul>
 
