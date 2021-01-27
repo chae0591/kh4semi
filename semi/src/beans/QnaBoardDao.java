@@ -244,6 +244,57 @@ public class QnaBoardDao {
 			
 		}
 	
+	//페이징을 이용한 검색
+		public List<QnaSearchVO> searchPagingList(String keyword, int startRow, int endRow) throws Exception{
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from("
+						+ "select Q.board_title, Q.board_content, Q.regist_time, Q.board_no, M.member_nick from "
+						+ "qna_board Q inner join member M "
+						+ "on M.member_id = Q.board_writer "
+						+ "where instr(board_title, ?) > 0 order by board_no desc)"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, startRow);
+			ps.setInt(3, endRow);
+			ResultSet rs = ps.executeQuery();
+			
+			List<QnaSearchVO> list = new ArrayList<>();
+			while(rs.next()) {
+				QnaSearchVO qnasearchVO = new QnaSearchVO();
+				qnasearchVO.setBoard_no(rs.getInt("board_no"));
+				qnasearchVO.setBoard_title(rs.getString("board_title"));
+				qnasearchVO.setBoard_content(rs.getString("board_content"));
+				qnasearchVO.setRegist_time(rs.getDate("regist_time"));
+				qnasearchVO.setMember_nick(rs.getString("member_nick"));
+				list.add(qnasearchVO);
+			}
+				
+				con.close();
+				
+				return list;
+		}
+	
+	//검색 개수 구하는 메소드
+		public int searchCount(String keyword) throws Exception{
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+			String sql = "select count(*) from qna_board where instr(board_title, ?) > 0";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			int count = rs.getInt(1);
+			con.close();
+			
+			return count;
+			
+		}
 		//페이징을 이용한 목록
 		public List<QnaBoardDto> pagingList(int startRow, int endRow) throws Exception {
 			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
