@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.MemberDao;
 import beans.MemberDto;
+import beans.QnaBoardDao;
 import beans.QnaOpinionDao;
 import beans.QnaOpinionDto;
 
@@ -36,7 +37,7 @@ public class QnaOpinionWriteServlet extends HttpServlet{
 			//처리 : QnaOpinipnDao를 사용, 댓글 테이블에 등록
 			//1. 시퀀스 번호 생성 = .getSequence()
 			//2. 등록 = .writeWithPrimaryKey()
-			QnaOpinionDao opinionDao = new QnaOpinionDao();
+			QnaOpinionDao opinionDao = new QnaOpinionDao();	
 			int opinion_no = opinionDao.getSequence(); 	//시퀀스번호생성
 			opinionDto.setOpinion_no(opinion_no); 		//생성된 번호를 DTO에 설정
 			opinionDao.writeWithPrimaryKey(opinionDto); //설정된 정보를 등록!

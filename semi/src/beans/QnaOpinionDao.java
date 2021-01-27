@@ -158,4 +158,4 @@ public class QnaOpinionDao {
 		
 		return count; 
 		}
-	}
+}

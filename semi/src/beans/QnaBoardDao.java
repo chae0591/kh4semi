@@ -31,6 +31,7 @@ public class QnaBoardDao {
 			dto.setBoard_title(rs.getString("board_title"));
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
+			dto.setOpinion(rs.getInt("opinion"));
 			list.add(dto);
 		}
 		con.close();
@@ -43,8 +44,8 @@ public class QnaBoardDao {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 
 		String sql = "insert into qna_board("
-				+ "board_no, board_writer, board_title, board_content"
-				+ ") values(qna_board_seq.nextval, ?, ?, ?, sysdate, 0)";
+				+ "board_no, board_writer, board_title, board_content, regist_time, vote, opinion"
+				+ ") values(qna_board_seq.nextval, ?, ?, ?, sysdate, 0, 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, qnadto.getBoard_writer());
@@ -73,12 +74,13 @@ public class QnaBoardDao {
 	public void writeWithPrimaryKey(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, 0)";
+		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getBoard_no());
 		ps.setString(2, dto.getBoard_writer());
 		ps.setString(3, dto.getBoard_title());
 		ps.setString(4, dto.getBoard_content());
+		ps.setInt(5, dto.getOpinion());
 		ps.execute();
 		
 		con.close();
@@ -133,6 +135,7 @@ public class QnaBoardDao {
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
 			dto.setVote(rs.getInt("vote"));
+			dto.setOpinion(rs.getInt("opinion"));
 		}
 		else {//결과가 없다면 잘못된 번호니까 null이라는 값을 반환하겠다
 			dto = null;
@@ -142,6 +145,7 @@ public class QnaBoardDao {
 			
 			return dto;
 		}
+	
 	//메인 선택글(최신순6개)
 	public List<QnaSearchVO> selectMain() throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -174,6 +178,18 @@ public class QnaBoardDao {
 		return list;
 	}
 	
+	/*
+	 * //댓글 갯수 표시 public void opinionCount(int board_no) throws Exception {
+	 * Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 * 
+	 * String sql = "update qna_board set opinion=opinion+1 where board_no=?";
+	 * 
+	 * PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
+	 * ps.execute();
+	 * 
+	 * con.close(); }
+	 */
+		
 	//좋아요 증가 기능
 	public void plusVote(int board_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -261,6 +277,7 @@ public class QnaBoardDao {
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
 			dto.setVote(rs.getInt("vote"));
+			dto.setOpinion(rs.getInt("opinion"));
 			list.add(dto);
 		}
 			
@@ -344,6 +361,7 @@ public class QnaBoardDao {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setRegist_time(rs.getDate("regist_time"));
 				dto.setVote(rs.getInt("vote"));
+				dto.setOpinion(rs.getInt("opinion"));
 				list.add(dto);
 
 			}

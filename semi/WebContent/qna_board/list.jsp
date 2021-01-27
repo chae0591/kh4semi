@@ -79,7 +79,7 @@
 		padding: 1.5rem;
 		position: relative;
 	}
-	.aside li{
+	aside li{
 		list-style: none;
 	}
 	article {
@@ -91,10 +91,16 @@
 		padding: 1rem;
 		position: relative;
 	}
+	.table-box {
+		width: 100%;
+		text-aligh: left;
+	}
+	.main-title{
+		margin-bottom: 10px;
+	}
 	.text-box {
 		margin-bottom: 10px;
 		padding: 0.5rem;
-		width: 100%;
 		border: 1px solid black;
 	}
 	.pagination {
@@ -105,34 +111,6 @@
 	.pagination > ul> li {
 		display: inline-block;
 		text-decoration: none;
-	}
-	.board_title {
-		width:100%;
-		height:20px;
-		text-overflow:ellipsis; 
-		overflow:hidden;
-	}
-	.board_title > a{
-		width:100%;
-		text-overflow:ellipsis; 
-		overflow:hidden;
-		white-space:nowrap;
-	}
-	/* .regist_time {
-		position: absolute;
-   	 	top: 20px;
-    	right: 20px;
-    	line-height: 1.4;
-    	font-size: 12px;
-	} */
-	.tb-top {
-		border-top: 1px solid black;
-	}
-	.tb-bottom {
-		border-bottom: 1px solid black;
-	}
-	.font-bold {
-		font-weight: bold; 
 	}
 
 </style>
@@ -157,8 +135,8 @@ $(function(){
 	<!— 최신순, 댓글순 —>
 	<aside>
 		<ul>
-			<li><a href="#">최신순</a></li>
-			<li><a href="#">댓글순</a></li>
+			<li><a href="list.jsp">최신순</a></li>
+			<li><a href="list.jsp?opinion_no=? order by opinion_no asc">댓글순</a></li>
 		</ul>
 	</aside>
 	
@@ -168,7 +146,7 @@ $(function(){
 			<thead>
 				<tr>
 					<th>
-						<h4>답변을 기다려요!</h4>
+						<h4 class="main-title">답변을 기다려요!</h4>
 					</th>
 				</tr>
 			</thead>
@@ -178,11 +156,19 @@ $(function(){
 				<tr>
 					<td>
 						<div class="text-box">
+							<!-- 타이틀 -->
 							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
-								<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>					
-							<p href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></p>
-							<span class="font-bold"><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
-							<span style="float: right"><%=dto.getRegist_time()%></span>
+								<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>		
+							<!-- 내용 -->				
+							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><p><%=dto.getBoard_content()%></p></a>
+							<!-- 작성자 -->
+							<span><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
+							<!-- 작성날짜 -->
+							<span><%=dto.getRegist_time()%></span>
+							<!-- 좋아요 -->
+							<span>♡</span><span><%=dto.getVote()%></span>
+							<!-- 댓글개수 -->
+							<span>댓글</span><span><%=dto.getOpinion()%></span>
 						</div>
 					</td>	
 				</tr>
