@@ -51,7 +51,7 @@ public class TipOpinionDao {
 		return list;
 	}
 	
-//	댓글 삭제 기능
+
 	public void delete(int opinion_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
@@ -59,12 +59,12 @@ public class TipOpinionDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, opinion_no);
 		ps.execute();
-//		int count = ps.executeUpdate();
+
 		
 		con.close();
 	}
 	
-//	댓글 수정
+
 	public void update(TipOpinionDto opinionDto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
@@ -73,7 +73,7 @@ public class TipOpinionDao {
 		ps.setString(1, opinionDto.getOpinion_text());
 		ps.setInt(2, opinionDto.getOpinion_no());
 		ps.execute();
-//		int count = ps.executeUpdate();
+
 		
 		con.close();
 	}
