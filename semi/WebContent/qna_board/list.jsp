@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 
 <%
+	//목록 가져오기
 	QnaBoardDao dao = new QnaBoardDao();
 	List<QnaBoardDto> list = dao.select();
 	
@@ -135,8 +136,9 @@ $(function(){
 	<!— 최신순, 댓글순 —>
 	<aside>
 		<ul>
+		<%QnaBoardDto boardDto = new QnaBoardDto();%>
 			<li><a href="list.jsp">최신순</a></li>
-			<li><a href="list.jsp?opinion_no=? order by opinion_no asc">댓글순</a></li>
+			<li><a href="list.jsp?">댓글순</a></li>
 		</ul>
 	</aside>
 	

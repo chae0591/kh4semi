@@ -61,6 +61,19 @@ public class QnaOpinionDao {
 		con.close();
 	}
 	
+	public boolean getIsCounted(QnaOpinionDto dto) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from qna_opinion where opinion_no=? and board_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, dto.getOpinion_no());
+		ps.setInt(2, dto.getBoard_no());
+		ResultSet rs = ps.executeQuery();
+		boolean isVoted = rs.next();
+		con.close();
+		return isVoted;
+	}
+	
 	//댓글 리스트
 	public List<QnaOpinionDto> select(int board_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -87,12 +100,13 @@ public class QnaOpinionDao {
 	}
 
 	//댓글 삭제 기능
-	public void delete(int opinion_no) throws Exception {
+	public void delete(QnaOpinionDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "delete qna_opinion where opinion_no=?";
+		String sql = "delete qna_opinion where opinion_no=? and board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, opinion_no);
+		ps.setInt(1, dto.getOpinion_no());
+		ps.setInt(2, dto.getBoard_no());
 		ps.execute();
 		
 		con.close();
@@ -157,5 +171,20 @@ public class QnaOpinionDao {
 		con.close();
 		
 		return count; 
-		}
+	}
+	
+	//수정필요!
+	//board_no가 같은 댓글 찾기
+	public void getOverLap(QnaOpinionDto dto) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select board_no=?, count(*) from qna_opinion group by board_no=? having count(*) > 1;";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, dto.getBoard_no());
+		
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		con.close();
+	}
 }

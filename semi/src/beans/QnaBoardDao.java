@@ -178,17 +178,31 @@ public class QnaBoardDao {
 		return list;
 	}
 	
-	/*
-	 * //댓글 갯수 표시 public void opinionCount(int board_no) throws Exception {
-	 * Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-	 * 
-	 * String sql = "update qna_board set opinion=opinion+1 where board_no=?";
-	 * 
-	 * PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
-	 * ps.execute();
-	 * 
-	 * con.close(); }
-	 */
+	
+	//댓글 개수 증가 기능
+	public void plusOpinion(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 
+		String sql = "update qna_board set opinion=opinion+1 where board_no=?";
+	
+		PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
+		ps.execute();
+	
+		con.close();
+	}
+	
+	//댓글 개수 감소(취소) 기능
+	public void minusOpinion(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 
+		String sql = "update qna_board set opinion=opinion-1 where board_no=?";
+	 
+		PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
+		ps.execute();
+	 
+		con.close();
+	}
+	 
 		
 	//좋아요 증가 기능
 	public void plusVote(int board_no) throws Exception {
@@ -387,16 +401,4 @@ public class QnaBoardDao {
 			
 		}
 		
-		//목록개수를 구하는 메소드 
-		public int getCount() throws Exception {
-			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-			String sql = "select count(*) from qna_board";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-			con.close();
-			return count; 
-		}
 	}

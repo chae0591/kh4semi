@@ -90,6 +90,7 @@
 		endBlock = pageSize;
 	}
 %>
+
 <h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
@@ -257,7 +258,6 @@
 					<td>
 						<div class="opinion-list-box">
 							<%for(QnaOpinionDto opinionDto : list){ %>
-							
 							<!-- 일반 출력 화면 -->
 							<div class="opinion-normal">
 								<div><%=opinionDto.getOpinion_writer()%></div>
