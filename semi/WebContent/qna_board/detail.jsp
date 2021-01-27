@@ -46,7 +46,7 @@
 
 <%
  	//댓글 목록 페이지 분할 계산 코드를 작성
-	int opinionSize = 10;
+	int opinionSize = 5;
 
 	int p;
 	try{
@@ -63,20 +63,26 @@
 %>  
 
 <%
+	List<QnaOpinionDto> opinionList; 
+
+	list = opinionDao.pagingList(startRow, endRow);
+%>
+
+<%
  	//페이지 네비게이터 계산 코드를 작성
-	
  	//블록 크기를 설정
-	int blockSize = 10;
+	int blockSize = 5;
  	
 	//페이지 번호에 따라 시작블록과 종료블럭을 계산
 	int startBlock = (p-1) / blockSize * blockSize + 1;
 	int endBlock = startBlock + blockSize - 1;
 	
  	//endBlock이 마지막 페이지 번호보다 크면 안된다 = 데이터베이스에서 게시글 수를 구해와야 한다.
- 	//int count = 목록개수 or 검색개수;
+ 	QnaOpinionDto opiniondto = new QnaOpinionDto();
+ 	opiniondto.setBoard_no(board_no);
 	int count;
-
-	count = opinionDao.getCount();
+	count = opinionDao.getCount(opiniondto);
+	
  	//페이지 개수 = (게시글수 + 9) / 10 = (게시글수 + 페이지크기 - 1) / 페이지크기
 	int pageSize = (count + opinionSize - 1) / opinionSize;
 	
@@ -84,7 +90,7 @@
 		endBlock = pageSize;
 	}
 %>
-
+<h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 	
@@ -127,6 +133,7 @@
 	}
 	.text-box {
 		margin-bottom: 10px;
+		padding: 0.5rem;
 	}
 	.opinion-input-box {
 		width: 100%;
@@ -147,6 +154,7 @@
 		width: 100%;
 		border: 1px solid black;
 		margin-bottom: 10px;
+		padding: 0.5rem;
 	}
 </style>
 <script>
@@ -164,6 +172,11 @@
 		//삭제버튼 -> delete.do
 		$(".delete-btn").click(function(){
 			location.href = "delete.do?board_no=<%=board_no%>";//절대경로
+		});
+		
+		//좋아요 버튼 -> vote_write_delete.do
+		$(".vote-btn").click(function(){
+			location.href = "vote_write_delete.do?board_no=<%=board_no%>";//절대경로
 		});
 		
 		<!-- 댓글 버튼 -->
@@ -218,7 +231,7 @@
 					
 							<p><%=boardDto.getBoard_content()%></p>
 						
-							<p>좋아요</p><%=boardDto.getVote() %>
+							<span class="vote">좋아요</span><span><%=boardDto.getVote()%></span>
 						</div>
 			<!-- 댓글 작성란 -->
 						<div class="opinion-box">
@@ -296,22 +309,24 @@
 							<%} %>
 							<%} %>
 						</div>
+						
 						<!-- 페이지 네비게이션 -->
 						<div class="row">
 							<ul class="pagination center">
 							
-								<li><a href="list.jsp?p=<%=startBlock-1%>">&lt;</a></li>
-							
-								<%for(int i=startBlock; i<=endBlock; i++){ %>
-									<%if(i == p){ %>
-										<li class="active">
-									<%}else{ %>
-										<li>
-									<%} %>
-										</li>
-								<%} %>
+								<li><a href="detail.jsp?p=<%=startBlock-1%>&board_no=<%=board_no%>">&lt;</a></li>
 								
-								<li><a href="list.jsp?p=<%=endBlock+1%>">&gt;</a></li>
+							<%for(int i=startBlock; i<=endBlock; i++){ %>
+								<%if(i == p){ %>
+								<li class="active"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+								<%}else{ %>
+								<li><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+								<%} %>
+							<%} %>
+								
+								<%if(endBlock != pageSize){ %>
+								<li><a href="detail.jsp?p=<%=endBlock+1%>&board_no=<%=board_no%>">&gt;</a></li>
+								<%} %>
 							</ul>
 						</div>
 					</td>
@@ -324,6 +339,7 @@
 					<th>
 					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
 					<%if(isMember){ %>
+						<button class="vote-btn">좋아요</button>
 						<button class="write-btn">글쓰기</button>
 						<button class="edit-btn">수정</button>
 						<button class="delete-btn">삭제</button>

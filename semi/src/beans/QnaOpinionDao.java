@@ -141,16 +141,21 @@ public class QnaOpinionDao {
 			return list; 
 	}
 			
-	//목록개수를 구하는 메소드 
-	public int getCount() throws Exception {
+	//댓글 개수를 구하는 메소드 
+	public int getCount(QnaOpinionDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 				
-		String sql = "select count(*) from qna_opinion";
+		String sql = "select count(*) from qna_opinion where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, dto.getBoard_no());
+		
 		ResultSet rs = ps.executeQuery();
 		rs.next();
+		
 		int count = rs.getInt(1);
+		
 		con.close();
+		
 		return count; 
 		}
 	}

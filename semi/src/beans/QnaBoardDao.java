@@ -174,6 +174,32 @@ public class QnaBoardDao {
 		return list;
 	}
 	
+	//좋아요 증가 기능
+	public void increaseVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "update qna_board set vote=vote+1 where board_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+		
+		con.close();
+	}
+	
+	//좋아요 감소(취소) 기능
+	public void decreaseVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+		String sql = "update qna_board set vote=vote+1 where board_no=?";
+			
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+			
+		con.close();
+	}
+	
 	//검색 결과 DAO
 	public List<QnaSearchVO> select(String keyword) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
