@@ -18,10 +18,19 @@ public class TipBoardOpinionCountVO {
 	private Date start_date;
 	private Date end_date;
 	private int opinion_count;
+	private String member_nick;
 	
 
 	public TipBoardOpinionCountVO() {
 		super();
+	}
+
+	public String getMember_nick() {
+		return member_nick;
+	}
+
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
 	}
 
 

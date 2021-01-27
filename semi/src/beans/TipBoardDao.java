@@ -344,20 +344,23 @@ public class TipBoardDao {
 				orderSql += " desc ";
 				break;
 		}
-		
 		String sql = "select * from ("
 						+ "select rownum rn, TMP.* from ("
 							+ "select "
 								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
 								+ "B.regist_time, B.vote, "
 								+ "B.start_date, B.end_date, "
+								+ "M.member_nick, " 
 								+ "count(R.opinion_no) opinion_count "
 							+ "from "
-							+ "tip_board B left outer join tip_opinion R on B.board_no = R.board_no "
+							+ "tip_board B "
+							+ "inner join member M on B.board_writer = M.member_id "
+							+ "left outer join tip_opinion R on B.board_no = R.board_no "
 							+ "group by "
 								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
 								+ "B.regist_time, B.vote, "
-								+ "B.start_date, B.end_date "
+								+ "B.start_date, B.end_date, "
+								+ "M.member_nick "
 							+ "order by #1 "
 						+ ")TMP "
 					+ ") where rn between ? and ?";
@@ -379,6 +382,7 @@ public class TipBoardDao {
 			vo.setStart_date(rs.getDate("start_date"));
 			vo.setEnd_date(rs.getDate("end_date"));
 			vo.setOpinion_count(rs.getInt("opinion_count"));
+			vo.setMember_nick(rs.getString("member_nick"));
 			list.add(vo);
 		}
 		
@@ -412,14 +416,18 @@ public class TipBoardDao {
 								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
 								+ "B.regist_time, B.vote, "
 								+ "B.start_date, B.end_date, "
+								+ "M.member_nick, " 
 								+ "count(R.opinion_no) opinion_count "
 							+ "from "
-							+ "tip_board B left outer join tip_opinion R on B.board_no = R.board_no "
+							+ "tip_board B "
+							+ "inner join member M on B.board_writer = M.member_id "
+							+ "left outer join tip_opinion R on B.board_no = R.board_no "
 							+ "where instr(#1, ?) > 0 "
 							+ "group by "
 								+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
 								+ "B.regist_time, B.vote, "
-								+ "B.start_date, B.end_date "
+								+ "B.start_date, B.end_date, "
+								+ "M.member_nick "
 							+ "order by #2 "
 						+ ")TMP "
 					+ ") where rn between ? and ?";
@@ -444,6 +452,7 @@ public class TipBoardDao {
 			vo.setStart_date(rs.getDate("start_date"));
 			vo.setEnd_date(rs.getDate("end_date"));
 			vo.setOpinion_count(rs.getInt("opinion_count"));
+			vo.setMember_nick(rs.getString("member_nick"));
 			list.add(vo);
 		}
 		

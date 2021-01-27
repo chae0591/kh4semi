@@ -27,10 +27,6 @@
 	int startRow = endRow - boardSize + 1;
 %>
 
-<h1>p = <%=p%>, startRow = <%=startRow%>, endRow = <%=endRow%></h1>
-
-
-
 
 <%
 	int orderColumn;
@@ -96,6 +92,139 @@
 %>
 
 
+<style>
+
+	.container-content {
+		padding: 10px;
+	}
+	
+	.gray {
+		color: #999;
+	}
+
+	div, span, a {
+		border: none !important;
+	}
+	
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
+	div{ box-sizing: border-box; }
+
+	.container-tip{
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 1rem;
+		justify-items: start;
+		align-items: start;		
+		padding: 10px 0 0 ;
+	}
+	
+	.container-qna{
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 0.5rem;
+		justify-items: start;
+		align-items: start;	
+		padding: 10px 0 0 ;	
+	}	
+
+	.item{
+		padding: 1rem;
+		width: 440px;
+	}
+	
+	.contents{
+		min-height: 50px;
+    	margin: 0 auto;
+    	padding: 10px 0 0 ;
+    	border-bottom: 1px solid #eeeeee;
+    }
+    
+    .contents span{
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color : #bbbbbb;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    
+    .contents a{
+    	display: block;
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color: #666666;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    
+    .bigTitle{
+    	position: relative;
+    	height: 60px;
+    	line-height: 70px;
+    	font-size: 25px;
+    	font-weight: 700;
+    	border-bottom: 3px solid #242424;
+    }
+    
+    .btn-box{
+    	margin-top: 15px;
+    }
+    
+    .btn-more{
+    	padding: 0 35px;
+    	height: 35px;
+    	line-height: 35px;
+    	border: 1px solid #ddd;
+    	border-radius: 2px;
+    	font-size: 14px;
+    	color: #333;
+    }
+    
+    /* 글 제목 글자수 제한 */
+    .title-line{
+    	float:left; 
+    	font-size:1.1em; 
+    	font-weight:600;
+    	display: inline-block;
+    	width:250px;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    }
+    
+    .title-line:hover{
+    	text-decoration: underline;
+    }
+    
+    /* 글 내용 줄 제한 */
+    .content-line{
+    	font-size: 0.9em;
+    	display: inline-block;
+    	width:280px;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: normal;
+    	line-height: 1.5;
+    	height: 3em;
+    	word-wrap: break-word;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 2;
+    	-webkit-box-orient: vertical;
+    }
+    
+    .content-line:hover{
+    	text-decoration: underline;
+    }
+</style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <script>
@@ -121,55 +250,47 @@
 	});
 </script>
 
-<div class="outbox" style="width:640px">
-	<div class="row center">
-		<h2>환영합니다!</h2>
-		<a href="#" onclick="setUrlParam('orderColumn', '0'); return false;">최신순</a>
-		<a href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
-		<%for(TipBoardOpinionCountVO dto : list){ %>
-		<div>
-			<%
-				List<String> imgSrcList = dto.getImgSrcList();
-				if(imgSrcList != null && imgSrcList.size() > 0){
-			%>
-				<img src="<%=imgSrcList.get(0)%>">
-			<%	}else{ %>
-				<img width="100px" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
-			<%	} %>
-			<!-- 글 제목을 누르면 상세 페이지로 이동하도록 번호를 첨부하여 링크 설정 -->		
-			<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>">				
-				<%=dto.getBoard_title()%>
-			</a>
-			<!-- 댓글 개수 출력(있을 경우만) -->
+<div class="contents left">
+	<a href="<%=request.getContextPath()%>">전체</a>
+	<span> &gt; </span> 
+	<a href="<%=request.getContextPath()%>/tip_board">여행꿀팁</a>
+</div>
+
+<div class="bigTitle">여행꿀팁</div>
+<div class="btn-box ">
+	<a href="#" onclick="setUrlParam('orderColumn', '0'); return false;">최신순</a>
+	 | 
+	<a href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
+</div>
+
+
+<div class="container-tip">
+  	<%for(TipBoardOpinionCountVO dto : list){ %>
+	<div class="item border-gray-1">
+  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=dto.getBoard_no()%>">
+			<span style="float:left; color:blue;">Tip&nbsp;</span>
+			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=dto.getBoard_title() %>
 			<%if(dto.getOpinion_count() > 0){ %>
 				[<%=dto.getOpinion_count()%>]
 			<%}%>
-			
-		</div>
-		<%} %>
+			</span>
+			<span style="float:right"><%=dto.getRegist_time() %></span>
+			<br><br>
+			<span class="content-line"><%=dto.getBoard_content()%></span>
+			<br>
+			<span style="float:left; font-size:14px;">일정 <%=dto.getStart_date()%> ~ <%=dto.getEnd_date() %></span>
+			<span style="float:right; color:#8C8C8C;"><%=dto.getMember_nick() %> 여행작가</span>
+		</a>
 	</div>
+	<%} %>
 	
-	<div class="row right">
-		<button class="write-btn input input-inline">글쓰기</button>
-	</div>
-	
-	<!-- 검색창 -->
-	<form action="list.jsp" method="get">
-	<div class="row">
-		<select name="type" class="input input-inline">
-			<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
-			<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
-		</select>
-		<%if(isSearch){ %>
-		<input type="text" class="input input-inline" name="key" required value="<%=key%>">
-		<%}else{ %>
-		<input type="text" class="input input-inline" name="key" required>
-		<%} %>
-		<input type="submit" class="input input-inline" value="검색">
-	</div>
-	</form>
-	
-	<!-- 페이지 네비게이션 -->
+</div>
+
+<div class="btn-box row right">
+	<button class="write-btn input input-inline">글쓰기</button>
+</div>
+
+<div class="btn-box center">
 	<div class="row">
 		<ul class="pagination">
 			<%if(isSearch){ %>
@@ -202,6 +323,9 @@
 		</ul>
 	</div>
 </div>
+
+
+
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>		
 		
