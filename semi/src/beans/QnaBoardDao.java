@@ -175,7 +175,7 @@ public class QnaBoardDao {
 	}
 	
 	//좋아요 증가 기능
-	public void increaseVote(int board_no) throws Exception {
+	public void plusVote(int board_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
 		String sql = "update qna_board set vote=vote+1 where board_no=?";
@@ -188,10 +188,10 @@ public class QnaBoardDao {
 	}
 	
 	//좋아요 감소(취소) 기능
-	public void decreaseVote(int board_no) throws Exception {
+	public void minusVote(int board_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 			
-		String sql = "update qna_board set vote=vote+1 where board_no=?";
+		String sql = "update qna_board set vote=vote-1 where board_no=?";
 			
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, board_no);

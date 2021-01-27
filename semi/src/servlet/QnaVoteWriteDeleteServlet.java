@@ -40,11 +40,15 @@ public class QnaVoteWriteDeleteServlet extends HttpServlet{
 			
 			boolean isVoted = qnavoteDao.getIsVoted(qnavoteDto);
 			if(!isVoted) {
+				//vote에 추가
 				qnavoteDao.insert(qnavoteDto);
-				qnaboardDao.increaseVote(qnavoteDto.getBoard_no());
+				//board에 추가
+				qnaboardDao.plusVote(qnavoteDto.getBoard_no());
 			}else {
+				//vote에 추가
 				qnavoteDao.delete(qnavoteDto);
-				qnaboardDao.decreaseVote(qnavoteDto.getBoard_no());
+				//board에 추가
+				qnaboardDao.minusVote(qnavoteDto.getBoard_no());
 			}
 			
 			//출력 : 상세페이지로 이동

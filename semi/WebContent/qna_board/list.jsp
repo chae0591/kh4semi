@@ -62,26 +62,40 @@
 	} 
 %>
 <style>
-	html, body{
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	}
-	.aside {
+	.outbox {
+		width:100%;
+		height: auth;
+		min-height: 700px;
+		position: relative;
 		border: 1px solid black;
+		overflow: auto;
+	}
+	aside {
+		border: 1px solid blue;
 		float: left;
 		width: 20%;
-		height: 560px;
+		height: auth;
+		min-height: 700px;
+		padding: 1.5rem;
+		position: relative;
 	}
 	.aside li{
 		list-style: none;
 	}
-	.article {
-		border: 1px solid black;
+	article {
+		border: 1px solid red;
 		float: right;
 		width: 80%;
-		height: 560px;
+		height: auth;
+		min-height: 700px;
+		padding: 1rem;
+		position: relative;
+	}
+	.text-box {
+		margin-bottom: 10px;
+		padding: 0.5rem;
+		width: 100%;
+		border: 1px solid black;
 	}
 	.pagination {
 		text-align: center;
@@ -91,18 +105,6 @@
 	.pagination > ul> li {
 		display: inline-block;
 		text-decoration: none;
-	}
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		table-layout:fixed; 
-	}
-	thead{
-		text-align:center;
-	}
-	td {
-		text-overflow:ellipsis; 
-		overflow:hidden; 
 	}
 	.board_title {
 		width:100%;
@@ -153,59 +155,43 @@ $(function(){
 	</div>
 	
 	<!— 최신순, 댓글순 —>
-	<div class="aside">
+	<aside>
 		<ul>
 			<li><a href="#">최신순</a></li>
 			<li><a href="#">댓글순</a></li>
 		</ul>
-	</div>
+	</aside>
 	
-	<div class="article">
-	<div class="row">
-	<!— margin-right: 525px —>
-		<table class="table"> 
+	<article>
+		<table class="table-box"> 
+		
 			<thead>
 				<tr>
-					<th>답변을 기다려요! </th>
+					<th>
+						<h4>답변을 기다려요!</h4>
+					</th>
 				</tr>
 			</thead>
-			<tbody class="">
+			
+			<tbody>
 				<%for(QnaBoardDto dto : list){ %>
-					<tr>
-						<td class="left tb-top">
-							<nobr>
-								<div class="board_title">
-									<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
-									<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>
-								
-								</div>					
-							</nobr>
-						</td>
-					</tr>
-					<tr class="">
-						<td class="left">
-							<nobr>
-								<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>">
-									<%=dto.getBoard_content()%>
-								</a>
-							</nobr>
-						</td>
-					</tr>
-					<tr>
-						<td class="left tb-bottom">
-							<div>
-								<span class="font-bold"><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
-								<span style="float: right"><%=dto.getRegist_time()%></span>
-							</div>
-						
-						</td>	
-					</tr>
+				<tr>
+					<td>
+						<div class="text-box">
+							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
+								<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>					
+							<p href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></p>
+							<span class="font-bold"><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
+							<span style="float: right"><%=dto.getRegist_time()%></span>
+						</div>
+					</td>	
+				</tr>
 				<%} %>
 			</tbody>
+			
 		</table>
-	</div>
-	
-	</div>
+
+	</article>
 	
 	<div class="row right">
 		<button class="write-btn input input-inline">글쓰기</button>
