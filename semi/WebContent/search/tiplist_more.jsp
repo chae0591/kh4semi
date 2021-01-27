@@ -41,7 +41,6 @@
 	List<TipSearchVO> tipList = tipboardDao.searchPagingList(keyword, startRow, endRow);
 	//List<TipSearchVO> tipList = tipboardDao.select1(keyword);
 %>
-<h2>startBlock=<%=startBlock%>, endBlock=<%=endBlock%>, pageSize=<%=pageSize%></h2>
 <!DOCTYPE html>
 <style>
 	div{ box-sizing: border-box; }
@@ -103,7 +102,7 @@
     	position: relative;
     	height: 60px;
     	line-height: 70px;
-    	font-size: 25px;
+    	font-size: 23px;
     	font-weight: 700;
     	border-bottom: 3px solid #242424;
     }
@@ -120,6 +119,43 @@
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+    }
+    
+	/* 글 제목 글자수 제한 */
+    .title-line{
+    	float:left; 
+    	font-size:1.1em; 
+    	font-weight:600;
+    	display: inline-block;
+    	width:250px;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    }
+    
+    .title-line:hover{
+    	text-decoration: underline;
+    }
+    
+    /* 글 내용 줄 제한 */
+    .content-line{
+    	font-size: 0.9em;
+    	display: inline-block;
+    	width:280px;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: normal;
+    	line-height: 1.5;
+    	height: 3em;
+    	word-wrap: break-word;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 2;
+    	-webkit-box-orient: vertical;
+    }
+    
+    .content-line:hover{
+    	text-decoration: underline;
     }
 </style>
 
@@ -143,7 +179,7 @@
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
 			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span style="float:left"><%=tipsearchVO.getBoard_content() %></span>
+			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
 			<br><br>
 			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
 			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>

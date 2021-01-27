@@ -153,8 +153,6 @@
 			<span class="title-line"><%=tipsearchVO.getBoard_title() %></span>
 			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span style="float:left"><%=tipsearchVO.getBoard_content() %></span>
-			<br><br>
 			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
 			<br>
 			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
@@ -186,8 +184,6 @@
 			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
 			<span class="title-line"><%=qnasearchVO.getBoard_title()%></span>
 			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
-			<br><br>
-			<span style="float:left"><%=qnasearchVO.getBoard_title()%></span>
 			<br><br>
 			<span class="content-line"><%=qnasearchVO.getBoard_content()%></span>
 			<br>
