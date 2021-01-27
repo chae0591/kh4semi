@@ -197,6 +197,7 @@ public class QnaBoardDao {
 			QnaSearchVO qnasearchVO = new QnaSearchVO();
 			qnasearchVO.setBoard_no(rs.getInt("board_no"));
 			qnasearchVO.setBoard_title(rs.getString("board_title"));
+			qnasearchVO.setBoard_content(rs.getString("board_content"));
 			qnasearchVO.setRegist_time(rs.getDate("regist_time"));
 			qnasearchVO.setMember_nick(rs.getString("member_nick"));
 			list.add(qnasearchVO);
