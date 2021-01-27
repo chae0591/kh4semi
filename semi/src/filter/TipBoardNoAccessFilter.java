@@ -48,6 +48,9 @@ public class TipBoardNoAccessFilter implements Filter{
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.find(member_no);
 			
+			//Board Content - CROSS-SITE SCRIPTING (XSS) 
+			//White List - Img, A Tag
+			
 			if(memberDto.getMember_id().equals(boardDto.getBoard_writer())) {
 				chain.doFilter(request, response);
 				return;
