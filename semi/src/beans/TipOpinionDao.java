@@ -77,7 +77,32 @@ public class TipOpinionDao {
 		
 		con.close();
 	}
-	
+
+	public TipOpinionDto find(int opinion_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from tip_opinion where opinion_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, opinion_no);
+		ResultSet rs = ps.executeQuery();
+		
+		TipOpinionDto opinionDto;
+		if(rs.next()) {
+			opinionDto = new TipOpinionDto();
+			opinionDto.setOpinion_no(rs.getInt("opinion_no"));
+			opinionDto.setOpinion_text(rs.getString("opinion_text"));
+			opinionDto.setRegist_time(rs.getDate("regist_time"));
+			opinionDto.setBoard_no(rs.getInt("board_no"));
+			opinionDto.setOpinion_writer(rs.getString("opinion_writer"));
+		}
+		else {
+			opinionDto = null;
+		}
+		
+		con.close();
+		
+		return opinionDto;
+	}
 }
 
 
