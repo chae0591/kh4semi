@@ -10,6 +10,61 @@
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script>
+
+var state = {
+	file_no_list: []
+};
+
+function copyContent () {
+    document.getElementsByName("file_no_list")[0].value = state.file_no_list
+    document.getElementsByName("board_content")[0].value =  
+        document.getElementById("textEditor").innerHTML;
+    return true;
+}
+
+$(document).ready(function() {
+
+    $('#btn-upload').click(function(e){
+        e.preventDefault();
+        $('#file').click();
+    });
+    
+	document.getElementById("file").onchange = function(evt) {
+	    //document.getElementById("imgUploadForm").submit();
+        var formData = new FormData($('#imgUploadForm')[0]);
+	     $.ajax({
+	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
+	        data: formData,
+	        dataType : "json",
+           type: "POST",
+           enctype: 'multipart/form-data',
+           processData: false,
+           contentType: false,
+           cache: false,
+           timeout: 10000,
+           success: function (data) {
+           		console.log(data);
+           		//alert("이미지가 업로드 되었습니다.");
+                state.file_no_list.push(data.file_no);
+			    var editer = document.getElementById('textEditor');
+			    var filePath = data.imgUrl;
+			    editer.focus();
+			    document.execCommand('InsertImage', false, filePath);
+           },
+           error: function (e) {
+           	alert("이미지 업로드에 실패하였습니다.");
+               console.log("ERROR : ", e);
+           }
+	     });
+	};
+});
+</script>
+<style>
+#textEditor div {
+	border:none !important;
+}
+</style>
 
 <div class="outbox" style="width:800px">
 	<div class="row center">
@@ -17,11 +72,14 @@
 	</div>
 	<div class="row center">상대방에 대한 인신공격은 예고 없이 삭제될 수 있습니다</div>
 	
-	<form action="<%=request.getContextPath()%>/tip_board/edit.do" method="post">
+	<form onsubmit='return copyContent();' action="<%=request.getContextPath()%>/tip_board/edit.do" method="post">
 	
 	<!-- 사용자 몰래 번호를 첨부 -->
 	<input type="hidden" name="board_no" value="<%=boardDto.getBoard_no()%>">
-	
+			
+	<!-- 사용자 몰래 번호를 첨부 -->
+	<input type="hidden" name="file_no_list">
+		
 	<div class="row">
 		<label>시작일</label>
 		<input type="date" name="start_date"
@@ -41,8 +99,13 @@
 	
 	<div class="row">
 		<label>내용</label>
-		<!-- textarea에는 value속성이 없습니다 -->
-		<textarea name="board_content" class="input" required rows="10"><%=boardDto.getBoard_content()%></textarea>
+		<div>
+			<button id='btn-upload'>이미지 업로드</button>
+		</div>
+		<textarea style="display:none;" id="board_content" name="board_content" class="input"></textarea>
+		<div id="textEditor" class="input" contenteditable="true">
+			<%=boardDto.getBoard_content()%>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -50,6 +113,24 @@
 	</div>
 	 
 	</form>
+	
+	<div style="display:none;">
+		<label>이미지 업로드</label>
+		<form id="imgUploadForm" action="<%=request.getContextPath()%>/tip_tmp_file/receive.do" method="post" enctype="multipart/form-data">
+			<input id="file" type="file" name="f" accept=".jpg , .png , .gif">
+			<!-- 
+			<br><br>
+			<input type="submit" value="업로드">			
+			-->
+		</form>
+	</div>
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
+
+
+
+
+
+
+
