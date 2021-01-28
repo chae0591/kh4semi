@@ -31,6 +31,13 @@
 	}
 	*/
 	
+	/* 모든 영역 폰트 설정*/
+	main, header, nav, section, 
+	aside, article, footer, div,
+	label, span, p {
+		font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	}
+	
 	/* 전체 화면의 폭은 1100px 로 한다 */
 	main {
 		width:1100px;
@@ -77,13 +84,19 @@
     .menu ul {
         list-style: none;
         margin: 0;
-        padding: 0rem;
+        padding: 1rem;
+        border-top: 2px solid #454545;
+        border-bottom: 2px solid #454545;
+        font-weight: 600;
+        
     }
 
-    .menu>li {
+    .menu>li,
+    .menu>li>a {
         width: 200px;
         display: inline-block;
         position: relative;
+        color: #454545;
     }
         
     a{
