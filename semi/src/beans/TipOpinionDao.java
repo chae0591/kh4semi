@@ -51,7 +51,7 @@ public class TipOpinionDao {
 		return list;
 	}
 	
-//	댓글 삭제 기능
+
 	public void delete(int opinion_no) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
@@ -59,12 +59,12 @@ public class TipOpinionDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, opinion_no);
 		ps.execute();
-//		int count = ps.executeUpdate();
+
 		
 		con.close();
 	}
 	
-//	댓글 수정
+
 	public void update(TipOpinionDto opinionDto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
@@ -73,11 +73,36 @@ public class TipOpinionDao {
 		ps.setString(1, opinionDto.getOpinion_text());
 		ps.setInt(2, opinionDto.getOpinion_no());
 		ps.execute();
-//		int count = ps.executeUpdate();
+
 		
 		con.close();
 	}
-	
+
+	public TipOpinionDto find(int opinion_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from tip_opinion where opinion_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, opinion_no);
+		ResultSet rs = ps.executeQuery();
+		
+		TipOpinionDto opinionDto;
+		if(rs.next()) {
+			opinionDto = new TipOpinionDto();
+			opinionDto.setOpinion_no(rs.getInt("opinion_no"));
+			opinionDto.setOpinion_text(rs.getString("opinion_text"));
+			opinionDto.setRegist_time(rs.getDate("regist_time"));
+			opinionDto.setBoard_no(rs.getInt("board_no"));
+			opinionDto.setOpinion_writer(rs.getString("opinion_writer"));
+		}
+		else {
+			opinionDto = null;
+		}
+		
+		con.close();
+		
+		return opinionDto;
+	}
 }
 
 

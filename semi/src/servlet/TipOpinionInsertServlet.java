@@ -18,7 +18,7 @@ public class TipOpinionInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-//			준비 : 파라미터(내용,원본글번호) + 세션(사용자정보)
+
 			req.setCharacterEncoding("UTF-8");
 			
 			TipOpinionDto tipOpinionDto = new TipOpinionDto();
@@ -31,11 +31,11 @@ public class TipOpinionInsertServlet extends HttpServlet{
 			
 			tipOpinionDto.setOpinion_writer(memberDto.getMember_id());
 			
-//			계산 : 댓글 테이블에 등록
+
 			TipOpinionDao tipOpinionDao = new TipOpinionDao();
 			tipOpinionDao.insert(tipOpinionDto);
 			 
-//			출력 : 상세보기 글로 다시 돌아가도록 처리o
+
 			resp.sendRedirect("detail.jsp?board_no="+tipOpinionDto.getBoard_no());
 		}
 		catch(Exception e) {
