@@ -69,6 +69,11 @@
 		width: 440px;
 	}
 	
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
+	
 	.contents{
 		min-height: 50px;
     	margin: 0 auto;
@@ -156,6 +161,10 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
+    .pagemargin{
+    	margin-top: 2rem;
+    }
 </style>
 
 
@@ -166,7 +175,7 @@
 <div class="container-qna outbox">
 
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
-	<div class="item">
+	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
 			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
 			<span class="title-line"><%=qnasearchVO.getBoard_title()%></span>
@@ -179,7 +188,8 @@
 	</div>
 	<%} %>
 </div>
-	
+
+<div class="pagemargin">
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
@@ -195,5 +205,6 @@
       	<li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
       <%}%>	 
     </ul>
+</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

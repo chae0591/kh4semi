@@ -70,6 +70,11 @@
 		width: 440px;
 	}
 	
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
+	
 	.contents{
 		min-height: 50px;
     	margin: 0 auto;
@@ -157,6 +162,11 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
+    .pagemargin{
+    	margin-top: 2rem;
+    }
+    
 </style>
 
 
@@ -173,7 +183,7 @@
 <div class="container-tip outbox">
 
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
-	<div class="item">
+	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
 			<span style="float:left; color:blue;">Tip&nbsp;</span>
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
@@ -188,6 +198,7 @@
 	<%} %>
 </div>
 	
+<div class="pagemargin">	
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
@@ -204,5 +215,6 @@
       	<li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
       <%}%>	 
     </ul>
+</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
