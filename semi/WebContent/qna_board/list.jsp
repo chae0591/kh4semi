@@ -72,7 +72,7 @@
 		border: 1px solid black;
 		float: left;
 		width: 20%;
-		height: 620px;
+		height: 560px;
 	}
 	.aside li{
 		list-style: none;
@@ -81,7 +81,7 @@
 		border: 1px solid black;
 		float: right;
 		width: 80%;
-		height: 620px;
+		height: 560px;
 	}
 	.pagination {
 		text-align: center;
@@ -131,7 +131,6 @@
 	.font-bold {
 		font-weight: bold; 
 	}
-
 </style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>

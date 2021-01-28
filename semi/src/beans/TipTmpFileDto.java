@@ -1,6 +1,6 @@
 package beans;
 
-//temp_file 테이블과 연동할 DTO
+
 public class TipTmpFileDto {
 	private int file_no;
 	private String upload_name;
