@@ -379,7 +379,7 @@ public class QnaBoardDao {
 				
 				String sql = 	"select * from(" + 
 									"select rownum rn, TMP.* from(" + 
-										"select * from Qna_board order by board_no desc" + 
+										"select * from qna_board order by board_no desc" + 
 									")TMP" + 
 								") where rn between ? and ?";
 				PreparedStatement ps = con.prepareStatement(sql);
@@ -409,7 +409,7 @@ public class QnaBoardDao {
 			public int getCount(String type, String key) throws Exception {
 				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 				
-				String sql = "select count(*) from board where instr(#1,?) > 0";
+				String sql = "select count(*) from qna_board where instr(#1,?) > 0";
 				sql = sql.replace("#1", type);
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, key);

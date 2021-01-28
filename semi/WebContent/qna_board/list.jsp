@@ -5,15 +5,11 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-
-	//목록 가져오기
-	QnaBoardDao dao = new QnaBoardDao();
-	List<QnaBoardDto> list;
 %>
 
 <%
 	//page 
-	int boardSize = 5;
+	int boardSize = 10;
 	int p;
 	try{
 		p = Integer.parseInt(request.getParameter("p"));
@@ -23,12 +19,12 @@
 		p = 1;
 	}
 	
-	int endRow = p * 5; 
+	int endRow = p * boardSize; 
 	int startRow = endRow - boardSize + 1; 
-	
-	
 %>
-<h1> p = <%=p%>, startRow = <%=startRow%>, endRow = <%=endRow%></h1>
+
+<!-- 출력해서 확인 -->
+<%-- <h1> p = <%=p%>, startRow = <%=startRow%>, endRow = <%=endRow%></h1> --%>
 
 <%
 	//목록 검색을 위해 필요한 프로그래밍 코드 
@@ -37,16 +33,9 @@
 	
 	boolean isSearch = type != null && key != null; 
 	
-	//목록 검색을 위해 필요한 프로그래밍 코드 
-		/*
-		
-		if(isSearch) {
-			list= dao.pagingList(type, key, startRow, endRow);
-		}
-		else {
-			list = dao.pagingList(startRow, endRow);
-		}
-		*/
+	//목록 가져오기
+	QnaBoardDao dao = new QnaBoardDao();
+	List<QnaBoardDto> list;
 	
 	//댓글 목록 구하기
 	String isOrder = request.getParameter("isOrder");
@@ -68,27 +57,33 @@
 %>
 
 <%
-	//페이지 네비게이터 계산코드를 작성 
-	
-	//브록 크기를 설정 
-	int blockSize = 10; 
-	
-	//페이지번호에 따라 시작블록과 종료블럭을 계산 
-	int startBlock = (p-1)/ blockSize * blockSize + 1; 
-	int endBlock = startBlock + blockSize -1; 
-	//endBlock이 마지막 페이지 번호보다 크면 안된다 
+	//	페이지 네비게이터 계산 코드를 작성
+
+	//	블록 크기를 설정
+	int blockSize = 10;
+
+	//	페이지 번호에 따라 시작블록과 종료블럭을 계산
+	int startBlock = (p-1) / blockSize * blockSize + 1;
+	int endBlock = startBlock + blockSize - 1;
+
+	//	endBlock이 마지막 페이지 번호보다 크면 안된다 = 데이터베이스에서 게시글 수를 구해와야 한다.
+	//	int count = 목록개수 or 검색개수;
 	int count;
-	if(isSearch) {
-		count = dao.getCount(type, key);
-	}else {
-		count = dao.getCount(); 
+	if(isSearch){
+		count = dao.getCount(type, key); 
 	}
-	
-	int pageSize = (count + boardSize -1) / boardSize;
-	 if(endBlock > pageSize) {
-		endBlock = pageSize; 
-	} 
+	else{
+		count = dao.getCount();
+	}
+
+	//	페이지 개수 = (게시글수 + 9) / 10 = (게시글수 + 페이지크기 - 1) / 페이지크기
+	int pageSize = (count + boardSize - 1) / boardSize;
+
+	if(endBlock > pageSize){
+		endBlock = pageSize;
+	}
 %>
+
 <style>
 	.outbox {
 		width:100%;
@@ -188,7 +183,14 @@
 <script>
 $(function(){
 	$(".write-btn").click(function(){
-		location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+		var sessionCheck = '<%=session.getAttribute("check")%>';
+		if(! sessionCheck == '' && sessionCheck == 'null'){
+			alert("로그인이 필요합니다.")
+			location.href = "<%=request.getContextPath()%>/member/login.jsp";
+		}
+		else{
+			location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+		}
 	});
 });
 </script>

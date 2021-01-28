@@ -196,7 +196,21 @@
 			$(this).parents(".opinion-edit").hide();
 			$(this).parents(".opinion-edit").prev().show();
 		});
-	
+		
+		//댓글 등록 눌렀을때 로그인 여부 확인
+		$(".input-btn").click(function(){
+			var sessionCheck = '<%=session.getAttribute("check")%>'
+			if(! sessionCheck == '' && sessionCheck == 'null'){
+				alert("로그인이 필요합니다.")
+				//로그인창으로 이동
+				location.href = "<%=request.getContextPath()%>/member/login.jsp";
+				//폼 전송 막기
+				return false;
+			}
+			else{
+				location.href = "<%=request.getContextPath()%>/qna_board/opinion_write.do";
+			}
+		});
 	});
 
 </script>
@@ -295,7 +309,7 @@
 							<!-- 수정을 위한 화면 : 댓글 작성자에게만 나오도록 조건 설정 -->
 							<%if(isReplyWriter){ %>
 							<div class="opinion-edit">
-								<form action="opinion_edit.do" method="post">
+								<form action="opinion_write.do" method="post">
 									<input type="hidden" name="opinion_no" value="<%=opinionDto.getOpinion_no()%>">
 									<input type="hidden" name="board_no" value="<%=board_no%>">
 									<div class="row">
