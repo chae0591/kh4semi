@@ -6,6 +6,8 @@
 <%
 	//목록 가져오기
 	QnaBoardDao dao = new QnaBoardDao();
+
+	//최신순
 	List<QnaBoardDto> list = dao.select();
 	
 	//page 
@@ -30,6 +32,7 @@
 	//목록 검색을 위해 필요한 프로그래밍 코드 
 	String type = request.getParameter("type");
 	String key = request.getParameter("key");
+	
 	boolean isSearch = type != null && key != null; 
 	
 	if(isSearch) {

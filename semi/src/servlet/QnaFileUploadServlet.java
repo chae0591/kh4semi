@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.TipTmpFileDao;
-import beans.TipTmpFileDto;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import beans.QnaTmpFileDao;
+import beans.QnaTmpFileDto;
 
 @WebServlet(urlPatterns = "/qna_tmp_file/receive.do")
 public class QnaFileUploadServlet extends HttpServlet {
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 //			수신 : req로 불가능하기 때문에 새로운 해석기를 생성해야 한다(MultipartRequest) - cos.jar 필요
 			String path = "C:/upload";
@@ -38,19 +41,19 @@ public class QnaFileUploadServlet extends HttpServlet {
 //			= 저장된 파일 객체를 꺼내는 명령은 mRequest.getFile("파라미터명")
 //			= 파일 유형은 mRequest.getContentType("파라미터명") 으로 수신
 			
-			TipTmpFileDto tmpFileDto = new TipTmpFileDto();
-			tmpFileDto.setSave_name(mRequest.getFilesystemName("f"));
-			tmpFileDto.setUpload_name(mRequest.getOriginalFileName("f"));
+			QnaTmpFileDto qnaFileDto = new QnaTmpFileDto();
+			qnaFileDto.setSave_name(mRequest.getFilesystemName("f"));
+			qnaFileDto.setUpload_name(mRequest.getOriginalFileName("f"));
 			File target = mRequest.getFile("f");
-			tmpFileDto.setFile_size(target.length());
-			tmpFileDto.setFile_type(mRequest.getContentType("f"));
+			qnaFileDto.setFile_size(target.length());
+			qnaFileDto.setFile_type(mRequest.getContentType("f"));
 			
-			TipTmpFileDao tmpFileDao = new TipTmpFileDao();
-			int file_no = tmpFileDao.getSequence();
-			tmpFileDto.setFile_no(file_no);
-			tmpFileDao.writeWithPrimaryKey(tmpFileDto);
+			QnaTmpFileDao qnaFileDao = new QnaTmpFileDao();
+			int file_no = qnaFileDao.getSequence();
+			qnaFileDto.setFile_no(file_no);
+			qnaFileDao.writeWithPrimaryKey(qnaFileDto);
 			
-			String imgUrl = req.getContextPath() + "/tip_tmp_file/download.do?file_no=" + file_no;
+			String imgUrl = req.getContextPath() + "/qna_tmp_file/download.do?file_no=" + file_no;
 
 //			resp.sendRedirect(imgUrl);
 			//http://localhost:8888/semi/file/download.do?file_no=1

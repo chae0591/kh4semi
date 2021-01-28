@@ -42,16 +42,16 @@ public class QnaTmpFileDao {
 	}
 	
 //	번호까지 함께 등록하는 기능
-	public void writeWithPrimaryKey(QnaTmpFileDto tmpFileDto) throws Exception {
+	public void writeWithPrimaryKey(QnaTmpFileDto qnaFileDto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
 		String sql = "insert into qna_tmp_file values(?, ?, ?, ?, ?, NULL)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, tmpFileDto.getFile_no());
-		ps.setString(2, tmpFileDto.getUpload_name());
-		ps.setString(3, tmpFileDto.getSave_name());
-		ps.setLong(4, tmpFileDto.getFile_size());
-		ps.setString(5, tmpFileDto.getFile_type());
+		ps.setInt(1, qnaFileDto.getFile_no());
+		ps.setString(2, qnaFileDto.getUpload_name());
+		ps.setString(3, qnaFileDto.getSave_name());
+		ps.setLong(4, qnaFileDto.getFile_size());
+		ps.setString(5, qnaFileDto.getFile_type());
 		ps.execute();
 		
 		con.close();
@@ -62,7 +62,7 @@ public class QnaTmpFileDao {
 	public void insert(QnaTmpFileDto qnaFileDto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into qna_tmp_file values(tmp_file_seq.nextval, ?, ?, ?, ?, NULL)";
+		String sql = "insert into qna_tmp_file values(qna_file_seq.nextval, ?, ?, ?, ?, NULL)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, qnaFileDto.getUpload_name());
 		ps.setString(2, qnaFileDto.getSave_name());

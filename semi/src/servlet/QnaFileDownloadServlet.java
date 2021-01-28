@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.TipTmpFileDao;
-import beans.TipTmpFileDto;
+import beans.QnaTmpFileDao;
+import beans.QnaTmpFileDto;
 
 @WebServlet(urlPatterns = "/qna_tmp_file/download.do")
 public class QnaFileDownloadServlet extends HttpServlet {
@@ -25,11 +25,11 @@ public class QnaFileDownloadServlet extends HttpServlet {
 			
 //			계산 : 파일번호로 파일정보를 불러오고 파일명을 이용해서 실제 파일을 불러온다
 //			(번호 --> DTO --> 파일 --> byte[])
-			TipTmpFileDao tmpFileDao = new TipTmpFileDao();
-			TipTmpFileDto tmpFileDto = tmpFileDao.find(file_no);
+			QnaTmpFileDao qnaFileDao = new QnaTmpFileDao();
+			QnaTmpFileDto qnaFileDto = qnaFileDao.find(file_no);
 			
 			String path = "C:/upload";
-			File target = new File(path, tmpFileDto.getSave_name());
+			File target = new File(path, qnaFileDto.getSave_name());
 			byte[] data = new byte[(int)target.length()];//파일크기만큼 배열 생성
 			FileInputStream in = new FileInputStream(target);//파일을 읽기 위한 통로 생성
 			in.read(data);//data에 파일의 모든 내용을 저장(크기가 일치하므로 딱 맞게 들어간다)
@@ -40,8 +40,8 @@ public class QnaFileDownloadServlet extends HttpServlet {
 			
 			resp.setHeader("Content-Type", "application/octet-stream");
 			resp.setHeader("Content-Encoding", "UTF-8");
-			resp.setHeader("Content-Length", String.valueOf(tmpFileDto.getFile_size()));
-			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(tmpFileDto.getUpload_name(), "UTF-8")+"\"");
+			resp.setHeader("Content-Length", String.valueOf(qnaFileDto.getFile_size()));
+			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(qnaFileDto.getUpload_name(), "UTF-8")+"\"");
 			
 			resp.getOutputStream().write(data);//읽어온 데이터를 사용자에게 전송
 		}

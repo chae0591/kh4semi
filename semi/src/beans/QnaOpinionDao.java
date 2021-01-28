@@ -85,13 +85,13 @@ public class QnaOpinionDao {
 		
 		List<QnaOpinionDto> list = new ArrayList<>();
 		while(rs.next()) {
-			QnaOpinionDto dto = new QnaOpinionDto();
-			dto.setOpinion_no(rs.getInt("opinion_no"));
-			dto.setOpinion_content(rs.getString("opinion_content"));
-			dto.setRegist_time(rs.getDate("regist_time"));
-			dto.setBoard_no(rs.getInt("board_no"));
-			dto.setOpinion_writer(rs.getString("opinion_writer"));
-			list.add(dto);
+			QnaOpinionDto opinionDto = new QnaOpinionDto();
+			opinionDto.setOpinion_no(rs.getInt("opinion_no"));
+			opinionDto.setOpinion_content(rs.getString("opinion_content"));
+			opinionDto.setRegist_time(rs.getDate("regist_time"));
+			opinionDto.setBoard_no(rs.getInt("board_no"));
+			opinionDto.setOpinion_writer(rs.getString("opinion_writer"));
+			list.add(opinionDto);
 
 		}
 		con.close();
@@ -126,17 +126,18 @@ public class QnaOpinionDao {
 	}
 	
 	//페이징을 이용한 목록
-	public List<QnaOpinionDto> pagingList(int startRow, int endRow) throws Exception {
+	public List<QnaOpinionDto> pagingList(int board_no, int startRow, int endRow) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 				
 		String sql = 	"select * from(" + 
 							"select rownum rn, TMP.* from(" + 
-								"select * from qna_opinion order by opinion_no desc" + 
+								"select * from qna_opinion where board_no=? order by opinion_no desc" + 
 							")TMP" + 
 						") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, startRow);
-		ps.setInt(2, endRow);
+		ps.setInt(1, board_no);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
 		ResultSet rs = ps.executeQuery();
 				
 		List<QnaOpinionDto> list = new ArrayList<>();
@@ -171,20 +172,5 @@ public class QnaOpinionDao {
 		con.close();
 		
 		return count; 
-	}
-	
-	//수정필요!
-	//board_no가 같은 댓글 찾기
-	public void getOverLap(QnaOpinionDto dto) throws Exception {
-		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-		
-		String sql = "select board_no=?, count(*) from qna_opinion group by board_no=? having count(*) > 1;";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, dto.getBoard_no());
-		
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		
-		con.close();
 	}
 }

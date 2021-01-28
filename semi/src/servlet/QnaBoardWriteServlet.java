@@ -40,6 +40,17 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			boardDto.setBoard_no(board_no);				//생성된 번호를 DTO에 설정
 			qnaboardDao.writeWithPrimaryKey(boardDto); 	//설정된 정보를 등록
 			
+			System.out.println(req.getParameter("file_no_list"));
+			String s_file_no_list = req.getParameter("file_no_list");
+			QnaTmpFileDao qnaTmpFileDao = new QnaTmpFileDao();
+			if(s_file_no_list != null && s_file_no_list.length() > 0) {
+				String[] file_no_list = s_file_no_list.split(",");
+				for (String s : file_no_list) {
+					int file_no = Integer.parseInt(s);
+					qnaTmpFileDao.updateBoardNo(file_no, board_no);
+				}
+			}
+			
 			//출력 : 상세페이지로 이동
 			resp.sendRedirect("detail.jsp?board_no="+board_no);
 		}

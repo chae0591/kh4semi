@@ -41,7 +41,7 @@
 <% 
 	//댓글 목록 구하기
 	QnaOpinionDao opinionDao = new QnaOpinionDao();
-	List<QnaOpinionDto> list = opinionDao.select(board_no);
+	/* List<QnaOpinionDto> list = opinionDao.select(board_no); */
 %>
 
 <%
@@ -63,9 +63,7 @@
 %>  
 
 <%
-	List<QnaOpinionDto> opinionList; 
-
-	list = opinionDao.pagingList(startRow, endRow);
+	List<QnaOpinionDto> list = opinionDao.pagingList(board_no, startRow, endRow);
 %>
 
 <%
@@ -258,13 +256,17 @@
 					<td>
 						<div class="opinion-list-box">
 							<%for(QnaOpinionDto opinionDto : list){ %>
+							
 							<!-- 일반 출력 화면 -->
 							<div class="opinion-normal">
 								<div><%=opinionDto.getOpinion_writer()%></div>
+									<%if(boardDto.getBoard_writer().equals(opinionDto.getOpinion_writer())){ %>
+										<span style="color:red;">(작성자)</span>
+									<%} %>
 								<div><%=opinionDto.getOpinion_content()%></div>
 								<div>
 									<% 
-										SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd h:mm:ss");
+										SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd E a h:mm:ss");
 										String timeFormat = f.format(opinionDto.getRegist_time());
 									%>
 									<%=timeFormat%>

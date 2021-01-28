@@ -12,7 +12,7 @@ var state = {
 function copyContent () {
     document.getElementsByName("file_no_list")[0].value = state.file_no_list
     document.getElementsByName("board_content")[0].value =  
-        document.getElementById("textEditor").innerHTML;
+       document.getElementById("textEditor").innerHTML;
     return true;
 }
 
@@ -27,7 +27,7 @@ window.onload = function() {
 	    //document.getElementById("imgUploadForm").submit();
         var formData = new FormData($('#imgUploadForm')[0]);
 	     $.ajax({
-	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
+	        url: '<%=request.getContextPath()%>/qna_tmp_file/receive.do',
 	        data: formData,
 	        dataType : "json",
            type: "POST",
@@ -83,7 +83,7 @@ window.onload = function() {
 	</form>
 	<div style="display:none;">
 		<label>이미지 업로드</label>
-		<form id="imgUploadForm" action="<%=request.getContextPath()%>/tip_tmp_file/receive.do" method="post" enctype="multipart/form-data">
+		<form id="imgUploadForm" action="<%=request.getContextPath()%>/qna_tmp_file/receive.do" method="post" enctype="multipart/form-data">
 			<input id="file" type="file" name="f" accept=".jpg , .png , .gif">
 			<!-- 
 			<br><br>
@@ -92,4 +92,5 @@ window.onload = function() {
 		</form>
 	</div>
 </div>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

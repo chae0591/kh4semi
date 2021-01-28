@@ -39,6 +39,32 @@ public class QnaBoardDao {
 		return list;
 	}
 	
+	//댓글순 목록 기능
+	public List<QnaBoardDto> select_opinion() throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select* from qna_board order by opinion desc;";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<QnaBoardDto> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			QnaBoardDto dto = new QnaBoardDto();
+			dto.setBoard_no(rs.getInt("board_no"));
+			dto.setBoard_writer(rs.getString("board_writer"));
+			dto.setBoard_title(rs.getString("board_title"));
+			dto.setBoard_content(rs.getString("board_content"));
+			dto.setRegist_time(rs.getDate("regist_time"));
+			dto.setOpinion(rs.getInt("opinion"));
+			list.add(dto);
+		}
+		con.close();
+		
+		return list;
+	}
+	
 	//등록 기능 - QnaBoardWriteServlet
 	public void write(QnaBoardDto qnadto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -80,7 +106,6 @@ public class QnaBoardDao {
 		ps.setString(2, dto.getBoard_writer());
 		ps.setString(3, dto.getBoard_title());
 		ps.setString(4, dto.getBoard_content());
-		ps.setInt(5, dto.getOpinion());
 		ps.execute();
 		
 		con.close();
@@ -388,7 +413,7 @@ public class QnaBoardDao {
 		public int getCount(String type, String key) throws Exception {
 			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 			
-			String sql = "select count(*) from board where instr(#1,?) > 0";
+			String sql = "select count(*) from qna_board where instr(#1,?) > 0";
 			sql = sql.replace("#1", type);
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, key);
@@ -399,6 +424,21 @@ public class QnaBoardDao {
 			con.close();
 			return count; 
 			
+		}
+		
+		//목록 개수를 구하는 메소드
+		public int getCount() throws Exception {
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+			String sql = "select count(*) from qna_board";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+
+			con.close();
+			
+			return count;
 		}
 		
 	}
