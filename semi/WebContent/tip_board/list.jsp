@@ -182,6 +182,15 @@
 		urlParams.set(key, value);
 		window.location.search = urlParams;
 	}
+	function setUrlParamByArr(arr){
+		var urlParams = new URLSearchParams(window.location.search);
+		arr.map(el=>{
+			var key = el[0];
+			var value = el[1];
+			urlParams.set(key, value);
+		})
+		window.location.search = urlParams;
+	}
 	$(function(){
 		$(".write-btn").click(function(){
 			location.href = "<%=request.getContextPath()%>/tip_board/write.jsp";
@@ -196,9 +205,9 @@
 <div class="bigTitle">여행꿀팁</div>
 <div class="btn-box ">
 	<a class="gray <%if(orderColumn == 0){%> black <%} %>"
-		href="#" onclick="setUrlParam('orderColumn', '0'); return false;">최신순</a>
+		href="#" onclick="setUrlParamByArr([['p','1'],['orderColumn', '0']]); return false;">최신순</a>
 	<a class="gray <%if(orderColumn == 1){%> black <%} %>"
-		href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
+		href="#" onclick="setUrlParamByArr([['p','1'],['orderColumn', '1']]); return false;">댓글순</a>
 </div>
 <div class="container-tip">
   	<%for(TipBoardOpinionCountVO dto : list){ %>
@@ -229,7 +238,7 @@
 			<li onclick="setUrlParam('p', '<%=startBlock-1%>');">&lt;</li>
 			<%for(int i=startBlock; i<=endBlock; i++){ %>
 				<li 
-					<%if(i == p){%> class="active" <%}%> 
+					class="<%if(i == p){%> active <%}%>"
 					onclick="setUrlParam('p', '<%=i%>');"
 				>
 					<%=i%>
