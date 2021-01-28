@@ -200,6 +200,7 @@
                 	return true 
                 }else {
                 	e.preventDefault();
+                	alert("아이디와 비밀번호 검사를 해주세요!")
                 }
     		})
         });
