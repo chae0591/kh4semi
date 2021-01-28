@@ -24,12 +24,12 @@
 <style>
 	/* 화면 레이아웃 스타일 */
 	
-	/* 모든 영역은 점선으로 테두리가 표시되게 한다(테스트용) */
+	/* 모든 영역은 점선으로 테두리가 표시되게 한다(테스트용 삭제)
 	main, header, nav, section, 
 	aside, article, footer, div,
 	label, span, p {
-		border: 1px dotted #ccc;
 	}
+	*/
 	
 	/* 전체 화면의 폭은 1100px 로 한다 */
 	main {
@@ -47,6 +47,16 @@
 		min-height: 500px;
 		margin-left: 5rem;
         margin-right: 5rem;
+	}
+	
+	footer {
+		min-height: 250px;
+		padding-left:6rem;
+		padding-top: 8rem;
+		background-color: #E7E7E7;
+		font-size: 12px;
+		font-weight:700;
+		color: #5D5D5D;
 	}
 	/* 로고있는 상단 부분 좌우 마진 */
 	.top{
@@ -178,16 +188,22 @@
     .dropdown {
 	  position: relative;
 	  display: inline-block;
+	  color: black; 
+	  font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	  background: ;
+	
 	}
 	
 	.dropdown-content {
 	  display: none;
 	  position: absolute;
-	  background-color: #f9f9f9;
+	  background-color: A9A9A9;
 	  min-width: 160px;
 	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	  padding: 12px 16px;
 	  z-index: 1;
+	  float: right;
+	  text-align: center;
 	}
 	
 	.dropdown:hover .dropdown-content {
@@ -337,11 +353,10 @@ function slide() {
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
 	            <div class="dropdown">
-	            	<span>  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
+	            	<span class="log-btn">  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
 	            	<div class="dropdown-content">
-	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
-	            		</p>
 	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a>
+	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
 	            		</p>
 	            	</div>
 	            </div>
