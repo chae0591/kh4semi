@@ -4,6 +4,10 @@
 <%@ page import="java.util.*" %>
 
 <%
+	request.setCharacterEncoding("UTF-8");
+%>
+
+<%
 	//목록 가져오기
 	QnaBoardDao dao = new QnaBoardDao();
 	List<QnaBoardDto> list;

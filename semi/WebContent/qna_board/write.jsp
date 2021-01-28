@@ -61,6 +61,8 @@ window.onload = function() {
 	
 	<form onsubmit='return copyContent();' action="write.do" method="post">
 	
+		<!-- 사용자 몰래 번호를 첨부 -->
+		<input type="hidden" name="file_no_list">
 	<div class="row">
 		<label>제목</label>
 		<input type="text" class="input" name="board_title" required>
