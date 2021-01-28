@@ -357,6 +357,7 @@ public class QnaBoardDao {
 					return list;
 			}
 		
+<<<<<<< HEAD
 		//검색 개수 구하는 메소드
 			public int searchCount(String keyword) throws Exception{
 				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -509,21 +510,19 @@ public class QnaBoardDao {
 				}
 				con.close();
 				
-				return list; 
+				return list;
 			}
-			//검색 개수를 구하는 메소드 
-			public int getCount() throws Exception {
-				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-				
-				String sql = "select count(*) from qna_board";
-				PreparedStatement ps = con.prepareStatement(sql);
-				
-				ResultSet rs = ps.executeQuery();
-				rs.next();
-				int count = rs.getInt(1);
-				con.close();
-				return count; 
-				
-			}
-					
+
+		//목록개수를 구하는 메소드 
+		public int getCount() throws Exception {
+			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+			String sql = "select count(*) from qna_board";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			con.close();
+			return count; 
 		}
+	}

@@ -104,10 +104,14 @@
 		border: 1px solid blue;
 		float: left;
 		width: 20%;
+<<<<<<< HEAD
 		height: auth;
 		min-height: 700px;
 		padding: 1.5rem;
 		position: relative;
+=======
+		height: 560px;
+>>>>>>> refs/remotes/origin/main
 	}
 	aside li{
 		list-style: none;
@@ -116,6 +120,7 @@
 		border: 1px solid red;
 		float: right;
 		width: 80%;
+<<<<<<< HEAD
 		height: auth;
 		min-height: 700px;
 		padding: 1rem;
@@ -132,6 +137,9 @@
 		margin-bottom: 10px;
 		padding: 0.5rem;
 		border: 1px solid black;
+=======
+		height: 560px;
+>>>>>>> refs/remotes/origin/main
 	}
 	.pagination {
 		text-align: center;
@@ -142,7 +150,49 @@
 		display: inline-block;
 		text-decoration: none;
 	}
+<<<<<<< HEAD
 
+=======
+	table {
+		border-collapse: collapse;
+		table-layout:fixed; 
+	}
+	thead{
+		text-align:center;
+	}
+	td {
+		text-overflow:ellipsis; 
+		overflow:hidden; 
+	}
+	.board_title {
+		width:100%;
+		height:20px;
+		text-overflow:ellipsis; 
+		overflow:hidden;
+	}
+	.board_title > a{
+		width:100%;
+		text-overflow:ellipsis; 
+		overflow:hidden;
+		white-space:nowrap;
+	}
+	/* .regist_time {
+		position: absolute;
+   	 	top: 20px;
+    	right: 20px;
+    	line-height: 1.4;
+    	font-size: 12px;
+	} */
+	.tb-top {
+		border-top: 1px solid black;
+	}
+	.tb-bottom {
+		border-bottom: 1px solid black;
+	}
+	.font-bold {
+		font-weight: bold; 
+	}
+>>>>>>> refs/remotes/origin/main
 </style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>

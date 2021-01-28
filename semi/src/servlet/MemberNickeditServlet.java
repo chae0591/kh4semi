@@ -31,7 +31,7 @@ public class MemberNickeditServlet extends HttpServlet {
 				resp.sendRedirect("my.jsp");
 			}
 			else {
-				resp.sendRedirect("edit.jsp?error");
+				resp.sendRedirect("nickedit.jsp?error");
 			}
 			
 			

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//게시글(BoardDto)에 댓글개수가 포함된 VO
+
 public class TipBoardOpinionCountVO {
 
 	private int board_no;
@@ -18,10 +18,19 @@ public class TipBoardOpinionCountVO {
 	private Date start_date;
 	private Date end_date;
 	private int opinion_count;
+	private String member_nick;
 	
 
 	public TipBoardOpinionCountVO() {
 		super();
+	}
+
+	public String getMember_nick() {
+		return member_nick;
+	}
+
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
 	}
 
 
@@ -133,8 +142,8 @@ public class TipBoardOpinionCountVO {
         m_image = p_image.matcher(htmlStr);  
         while (m_image.find()) {  
             img = img + "," + m_image.group();  
-            // Matcher m =  
-                         // Pattern.compile ( "src = \" (*) (\ "|> | \\ s +)"?.?) Matcher (img);. // src match  
+            
+                         
             Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
             
             while (m.find()) {  

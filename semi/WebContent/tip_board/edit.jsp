@@ -61,16 +61,22 @@ $(document).ready(function() {
 });
 </script>
 <style>
-#textEditor div {
-	border:none !important;
+
+label, div, span, a {
+	border: none !important;
 }
+
+
+#textEditor {
+	border: 1px solid #ccc !important;
+}
+
 </style>
 
 <div class="outbox" style="width:800px">
 	<div class="row center">
-		<h2>게시글 수정</h2>
+		<h2>여행꿀팁 수정</h2>
 	</div>
-	<div class="row center">상대방에 대한 인신공격은 예고 없이 삭제될 수 있습니다</div>
 	
 	<form onsubmit='return copyContent();' action="<%=request.getContextPath()%>/tip_board/edit.do" method="post">
 	

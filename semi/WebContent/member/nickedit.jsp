@@ -10,10 +10,28 @@
 	MemberDto dto = dao.find(member_no);
 %>    
     
+<style>
+	.font {
+	    font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	}
+	.button {
+		background-color: #f3f6f7;
+		  border: none;
+		  color: black;
+		  padding: 15px;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 20px;
+		  cursor: pointer;
+		  width: 400px;
+		  margin: 2px;
+	}
+</style>    
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <form action="edit.do" method="post">
-	<div class="outbox" style="width:500px">
+	<div class="outbox font" style="width:500px">
 		<div class="row center">
 			<h2>회원 정보 수정</h2>
 		</div>
@@ -28,7 +46,7 @@
 			<input type="password" name="member_pw" required class="input" placeholder="8~20자 영문 소문자/대문자/특수문자/숫자">
 		</div>
 		<div class="row">
-			<input type="submit" value="정보수정" class="input">
+			<input type="submit" value="정보수정" class="input button">
 		</div>
 		
 		<%if(request.getParameter("error") != null){ %>
