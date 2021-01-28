@@ -164,9 +164,6 @@
     	text-decoration: underline;
     }
     
-    .pagemargin{
-    	margin-top: 2rem;
-    }
     
 </style>
 
@@ -199,7 +196,6 @@
 	<%} %>
 </div>
 	
-<div class="pagemargin">	
 <div class="btn-box">	
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
