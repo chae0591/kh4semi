@@ -5,15 +5,13 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-%>
 
-<%
 	//목록 가져오기
 	QnaBoardDao dao = new QnaBoardDao();
 	List<QnaBoardDto> list;
-	
-	//List<QnaBoardDto> list = dao.select();
-	
+%>
+
+<%
 	//page 
 	int boardSize = 5;
 	int p;
@@ -49,7 +47,7 @@
 			list = dao.pagingList(startRow, endRow);
 		}
 		*/
-
+	
 	//댓글 목록 구하기
 	String isOrder = request.getParameter("isOrder");
 	if(isOrder == null){
@@ -104,14 +102,11 @@
 		border: 1px solid blue;
 		float: left;
 		width: 20%;
-<<<<<<< HEAD
 		height: auth;
 		min-height: 700px;
 		padding: 1.5rem;
 		position: relative;
-=======
 		height: 560px;
->>>>>>> refs/remotes/origin/main
 	}
 	aside li{
 		list-style: none;
@@ -120,7 +115,6 @@
 		border: 1px solid red;
 		float: right;
 		width: 80%;
-<<<<<<< HEAD
 		height: auth;
 		min-height: 700px;
 		padding: 1rem;
@@ -137,9 +131,7 @@
 		margin-bottom: 10px;
 		padding: 0.5rem;
 		border: 1px solid black;
-=======
 		height: 560px;
->>>>>>> refs/remotes/origin/main
 	}
 	.pagination {
 		text-align: center;
@@ -150,9 +142,6 @@
 		display: inline-block;
 		text-decoration: none;
 	}
-<<<<<<< HEAD
-
-=======
 	table {
 		border-collapse: collapse;
 		table-layout:fixed; 
@@ -192,7 +181,7 @@
 	.font-bold {
 		font-weight: bold; 
 	}
->>>>>>> refs/remotes/origin/main
+
 </style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>

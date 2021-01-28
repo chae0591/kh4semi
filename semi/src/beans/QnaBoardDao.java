@@ -356,8 +356,7 @@ public class QnaBoardDao {
 					
 					return list;
 			}
-		
-<<<<<<< HEAD
+
 		//검색 개수 구하는 메소드
 			public int searchCount(String keyword) throws Exception{
 				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);

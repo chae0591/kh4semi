@@ -37,8 +37,8 @@ public class QnaBoardWriteServlet extends HttpServlet{
 			//2. 등록 = .writeWithPrimaryKey()
 			QnaBoardDao qnaboardDao = new QnaBoardDao();
 			int board_no = qnaboardDao.getSequence();		//시퀀스 번호 생성
-			boardDto.setBoard_no(board_no);				//생성된 번호를 DTO에 설정
-			qnaboardDao.writeWithPrimaryKey(boardDto); 	//설정된 정보를 등록
+			boardDto.setBoard_no(board_no);					//생성된 번호를 DTO에 설정
+			qnaboardDao.writeWithPrimaryKey(boardDto); 		//설정된 정보를 등록
 			
 			System.out.println(req.getParameter("file_no_list"));
 			String s_file_no_list = req.getParameter("file_no_list");

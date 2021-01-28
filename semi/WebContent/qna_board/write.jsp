@@ -63,6 +63,7 @@ window.onload = function() {
 	
 		<!-- 사용자 몰래 번호를 첨부 -->
 		<input type="hidden" name="file_no_list">
+		
 	<div class="row">
 		<label>제목</label>
 		<input type="text" class="input" name="board_title" required>
@@ -83,6 +84,7 @@ window.onload = function() {
 	</div>
 	 
 	</form>
+	
 	<div style="display:none;">
 		<label>이미지 업로드</label>
 		<form id="imgUploadForm" action="<%=request.getContextPath()%>/qna_tmp_file/receive.do" method="post" enctype="multipart/form-data">
