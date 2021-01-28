@@ -194,7 +194,7 @@
 	</div>
 	<%} %>
 </div>
-	
+<div class="btn-box">	
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
@@ -211,5 +211,6 @@
       	<li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
       <%}%>	 
     </ul>
+</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
