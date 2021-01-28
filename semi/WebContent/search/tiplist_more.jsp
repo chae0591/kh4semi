@@ -70,6 +70,11 @@
 		width: 440px;
 	}
 	
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
+	
 	.contents{
 		min-height: 50px;
     	margin: 0 auto;
@@ -104,7 +109,8 @@
     	line-height: 70px;
     	font-size: 23px;
     	font-weight: 700;
-    	border-bottom: 3px solid #242424;
+    	color: #454545;
+    	border-bottom: 3px solid #454545;
     }
     
     .btn-box{
@@ -119,6 +125,7 @@
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+    	border-radius: 10px;
     }
     
 	/* 글 제목 글자수 제한 */
@@ -173,7 +180,7 @@
 <div class="container-tip outbox">
 
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
-	<div class="item">
+	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
 			<span style="float:left; color:blue;">Tip&nbsp;</span>
 			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
