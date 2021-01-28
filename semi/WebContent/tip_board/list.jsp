@@ -229,22 +229,13 @@
 
 <script>
 	function setUrlParam(key, value){
-		console.log(key, value);
 		var urlParams = new URLSearchParams(window.location.search);
 		urlParams.set(key, value);
 		window.location.search = urlParams;
 	}
 
 	$(function(){
-		//.write-btn을 누르면 글쓰기 페이지로 이동
 		$(".write-btn").click(function(){
-			//상대경로
-			//location.href = "write.jsp";
-			//$(location).attr("href", "write.jsp");
-			
-			//절대경로
-			//location.href = "http://localhost:8888/home/board/write.jsp";
-			//location.href = "/home/board/write.jsp";
 			location.href = "<%=request.getContextPath()%>/tip_board/write.jsp";
 		});
 	});
@@ -262,7 +253,6 @@
 	 | 
 	<a href="#" onclick="setUrlParam('orderColumn', '1'); return false;">댓글순</a>
 </div>
-
 
 <div class="container-tip">
   	<%for(TipBoardOpinionCountVO dto : list){ %>
@@ -283,7 +273,6 @@
 		</a>
 	</div>
 	<%} %>
-	
 </div>
 
 <div class="btn-box row right">
@@ -293,39 +282,20 @@
 <div class="btn-box center">
 	<div class="row">
 		<ul class="pagination">
-			<%if(isSearch){ %>
-				<li><a href="list.jsp?p=<%=startBlock-1%>&type=<%=type%>&key=<%=key%>">&lt;</a></li>
-			<%}else{ %>
-				<li><a href="list.jsp?p=<%=startBlock-1%>">&lt;</a></li>
-			<%} %>
-			
+			<li><a href="#" onclick="setUrlParam('p', '<%=startBlock-1%>'); return false;">&lt;</a></li>
 			<%for(int i=startBlock; i<=endBlock; i++){ %>
 				<%if(i == p){ %>
 				<li class="active">
 				<%}else{ %>
 				<li>
 				<%} %>
-				<%if(isSearch){ %>
-					<!-- 검색용 링크 -->
-					<a href="list.jsp?p=<%=i%>&type=<%=type%>&key=<%=key%>"><%=i%></a>
-				<%}else{ %>
-					<!-- 목록용 링크 -->
-					<a href="list.jsp?p=<%=i%>"><%=i%></a>
-				<%} %>
+					<a href="#" onclick="setUrlParam('p', '<%=i%>'); return false;"><%=i%></a>
 				</li>
 			<%} %>
-			
-			<%if(isSearch){ %>
-				<li><a href="list.jsp?p=<%=endBlock+1%>&type=<%=type%>&key=<%=key%>">&gt;</a></li>
-			<%}else{ %>
-				<li><a href="list.jsp?p=<%=endBlock+1%>">&gt;</a></li>
-			<%} %>
+			<li><a href="#" onclick="setUrlParam('p', '<%=endBlock+1%>'); return false;">&gt;</a></li>
 		</ul>
 	</div>
 </div>
-
-
-
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>		
 		
