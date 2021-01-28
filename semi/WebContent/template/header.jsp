@@ -24,11 +24,12 @@
 <style>
 	/* 화면 레이아웃 스타일 */
 	
-	/* 모든 영역은 점선으로 테두리가 표시되게 한다(테스트용) */
+	/* 모든 영역은 점선으로 테두리가 표시되게 한다(테스트용 삭제)
 	main, header, nav, section, 
 	aside, article, footer, div,
 	label, span, p {
 	}
+	*/
 	
 	/* 전체 화면의 폭은 1100px 로 한다 */
 	main {
