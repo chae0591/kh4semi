@@ -557,4 +557,58 @@ public class TipBoardDao {
 			
 			return list;
 		}
+	
+	//페이징을 이용한 검색
+	public List<TipSearchVO> searchPagingList(String keyword, int startRow, int endRow) throws Exception{
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from("
+					+ "select T.board_title, T.board_content, T.regist_time, T.start_date, T.end_date, T.board_no, M.member_nick from "
+					+ "tip_board T inner join member M "
+					+ "on M.member_id = T.board_writer "
+					+ "where instr(board_title, ?) > 0 order by board_no desc)"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
+		ResultSet rs = ps.executeQuery();
+		
+		List<TipSearchVO> list = new ArrayList<>();
+		while(rs.next()) {
+			TipSearchVO tipsearchVO = new TipSearchVO();
+			tipsearchVO.setBoard_no(rs.getInt("board_no"));
+			tipsearchVO.setBoard_title(rs.getString("board_title"));
+			tipsearchVO.setBoard_content(rs.getString("board_content"));
+			tipsearchVO.setRegist_time(rs.getDate("regist_time"));
+			tipsearchVO.setStart_date(rs.getDate("start_date"));
+			tipsearchVO.setEnd_date(rs.getDate("end_date"));
+			tipsearchVO.setMember_nick(rs.getString("member_nick"));
+			list.add(tipsearchVO);
+		}
+			
+			con.close();
+			
+			return list;
+	}
+	
+	//검색 개수 구하는 메소드
+	public int searchCount(String keyword) throws Exception{
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "select count(*) from tip_board where instr(board_title, ?) > 0";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		int count = rs.getInt(1);
+		con.close();
+		
+		return count;
+		
+	}
 }

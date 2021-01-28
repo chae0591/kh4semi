@@ -6,13 +6,39 @@
 	request.setCharacterEncoding("UTF-8");
 	String keyword = request.getParameter("keyword");
 	
-	//여행Q&A
-	QnaBoardDao qnaboardDao = new QnaBoardDao();
-	List<QnaSearchVO> qnaList = qnaboardDao.select(keyword);
-	
 	//여행꿀팁
-	TipBoardDao tipboardDao = new TipBoardDao();
-	List<TipSearchVO> tipList = tipboardDao.select(keyword);
+	QnaBoardDao qnaboardDao = new QnaBoardDao();
+	
+
+	//페이지 분할 코드
+	int boardSize = 10;
+	int p;
+	try{
+		p = Integer.parseInt(request.getParameter("p"));
+		if(p <= 0) throw new Exception();
+	}
+	catch(Exception e){
+		p = 1;
+	}
+	
+	int endRow = p * boardSize;
+	int startRow = endRow - boardSize + 1;
+	
+	
+	//페이지 블록 개수 코드
+	int blockSize = 10;
+	int startBlock = (p-1) / blockSize * blockSize + 1;
+	int endBlock = startBlock + blockSize - 1;
+	
+	int count = qnaboardDao.searchCount(keyword);
+	
+	// 페이지 개수
+	int	pageSize = (count + boardSize - 1) / boardSize;
+	if(endBlock > pageSize){
+		endBlock = pageSize;
+	}
+
+	List<QnaSearchVO> qnaList = qnaboardDao.searchPagingList(keyword, startRow, endRow);
 %>
 <!DOCTYPE html>
 <style>
@@ -135,52 +161,13 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<div class="contents left">
-	<a href="<%=request.getContextPath()%>">전체</a>
-	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
-</div>
-
-<div class="bigTitle">여행꿀팁</div>
-
-<%if(!tipList.isEmpty()){ %>
-<div class="container-tip">
-
-	<%for(TipSearchVO tipsearchVO : tipList){ %>
-	<div class="item">
-  		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span class="title-line"><%=tipsearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
-			<br><br>
-			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
-			<br>
-			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
-		</a>
-	</div>
-	<%} %>
-	
-</div>
-
-<div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>" class="btn-more input">
-		<span>여행꿀팁 더보기&gt;</span>
-	</a>
-</div>
-
-<%} else{%>
-	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
-<%} %>
-
 <div class="bigTitle">여행Q&amp;A</div>
 
-<%if(!qnaList.isEmpty()){%>
-<div class="container-qna">
+<div class="container-qna outbox">
 
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item">
-		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
+  		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
 			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
 			<span class="title-line"><%=qnasearchVO.getBoard_title()%></span>
 			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
@@ -191,15 +178,22 @@
 		</a>
 	</div>
 	<%} %>
-	
 </div>
-
-<div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
-</div>
-
-<%} else{%>
-	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
-<%} %>
 	
+	 <ul class="pagination center">
+	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
+	    
+	 <%for(int i=startBlock ; i <=  endBlock ; i++){ %>
+	 	<%if(p == i){ %>
+       		<li class="active"><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
+        <%} else{%>
+        	<li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=i%>"><%=i%></a></li>
+        <%} %>	
+      <%} %>
+      
+      <%if(endBlock != pageSize){ %>
+      	<li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
+      <%}%>	 
+    </ul>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>
