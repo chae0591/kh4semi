@@ -39,7 +39,6 @@
 	}
 
 	List<TipSearchVO> tipList = tipboardDao.searchPagingList(keyword, startRow, endRow);
-	//List<TipSearchVO> tipList = tipboardDao.select1(keyword);
 %>
 <!DOCTYPE html>
 <style>
@@ -164,6 +163,8 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
+    
 </style>
 
 
@@ -194,6 +195,7 @@
 	</div>
 	<%} %>
 </div>
+	
 <div class="btn-box">	
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>

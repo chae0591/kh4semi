@@ -163,6 +163,7 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
 </style>
 
 
@@ -186,6 +187,7 @@
 	</div>
 	<%} %>
 </div>
+
 <div class="btn-box">
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
