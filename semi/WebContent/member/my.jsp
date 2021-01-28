@@ -43,6 +43,18 @@
 		  vertical-align: top;
 		  border-bottom: 1px solid #ccc;
 	}
+	.button {
+		background-color: #f3f6f7;
+		  border: none;
+		  color: black;
+		  padding: 15px;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 20px;
+		  cursor: pointer;
+		  width: 400px;
+		  margin: 2px;
+	}
 </style>
 
 <div class="outbox" style="width:400px">
@@ -73,15 +85,32 @@
 	</div>
 	
 	<!-- 하단 매뉴 -->
-	<div class="row center font">
+<!-- 	<div class="row center font">
 		<a href="pw.jsp">비밀번호 변경하기</a>
 	</div>
-	<div class="row center font">
+	 -->
+	<form action="pw.jsp">
+		<input type="submit" class="center button" value="비밀번호 변경하기"> 
+	</form>
+	
+	
+	<!-- <div class="row center font">
 		<a href="nickedit.jsp">닉네임 변경하기</a>
-	</div>
+	</div> -->
+	
+	<form action="nickedit.jsp">
+		<input type="submit" class="center button" value="닉네임 변경하기">
+	</form>
+	
+	<!-- 
 	<div class="row center font" onclick="return confirm('회원탈퇴 하시겠습니까?');">
 		<a href="delete.do">회원 탈퇴하기</a>
-	</div>
+	</div> -->
+	
+	<form action="delete.do" onclick="return confirm('회원탈퇴 하시겠습니까?');">
+		<input type="submit" class="center button" value="회원탈퇴 하기">
+	</form>
+	
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>		

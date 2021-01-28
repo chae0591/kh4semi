@@ -108,7 +108,8 @@
     	line-height: 70px;
     	font-size: 23px;
     	font-weight: 700;
-    	border-bottom: 3px solid #242424;
+    	color: #454545;
+    	border-bottom: 3px solid #454545;
     }
     
     .btn-box{
@@ -123,6 +124,7 @@
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+    	border-radius: 10px;
     }
     
 	/* 글 제목 글자수 제한 */
@@ -162,9 +164,6 @@
     	text-decoration: underline;
     }
     
-    .pagemargin{
-    	margin-top: 2rem;
-    }
 </style>
 
 
@@ -189,7 +188,7 @@
 	<%} %>
 </div>
 
-<div class="pagemargin">
+<div class="btn-box">
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
