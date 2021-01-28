@@ -6,9 +6,9 @@
 <%
 	//목록 가져오기
 	QnaBoardDao dao = new QnaBoardDao();
-
-	//최신순
-	List<QnaBoardDto> list = dao.select();
+	List<QnaBoardDto> list;
+	
+	//List<QnaBoardDto> list = dao.select();
 	
 	//page 
 	int boardSize = 5;
@@ -35,11 +35,33 @@
 	
 	boolean isSearch = type != null && key != null; 
 	
-	if(isSearch) {
-		list= dao.pagingList(type, key, startRow, endRow);
-	}
-	else {
-		list = dao.pagingList(startRow, endRow);
+	//목록 검색을 위해 필요한 프로그래밍 코드 
+		/*
+		
+		if(isSearch) {
+			list= dao.pagingList(type, key, startRow, endRow);
+		}
+		else {
+			list = dao.pagingList(startRow, endRow);
+		}
+		*/
+
+	//댓글 목록 구하기
+	String isOrder = request.getParameter("isOrder");
+	if(isOrder == null){
+		if(isSearch) {
+			list= dao.pagingList(type, key, startRow, endRow);
+		}
+		else {
+			list = dao.pagingList(startRow, endRow);
+		}
+	}else{
+		if(isSearch) {
+			list= dao.pagingListByOpinion(type, key, startRow, endRow);
+		}
+		else {
+			list = dao.pagingListByOpinion(startRow, endRow);
+		}
 	}
 %>
 
@@ -140,8 +162,16 @@ $(function(){
 	<aside>
 		<ul>
 		<%QnaBoardDto boardDto = new QnaBoardDto();%>
-			<li><a href="list.jsp">최신순</a></li>
-			<li><a href="list.jsp?">댓글순</a></li>
+			<%if(isSearch){%>
+				<li><a href="list.jsp?type=<%=type%>&key=<%=key%><">최신순</a></li>
+			<%}else{ %>
+				<li><a href="list.jsp">최신순</a></li>
+			<%} %>
+			<%if(isSearch){%>
+				<li><a href="list.jsp?isOrder&type=<%=type%>&key=<%=key%><">댓글순</a></li>
+			<%}else{ %>
+				<li><a href="list.jsp?isOrder">댓글순</a></li>
+			<%} %>
 		</ul>
 	</aside>
 	
