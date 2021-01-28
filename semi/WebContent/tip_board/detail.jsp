@@ -55,6 +55,9 @@
 %>
 
 <style>
+.img-container img{
+	max-width:100%;
+}
 html, body {
 	width: 100%;
 	height: 100%;
@@ -287,7 +290,7 @@ td {
 			</div>
 
 			<hr>
-			<div style="word-break: break-all;" class="container-content padding-top-20 padding-bottom-20 "><%=boardDto.getBoard_content()%></div>
+			<div style="word-break: break-all;" class="container-content padding-top-20 padding-bottom-20 img-container"><%=boardDto.getBoard_content()%></div>
 
 
 			<hr>
