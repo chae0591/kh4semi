@@ -10,6 +10,8 @@ public class TipSearchVO {
 	private Date regist_time;
 	private Date start_date;
 	private Date end_date;
+	private int vote;
+	private int opinion;
 	private String member_nick;
 	
 	public TipSearchVO() {
@@ -64,6 +66,22 @@ public class TipSearchVO {
 		this.end_date = end_date;
 	}
 
+	public int getVote() {
+		return vote;
+	}
+
+	public void setVote(int vote) {
+		this.vote = vote;
+	}
+
+	public int getOpinion() {
+		return opinion;
+	}
+
+	public void setOpinion(int opinion) {
+		this.opinion = opinion;
+	}
+
 	public String getMember_nick() {
 		return member_nick;
 	}
@@ -71,5 +89,5 @@ public class TipSearchVO {
 	public void setMember_nick(String member_nick) {
 		this.member_nick = member_nick;
 	}
-
+	
 }
