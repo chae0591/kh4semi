@@ -96,7 +96,7 @@ label, div, span, a {
 				<button id='btn-upload'>이미지 업로드</button>
 			</div>
 			<textarea style="display:none;" name="board_content" class="input"></textarea>
-			<div id="textEditor" class="input" contenteditable="true">
+			<div id="textEditor" class="input img-container" contenteditable="true">
 				<br><br><br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>

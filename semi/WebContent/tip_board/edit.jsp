@@ -110,7 +110,7 @@ label, div, span, a {
 			<button id='btn-upload'>이미지 업로드</button>
 		</div>
 		<textarea style="display:none;" id="board_content" name="board_content" class="input"></textarea>
-		<div id="textEditor" class="input" contenteditable="true">
+		<div id="textEditor" class="input img-container" contenteditable="true">
 			<%=boardDto.getBoard_content()%>
 		</div>
 	</div>
