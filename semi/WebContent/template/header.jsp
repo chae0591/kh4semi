@@ -188,16 +188,22 @@
     .dropdown {
 	  position: relative;
 	  display: inline-block;
+	  color: black; 
+	  font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	  background: ;
+	
 	}
 	
 	.dropdown-content {
 	  display: none;
 	  position: absolute;
-	  background-color: #f9f9f9;
+	  background-color: A9A9A9;
 	  min-width: 160px;
 	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	  padding: 12px 16px;
 	  z-index: 1;
+	  float: right;
+	  text-align: center;
 	}
 	
 	.dropdown:hover .dropdown-content {
@@ -349,9 +355,8 @@ function slide() {
 	            <div class="dropdown">
 	            	<span class="log-btn">  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
 	            	<div class="dropdown-content">
+	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a>
 	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
-	            		</p>
-	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-btn">내정보</a>
 	            		</p>
 	            	</div>
 	            </div>
