@@ -88,16 +88,18 @@
     
     .btn-box{
     	margin-top: 15px;
+    	
     }
     
     .btn-more{
     	padding: 0 35px;
     	height: 35px;
     	line-height: 35px;
-    	border: 1px solid #ddd;
+    	border: 1px solid #999;
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+  		border-radius: 10px;
     	border-radius: 10px;
     }
     
@@ -137,18 +139,22 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
+    .font {
+	    font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	}
 </style>
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<div class="contents left">
+<div class="contents left font">
 	<a href="<%=request.getContextPath()%>">전체</a>
 	<span> &gt; </span> 
 	<a href="<%=request.getContextPath()%>">추천콘텐츠</a>
 </div>
 
-<div class="bigTitle">여행꿀팁</div>
+<div class="bigTitle font">여행꿀팁</div>
 
 <%if(!tipList.isEmpty()){ %>
 <div class="container-tip">
@@ -156,14 +162,14 @@
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
 	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span class="title-line"><%=tipsearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<span class="font" style="float:left; color:blue;">Tip&nbsp;</span>
+			<span class="font title-line"><%=tipsearchVO.getBoard_title() %></span>
+			<span class="font" style="float:right"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
+			<span class="font content-line"><%=tipsearchVO.getBoard_content()%></span>
 			<br>
-			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
+			<span class="font" style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span class="font" style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
@@ -171,16 +177,16 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>" class="btn-more input">
-		<span>여행꿀팁 더보기&gt;</span>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>">
+		<span class="font">여행꿀팁 더보기&gt;</span>
 	</a>
 </div>
 
 <%} else{%>
-	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
+	<h3 class="font">'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
 <%} %>
 
-<div class="bigTitle">여행Q&amp;A</div>
+<div class="bigTitle font">여행Q&amp;A</div>
 
 <%if(!qnaList.isEmpty()){%>
 <div class="container-qna">
@@ -188,13 +194,13 @@
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item border-gray-1">
 		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
-			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
-			<span class="title-line"><%=qnasearchVO.getBoard_title()%></span>
-			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
+			<span class="font" style="float:left; color:red;">Q&amp;A&nbsp;</span>
+			<span class="title-line font"><%=qnasearchVO.getBoard_title()%></span>
+			<span class="font" style="float:right"><%=qnasearchVO.getRegist_time()%></span>
 			<br><br>
-			<span class="content-line"><%=qnasearchVO.getBoard_content()%></span>
+			<span class="content-line font"><%=qnasearchVO.getBoard_content()%></span>
 			<br>
-			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
+			<span class="font" style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
@@ -202,11 +208,13 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">
+		<span class="font">여행Q&amp;A 더보기&gt;</span>
+	</a>
 </div>
 
 <%} else{%>
-	<h3>'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
+	<h3 class="font">'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
 <%} %>
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
