@@ -31,21 +31,28 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
+		margin-left: 1.2rem;
 	}
 	
 	.container-qna{
 		display: grid;
 		grid-template-columns: repeat(2,1fr);
 		grid-auto-rows: minmax(1em, auto);
-		grid-gap: 0.5rem;
+		grid-gap: 1rem;
 		justify-items: start;
 		align-items: start;	
 		padding: 10px 0 0 ;	
+		margin-left: 1.2rem;
 	}	
 
 	.item{
 		padding: 1rem;
-		width: 440px;
+		width: 500px;
+	}
+	
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
 	}
 	
 	.contents{
@@ -82,7 +89,8 @@
     	line-height: 70px;
     	font-size: 23px;
     	font-weight: 700;
-    	border-bottom: 3px solid #242424;
+    	color: #119e9e;
+    	border-bottom: 3px solid #119e9e;
     }
     
     .btn-box{
@@ -97,6 +105,12 @@
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+    	border-radius: 10px;
+    }
+    
+    .right-line{
+    	float:right; 
+    	margin-right: 1rem;
     }
     
     /* 글 제목 글자수 제한 */
@@ -105,7 +119,8 @@
     	font-size:1.1em; 
     	font-weight:600;
     	display: inline-block;
-    	width:250px;
+    	width:280px;
+    	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
@@ -151,16 +166,16 @@
 
 <div class="container-tip">
   	<%for(TipSearchVO tipsearchVO : tipList){ %>
-	<div class="item">
+	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
+			<span style="float:left; color:blue;">Tip</span>
 			<span class="title-line"><%=tipsearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<span class="right-line"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
+			<span class="content-line" style="margin-left: 2rem"><%=tipsearchVO.getBoard_content()%></span>
 			<br>
-			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick() %> 여행작가</span>
+			<span style="float:left; font-size:14px; margin-left: 2rem;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span class="right-line" style="color:#8C8C8C"><%=tipsearchVO.getMember_nick() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
@@ -174,15 +189,15 @@
 
 <div class="container-qna">
   	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
-	<div class="item">
+	<div class="item border-gray-1">
 		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
-			<span style="float:left; color:red;">Q&A&nbsp;</span>
+			<span style="float:left; color:red;">Q&amp;A</span>
 			<span class="title-line"><%=qnasearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=qnasearchVO.getRegist_time() %></span>
+			<span class="right-line"><%=qnasearchVO.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line"><%=qnasearchVO.getBoard_content() %></span>
+			<span class="content-line" style="margin-left: 2.9rem"><%=qnasearchVO.getBoard_content() %></span>
 			<br>
-			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick() %> 님의 질문입니다</span>
+			<span style="color:#8C8C8C; margin-left: 2.9rem;"><%=qnasearchVO.getMember_nick() %> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>

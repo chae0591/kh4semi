@@ -31,38 +31,48 @@
 	}
 	*/
 	
+	/* 모든 영역 폰트 설정*/
+	main, header, nav, section, 
+	aside, article, footer, div,
+	label, span, p {
+		font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
+	}
+	
 	/* 전체 화면의 폭은 1100px 로 한다 */
-	main {
+	header, section, .slide {
 		width:1100px;
 		margin:auto;
 	}
 	
+	nav, footer {
+		width:100%;
+	}
+	
+	.top{
+		width:1100px;
+		margin:auto;
+		margin-top: 1.2rem;
+	}
+	
 	/* 각각의 레이아웃 영역에 여백을 설정한다 */
-	header, footer, nav, section {
+	header, footer, section {
 		padding:1rem;
 	}
 	
 	/* 본문에 내용이 없어도 최소높이를 설정하여 일정 크기만큼 표시되도록 한다 */
 	section {
 		min-height: 500px;
-		margin-left: 5rem;
-        margin-right: 5rem;
 	}
 	
 	footer {
-		min-height: 250px;
-		padding-left:6rem;
+		min-height: 300px;
 		padding-top: 8rem;
-		background-color: #E7E7E7;
+		background-color: #DFF9F9;
 		font-size: 12px;
 		font-weight:700;
 		color: #5D5D5D;
+		margin: auto;
 	}
-	/* 로고있는 상단 부분 좌우 마진 */
-	.top{
-        margin-left: 5rem;
-        margin-right: 5rem;
-    }
 	
 	.logo {
 	    float: left;
@@ -76,14 +86,27 @@
 	.menu,
     .menu ul {
         list-style: none;
-        margin: 0;
-        padding: 0rem;
+        padding: 1.4rem;
+        height:68px;
+        margin-top: 10px;
+        background-color: #5edfdf;
+        font-weight: 500;
+        font-size: 17px;
     }
-
-    .menu>li {
-        width: 200px;
+    
+    .menu>li,
+    .menu>li>a {
+        width: 250px;
         display: inline-block;
         position: relative;
+        color: #fff;
+    }
+    
+    .menu>li>a:hover{
+    	color: #119e9e;
+    	font-weight: 900;
+    	font-size:18px;
+    	text-decoration: underline;
     }
         
     a{
@@ -110,7 +133,7 @@
 	
 	.slide {
 	  position: relative;
-	  padding-top: 10px;
+	  padding-top: 30px;
 	  overflow: hidden;
 	}
 	
@@ -190,14 +213,12 @@
 	  display: inline-block;
 	  color: black; 
 	  font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
-	  background: ;
-	
 	}
 	
 	.dropdown-content {
 	  display: none;
 	  position: absolute;
-	  background-color: A9A9A9;
+	  background-color: #f3f6f7;
 	  min-width: 160px;
 	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	  padding: 12px 16px;
@@ -205,6 +226,15 @@
 	  float: right;
 	  text-align: center;
 	}
+	.dropdown:hover .dropbtn {
+		font-weight: bold;
+		color: black;
+	}
+	.dropdown-content p:hover {
+		width: auto;
+		font-weight: bold;
+	}
+	
 	
 	.dropdown:hover .dropdown-content {
 	  display: block;
@@ -353,11 +383,10 @@ function slide() {
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
 	            <div class="dropdown">
-	            	<span class="log-btn">  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
+	            	<span class="log-btn dropbtn">  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
 	            	<div class="dropdown-content">
-	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a>
-	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a>
-	            		</p>
+	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a></p>
+	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a></p>
 	            	</div>
 	            </div>
 	            

@@ -79,6 +79,7 @@
 	.white {
 		color: #fff;
 	}
+
 	.border-gray-1 {
 		border: 1px solid #999 !important;
   		border-radius: 10px;
@@ -92,6 +93,7 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
+		margin-left: 1.2rem;
 	}
 	.container-qna{
 		display: grid;
@@ -102,9 +104,10 @@
 		align-items: start;	
 		padding: 10px 0 0 ;	
 	}	
+
 	.item{
 		padding: 1rem;
-		width: 440px;
+		width: 500px;
 	}
 	.contents{
 		min-height: 50px;
@@ -135,9 +138,10 @@
     	position: relative;
     	height: 60px;
     	line-height: 70px;
-    	font-size: 25px;
+    	font-size: 23px;
     	font-weight: 700;
-    	border-bottom: 3px solid #242424;
+    	color: #454545;
+    	border-bottom: 3px solid #454545;
     }
     .btn-box{
     	margin-top: 15px;
@@ -150,13 +154,20 @@
     	border-radius: 2px;
     	font-size: 14px;
     	color: #333;
+    	border-radius: 10px;
+    }
+    
+    .right-line{
+    	float:right; 
+    	margin-right: 1rem;
     }
     .title-line{
     	float:left; 
     	font-size:1.1em; 
     	font-weight:600;
     	display: inline-block;
-    	width:250px;
+    	width:280px;
+    	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
@@ -221,18 +232,18 @@
   	<%for(TipBoardOpinionCountVO dto : list){ %>
 	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=dto.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=dto.getBoard_title() %>
+			<span style="float:left; color:blue;">Tip</span>
+			<span class="title-line"><%=dto.getBoard_title() %>
 			<%if(dto.getOpinion_count() > 0){ %>
 				[<%=dto.getOpinion_count()%>]
 			<%}%>
 			</span>
-			<span style="float:right"><%=dto.getRegist_time() %></span>
+			<span class="right-line"><%=dto.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line"><%=dto.getBoard_content()%></span>
+			<span class="content-line" style="margin-left: 2rem"><%=dto.getBoard_content()%></span>
 			<br>
-			<span style="float:left; font-size:14px;">일정 <%=dto.getStart_date()%> ~ <%=dto.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=dto.getMember_nick() %> 여행작가</span>
+			<span style="float:left; font-size:14px; margin-left: 2rem;">일정 <%=dto.getStart_date()%> ~ <%=dto.getEnd_date() %></span>
+			<span class="right-line" style="color:#8C8C8C"><%=dto.getMember_nick() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
