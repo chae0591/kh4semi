@@ -110,7 +110,7 @@
     	font-size:19px;
     	text-decoration: underline;
     }
-        
+    
     a{
 	    text-decoration: none;
 	    color: black;
@@ -376,6 +376,7 @@ function slide() {
 </script>
 <script>
 
+
 </script>
 </head>
 <body>
@@ -410,9 +411,9 @@ function slide() {
 		</header>
 		<nav>
 			<ul class="menu center">
-				<li><a href="<%=request.getContextPath()%>">추천 콘텐츠</a></li>
-				<li><a href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a></li>
-				<li><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a></li>
+				<li class="menu_li"><a href="<%=request.getContextPath()%>">추천 콘텐츠</a></li>
+				<li class="menu_li"><a href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a></li>
+				<li class="menu_li"><a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a></li>
 			</ul>
 		</nav>
 		
