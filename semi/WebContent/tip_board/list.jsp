@@ -93,17 +93,8 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
-		margin-left: 1.2rem;
+		margin-left: 2.3rem;
 	}
-	.container-qna{
-		display: grid;
-		grid-template-columns: repeat(2,1fr);
-		grid-auto-rows: minmax(1em, auto);
-		grid-gap: 0.5rem;
-		justify-items: start;
-		align-items: start;	
-		padding: 10px 0 0 ;	
-	}	
 
 	.item{
 		padding: 1rem;
@@ -164,13 +155,14 @@
     .title-line{
     	float:left; 
     	font-size:1.1em; 
-    	font-weight:600;
+    	font-weight:500;
     	display: inline-block;
     	width:280px;
     	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
+    	color: #222;
     }
     .title-line:hover{
     	text-decoration: underline;
@@ -189,6 +181,7 @@
     	display: -webkit-box;
     	-webkit-line-clamp: 2;
     	-webkit-box-orient: vertical;
+    	color: #8c8c8c;
     }
     .content-line:hover{
     	text-decoration: underline;
@@ -221,6 +214,7 @@
 	<span> &gt; </span> 
 	<a href="<%=request.getContextPath()%>/tip_board">여행꿀팁</a>
 </div>
+
 <div class="bigTitle">여행꿀팁</div>
 <div class="btn-box ">
 	<a class="gray <%if(orderColumn == 0){%> black <%} %>"
@@ -240,16 +234,16 @@
 			</span>
 			<span class="right-line"><%=dto.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line" style="margin-left: 2rem"><%=dto.getBoard_content()%></span>
+			<span class="content-line" style="margin-left: 2.5rem"><%=dto.getBoard_content()%></span>
 			<br>
-			<span style="float:left; font-size:14px; margin-left: 2rem;">일정 <%=dto.getStart_date()%> ~ <%=dto.getEnd_date() %></span>
+			<span style="float:left; font-size:14px; margin-left: 2.5rem;">일정 <%=dto.getStart_date()%> ~ <%=dto.getEnd_date() %></span>
 			<span class="right-line" style="color:#8C8C8C"><%=dto.getMember_nick() %> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
 </div>
 <div class="btn-box row right">
-	<button class="write-btn input input-inline">글쓰기</button>
+	<button class="write-btn input input-inline btn btn-info">글쓰기</button>
 </div>
 <div class="btn-box center">
 	<div class="row">

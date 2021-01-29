@@ -78,7 +78,7 @@
 	.logo {
 	    float: left;
 	    width: 200px;
-	    height: 90px;
+	    height: 80px;
     }
     
     .log-btn {
