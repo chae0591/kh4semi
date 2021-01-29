@@ -23,8 +23,7 @@
 		    margin: 0;
 		    padding: 0;
 		    display:table;
-      
-		background:rgba(0, 0, 0, 0. 100);
+			background:rgba(0, 0, 0, 0. 100);
         }
         body {
 		    display:table-cell;
@@ -51,7 +50,7 @@
 		pointer-events: auto;
 		background-color: #fff;
 		background-clip: padding-box;
-		border: 1px solid rgba(0,0,0,.2);
+		border: 1px solid #00EDF5;
 		border-radius: 1.1rem;
 		outline: 0;
 		max-width: 500px;
@@ -92,10 +91,8 @@
 		         
 		.login_div {
 		    position: absolute;
-		
 		    width: 300px;
 		    height: 300px;
-		
 		    /* Center form on page horizontally & vertically */
 		    top: 20%;
 		    left: 50%;
@@ -106,12 +103,31 @@
 		.login_form {
 		    width: 300px;
 		    height: 300px;
-		
 		    border-radius: 10px;
-		
 		    margin: 0;
 		    padding: 0;
 		}
+		
+		.login_button_color {
+			background-color: #5edfdf;
+			 border: none;
+		}
+		
+		.font_color{
+			color: #5edfdf;
+		}
+		
+		.hover_color:hover{
+			background-color:  #5edfdf;
+			font-weight: bold; 
+		}
+		.hover_text:hover{
+			font-weight: bold; 
+			color: #5edfdf;
+		}
+		.findpw_text:hover{
+			font-weight: bold;
+		} 
 </style>
 
 </head>
@@ -125,7 +141,7 @@
 			  <div >
 			      <div class="myform">
                         <div>
-                           <div class="col-md-12 text-center">
+                           <div class="col-md-12 text-center" >
                               <h1>Dibigo Login</h1>
                            </div><br>
                         </div>
@@ -143,22 +159,22 @@
 							<script>alert('로그인 실패! \n아이디와 비밀번호를 확인해주세요.');</script>
 							<%} %>
 				                          
-                           <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">로그인</button>
+                          	<div class="text-center mb-3">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm login_button_color hover_color" >로그인</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="form-group">
-                                 <p class="text-center"><a href="join.jsp" id="signin">회원가입하기 </a></p>
+                                 <p class="text-center"><a href="join.jsp" id="signin" class=" font_color hover_text">회원가입하기 </a></p>
                               </div>
                            </div>
                             <div class="col-md-12 ">
                               <div class="form-group">
-                                 <p class="text-center"><a href="findpw.jsp" style="color:red">비밀번호 찾기 </a></p>
+                                 <p class="text-center"><a href="findpw.jsp" style="color:red" class="findpw_text">비밀번호 찾기 </a></p>
                               </div>
                            </div>
                               <div class="col-md-12 ">
                               <div class="form-group">
-                                 <p class="text-center"><a href="../index.jsp">디비고로 돌아가기 </a></p>
+                                 <p class="text-center"><a href="../index.jsp" class=" font_color hover_text">디비고로 돌아가기 </a></p>
                               </div>
                            </div>
                         </form>

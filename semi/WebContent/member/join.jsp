@@ -53,7 +53,7 @@
 		pointer-events: auto;
 		background-color: #fff;
 		background-clip: padding-box;
-		border: 1px solid rgba(0,0,0,.2);
+		border: 1px solid #5edfdf;
 		border-radius: 1.1rem;
 		outline: 0;
 		max-width: 500px;
@@ -124,7 +124,7 @@
 		 }
 		 
 		 .check{
-		 	 background-color: #FA8072;
+		 	 background-color: #5edfdf;
 			  border: none;
 			  color: white;
 			  padding: 3px;
@@ -137,8 +137,25 @@
 		 }
 		 
 		 .hidden {
-		 /* display: none;  */
+			 /* display: none;  */
 		 }
+		 .join_button_color {
+			background-color: #5edfdf;
+			 border: none;
+		}
+		.hover_color:hover{
+			background-color:  #5edfdf;
+			font-weight: bold; 
+		}
+		.font_color{
+			color: #5edfdf;
+		}
+		.hover_text:hover{
+			font-weight: bold; 
+			color: #5edfdf;
+		}
+		
+		 
 </style>
 
 <script>
@@ -254,11 +271,11 @@
                            </div>
                           
                            <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">회원가입</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm join_button_color hover_color">회원가입</button>
                            </div>
                            <div class="col-md-12 ">
                               <div class="form-group">
-                                 <p class="text-center"><a href="login.jsp" id="signin">로그인 화면으로 돌아가기 </a></p>
+                                 <p class="text-center"><a href="login.jsp" id="signin" class="font_color hover_text">로그인 화면으로 돌아가기 </a></p>
                               </div>
                            </div>
                         </form>

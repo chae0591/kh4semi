@@ -93,12 +93,12 @@
 		padding: 0;
 		border: 1px solid #ededed; */
 	
-	.information > span {
+	.information > span, span > a {
 		margin-bottom: 10px;
-		font-size: 14px;
+		font-size: 12px;
    	 	line-height: 20px;
     	font-weight: 500;
-		color: #000;
+		color: #888888;
 	}
 	.category li {
 		margin-bottom: 10px;
@@ -116,17 +116,21 @@
 		text-align: center;
 	}
 	<!-- 게시글 -->
-	.text-box {
-		width:100%;
-		height: 150px;
-		margin-bottom: 10px;
+	.text-outbox {
+		width: 700px;
 		padding: 0.5rem;
-		border: 1px solid #ededed;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
     	white-space: normal;
     	border-radius: 10px;
+	}
+	.text-box {
+		width: 700px;
+		height: 130px;
+		border: 1px solid #ededed;
+    	border-radius: 10px;
+    	margin-bottom: 10px;
 	}
 	.question {
 		font-size: 14px;
@@ -240,14 +244,13 @@ $(function(){
 });
 </script>
 		
-	<!— 상단 부분 —>
+	<!-- 상단 부분 -->
 	<div class="information">
 		<span><a href="/semi">전체</a></span>
 		<span> > </span>
-		<span><a href="/semi/qna_board/list.jsp">여행Q&A</a></span>
+		<span><a href="/semi/qna_board/list.jsp">여행Q&amp;A</a></span>
 	</div>
-	
-	<!— 최신순, 댓글순 —>
+	<!-- 최신순, 댓글순 -->
 	<div class="category">
 		<ul>
 		<%QnaBoardDto boardDto = new QnaBoardDto();%>
@@ -288,7 +291,7 @@ $(function(){
 	<div class="row right">
 		<button class="write-btn input input-inline">글쓰기</button>
 	</div>
-	<!— 검색창 —>
+	<!-- 검색창  -->
 	<form action="list.jsp" method="post">
 	<div class="row">
 		<select name="type" class="input input-inline">
@@ -305,7 +308,7 @@ $(function(){
 	</form>
 	
 	
-	<!— 페이지 네비게이션 —>
+	<!-- 페이지 네비게이션 -->
 	<div class="pagination">
 		<ul>
 			<%if(isSearch) {%>
@@ -316,10 +319,10 @@ $(function(){
 			<%for(int i =startBlock; i<=endBlock; i++){ %>
 				<li>
 				<%if(isSearch){ %>
-					<!— 검색용 링크 —>
+					<!-- 검색용 링크 -->
 					<a href="list.jsp?p=<%=1%>&type=<%=type%>&key=<%=key%>"><%=i%></a>
 				<%}else{ %>
-					<!— 목록용 링크 —>
+					<!-- 목록용 링크 -->
 					<a href="list.jsp?p=<%=i%>"><%=i%></a>
 				<%} %>
 				</li>
