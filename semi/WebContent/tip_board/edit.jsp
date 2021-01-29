@@ -17,7 +17,7 @@ var state = {
 };
 
 function copyContent () {
-    document.getElementsByName("file_no_list")[0].value = state.file_no_list
+    document.getElementsByName("file_no_list")[0].value = state.file_no_list.join()
     document.getElementsByName("board_content")[0].value =  
         document.getElementById("textEditor").innerHTML;
     return true;
@@ -31,7 +31,6 @@ $(document).ready(function() {
     });
     
 	document.getElementById("file").onchange = function(evt) {
-	    //document.getElementById("imgUploadForm").submit();
         var formData = new FormData($('#imgUploadForm')[0]);
 	     $.ajax({
 	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
@@ -44,8 +43,6 @@ $(document).ready(function() {
            cache: false,
            timeout: 10000,
            success: function (data) {
-           		console.log(data);
-           		//alert("이미지가 업로드 되었습니다.");
                 state.file_no_list.push(data.file_no);
 			    var editer = document.getElementById('textEditor');
 			    var filePath = data.imgUrl;
@@ -61,6 +58,10 @@ $(document).ready(function() {
 });
 </script>
 <style>
+
+.img-container img{
+	max-width:100%;
+}
 
 label, div, span, a {
 	border: none !important;
@@ -109,7 +110,7 @@ label, div, span, a {
 			<button id='btn-upload'>이미지 업로드</button>
 		</div>
 		<textarea style="display:none;" id="board_content" name="board_content" class="input"></textarea>
-		<div id="textEditor" class="input" contenteditable="true">
+		<div id="textEditor" class="input img-container" contenteditable="true">
 			<%=boardDto.getBoard_content()%>
 		</div>
 	</div>

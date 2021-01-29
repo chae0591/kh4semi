@@ -9,7 +9,7 @@ var state = {
 };
 
 function copyContent () {
-    document.getElementsByName("file_no_list")[0].value = state.file_no_list
+    document.getElementsByName("file_no_list")[0].value = state.file_no_list.join();
     document.getElementsByName("board_content")[0].value =  
         document.getElementById("textEditor").innerHTML;
     return true;
@@ -23,7 +23,6 @@ window.onload = function() {
     });
     
 	document.getElementById("file").onchange = function(evt) {
-	    //document.getElementById("imgUploadForm").submit();
         var formData = new FormData($('#imgUploadForm')[0]);
 	     $.ajax({
 	        url: '<%=request.getContextPath()%>/tip_tmp_file/receive.do',
@@ -37,7 +36,6 @@ window.onload = function() {
            timeout: 10000,
            success: function (data) {
            		console.log(data);
-           		//alert("이미지가 업로드 되었습니다.");
                 state.file_no_list.push(data.file_no);
 			    var editer = document.getElementById('textEditor');
 			    var filePath = data.imgUrl;
@@ -45,8 +43,8 @@ window.onload = function() {
 			    document.execCommand('InsertImage', false, filePath);
            },
            error: function (e) {
-           	alert("이미지 업로드에 실패하였습니다.");
-               console.log("ERROR : ", e);
+				alert("이미지 업로드에 실패하였습니다.");
+				console.log("ERROR : ", e);
            }
 	     });
 	};
@@ -55,10 +53,13 @@ window.onload = function() {
 </script>
 <style>
 
+.img-container img{
+	max-width:100%;
+}
+
 label, div, span, a {
 	border: none !important;
 }
-
 
 #textEditor {
 	border: 1px solid #ccc !important;
@@ -95,7 +96,7 @@ label, div, span, a {
 				<button id='btn-upload'>이미지 업로드</button>
 			</div>
 			<textarea style="display:none;" name="board_content" class="input"></textarea>
-			<div id="textEditor" class="input" contenteditable="true">
+			<div id="textEditor" class="input img-container" contenteditable="true">
 				<br><br><br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
@@ -119,6 +120,3 @@ label, div, span, a {
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
-
-

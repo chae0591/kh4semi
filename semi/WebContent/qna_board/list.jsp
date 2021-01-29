@@ -4,11 +4,12 @@
 <%@ page import="java.util.*" %>
 
 <%
-	QnaBoardDao dao = new QnaBoardDao();
-	List<QnaBoardDto> list = dao.select();
-	
+	request.setCharacterEncoding("UTF-8");
+%>
+
+<%
 	//page 
-	int boardSize = 5;
+	int boardSize = 10;
 	int p;
 	try{
 		p = Integer.parseInt(request.getParameter("p"));
@@ -18,69 +19,113 @@
 		p = 1;
 	}
 	
-	int endRow = p * 5; 
+	int endRow = p * boardSize; 
 	int startRow = endRow - boardSize + 1; 
-	
-	
 %>
-<h1> p = <%=p%>, startRow = <%=startRow%>, endRow = <%=endRow%></h1>
+
+<!-- 출력해서 확인 -->
+<%-- <h1> p = <%=p%>, startRow = <%=startRow%>, endRow = <%=endRow%></h1> --%>
 
 <%
 	//목록 검색을 위해 필요한 프로그래밍 코드 
 	String type = request.getParameter("type");
 	String key = request.getParameter("key");
+	
 	boolean isSearch = type != null && key != null; 
 	
-	if(isSearch) {
-		list= dao.pagingList(type, key, startRow, endRow);
-	}
-	else {
-		list = dao.pagingList(startRow, endRow);
+	//목록 가져오기
+	QnaBoardDao dao = new QnaBoardDao();
+	List<QnaBoardDto> list;
+	
+	//댓글 목록 구하기
+	String isOrder = request.getParameter("isOrder");
+	if(isOrder == null){
+		if(isSearch) {
+			list= dao.pagingList(type, key, startRow, endRow);
+		}
+		else {
+			list = dao.pagingList(startRow, endRow);
+		}
+	}else{
+		if(isSearch) {
+			list= dao.pagingListByOpinion(type, key, startRow, endRow);
+		}
+		else {
+			list = dao.pagingListByOpinion(startRow, endRow);
+		}
 	}
 %>
 
 <%
-	//페이지 네비게이터 계산코드를 작성 
-	
-	//브록 크기를 설정 
-	int blockSize = 10; 
-	
-	//페이지번호에 따라 시작블록과 종료블럭을 계산 
-	int startBlock = (p-1)/ blockSize * blockSize + 1; 
-	int endBlock = startBlock + blockSize -1; 
-	//endBlock이 마지막 페이지 번호보다 크면 안된다 
+	//	페이지 네비게이터 계산 코드를 작성
+
+	//	블록 크기를 설정
+	int blockSize = 10;
+
+	//	페이지 번호에 따라 시작블록과 종료블럭을 계산
+	int startBlock = (p-1) / blockSize * blockSize + 1;
+	int endBlock = startBlock + blockSize - 1;
+
+	//	endBlock이 마지막 페이지 번호보다 크면 안된다 = 데이터베이스에서 게시글 수를 구해와야 한다.
+	//	int count = 목록개수 or 검색개수;
 	int count;
-	if(isSearch) {
-		count = dao.getCount(type, key);
-	}else {
-		count = dao.getCount(); 
+	if(isSearch){
+		count = dao.getCount(type, key); 
 	}
-	
-	int pageSize = (count + boardSize -1) / boardSize;
-	 if(endBlock > pageSize) {
-		endBlock = pageSize; 
-	} 
+	else{
+		count = dao.getCount();
+	}
+
+	//	페이지 개수 = (게시글수 + 9) / 10 = (게시글수 + 페이지크기 - 1) / 페이지크기
+	int pageSize = (count + boardSize - 1) / boardSize;
+
+	if(endBlock > pageSize){
+		endBlock = pageSize;
+	}
 %>
+
 <style>
-	html, body{
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	}
-	.aside {
+	.outbox {
+		width:100%;
+		height: auth;
+		min-height: 700px;
+		position: relative;
 		border: 1px solid black;
+		overflow: auto;
+	}
+	aside {
+		border: 1px solid blue;
 		float: left;
 		width: 20%;
+		height: auth;
+		min-height: 700px;
+		padding: 1.5rem;
+		position: relative;
 		height: 560px;
 	}
-	.aside li{
+	aside li{
 		list-style: none;
 	}
-	.article {
-		border: 1px solid black;
+	article {
+		border: 1px solid red;
 		float: right;
 		width: 80%;
+		height: auth;
+		min-height: 700px;
+		padding: 1rem;
+		position: relative;
+	}
+	.table-box {
+		width: 100%;
+		text-aligh: left;
+	}
+	.main-title{
+		margin-bottom: 10px;
+	}
+	.text-box {
+		margin-bottom: 10px;
+		padding: 0.5rem;
+		border: 1px solid black;
 		height: 560px;
 	}
 	.pagination {
@@ -131,13 +176,21 @@
 	.font-bold {
 		font-weight: bold; 
 	}
+
 </style>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script>
 $(function(){
 	$(".write-btn").click(function(){
-		location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+		var sessionCheck = '<%=session.getAttribute("check")%>';
+		if(! sessionCheck == '' && sessionCheck == 'null'){
+			alert("로그인이 필요합니다.")
+			location.href = "<%=request.getContextPath()%>/member/login.jsp";
+		}
+		else{
+			location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+		}
 	});
 });
 </script>
@@ -151,59 +204,60 @@ $(function(){
 	</div>
 	
 	<!— 최신순, 댓글순 —>
-	<div class="aside">
+	<aside>
 		<ul>
-			<li><a href="#">최신순</a></li>
-			<li><a href="#">댓글순</a></li>
+		<%QnaBoardDto boardDto = new QnaBoardDto();%>
+			<%if(isSearch){%>
+				<li><a href="list.jsp?type=<%=type%>&key=<%=key%><">최신순</a></li>
+			<%}else{ %>
+				<li><a href="list.jsp">최신순</a></li>
+			<%} %>
+			<%if(isSearch){%>
+				<li><a href="list.jsp?isOrder&type=<%=type%>&key=<%=key%><">댓글순</a></li>
+			<%}else{ %>
+				<li><a href="list.jsp?isOrder">댓글순</a></li>
+			<%} %>
 		</ul>
-	</div>
+	</aside>
 	
-	<div class="article">
-	<div class="row">
-	<!— margin-right: 525px —>
-		<table class="table"> 
+	<article>
+		<table class="table-box"> 
+		
 			<thead>
 				<tr>
-					<th>답변을 기다려요! </th>
+					<th>
+						<h4 class="main-title">답변을 기다려요!</h4>
+					</th>
 				</tr>
 			</thead>
-			<tbody class="">
+			
+			<tbody>
 				<%for(QnaBoardDto dto : list){ %>
-					<tr>
-						<td class="left tb-top">
-							<nobr>
-								<div class="board_title">
-									<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
-									<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>
-								
-								</div>					
-							</nobr>
-						</td>
-					</tr>
-					<tr class="">
-						<td class="left">
-							<nobr>
-								<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>">
-									<%=dto.getBoard_content()%>
-								</a>
-							</nobr>
-						</td>
-					</tr>
-					<tr>
-						<td class="left tb-bottom">
-							<div>
-								<span class="font-bold"><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
-								<span style="float: right"><%=dto.getRegist_time()%></span>
-							</div>
-						
-						</td>	
-					</tr>
+				<tr>
+					<td>
+						<div class="text-box">
+							<!-- 타이틀 -->
+							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
+								<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>		
+							<!-- 내용 -->				
+							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><p><%=dto.getBoard_content()%></p></a>
+							<!-- 작성자 -->
+							<span><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
+							<!-- 작성날짜 -->
+							<span><%=dto.getRegist_time()%></span>
+							<!-- 좋아요 -->
+							<span>♡</span><span><%=dto.getVote()%></span>
+							<!-- 댓글개수 -->
+							<span>댓글</span><span><%=dto.getOpinion()%></span>
+						</div>
+					</td>	
+				</tr>
 				<%} %>
 			</tbody>
+			
 		</table>
-	</div>
-	
-	</div>
+
+	</article>
 	
 	<div class="row right">
 		<button class="write-btn input input-inline">글쓰기</button>
