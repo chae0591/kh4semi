@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.MemberDao;
 import beans.MemberDto;
+import beans.QnaBoardDao;
 import beans.QnaOpinionDao;
 import beans.QnaOpinionDto;
 
@@ -26,9 +27,9 @@ public class QnaOpinionWriteServlet extends HttpServlet{
 			opinionDto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
 			
 			//현재 로그인한 사용자 정보를 불러오는 코드
-			int memeber_no = (int)req.getSession().getAttribute("check");
+			int member_no = (int)req.getSession().getAttribute("check");
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.find(memeber_no);
+			MemberDto memberDto = memberDao.find(member_no);
 			
 			//MemberDto의 member_id를 QnaOpinionDto의 opinion_writer에 설정
 			opinionDto.setOpinion_writer(memberDto.getMember_id());
@@ -37,10 +38,16 @@ public class QnaOpinionWriteServlet extends HttpServlet{
 			//1. 시퀀스 번호 생성 = .getSequence()
 			//2. 등록 = .writeWithPrimaryKey()
 			QnaOpinionDao opinionDao = new QnaOpinionDao();
-			int opinion_no = opinionDao.getSequence(); 	//시퀀스번호생성
-			opinionDto.setOpinion_no(opinion_no); 		//생성된 번호를 DTO에 설정
-			opinionDao.writeWithPrimaryKey(opinionDto); //설정된 정보를 등록!
-			 			
+			QnaBoardDao boardDao = new QnaBoardDao();
+			boolean isCounted = opinionDao.getIsCounted(opinionDto);
+			
+			if(!isCounted) {
+				int opinion_no = opinionDao.getSequence(); 	//시퀀스번호생성
+				opinionDto.setOpinion_no(opinion_no); 		//생성된 번호를 DTO에 설정
+				opinionDao.writeWithPrimaryKey(opinionDto); //설정된 정보를 등록!
+			
+				boardDao.plusOpinion(opinionDto.getBoard_no());
+			}			
 			//츨력 : detail.jsp(상세페이지)로 이동
 			resp.sendRedirect("detail.jsp?board_no="+opinionDto.getBoard_no());
 		}

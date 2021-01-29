@@ -31,6 +31,7 @@ public class QnaBoardDao {
 			dto.setBoard_title(rs.getString("board_title"));
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
+			dto.setOpinion(rs.getInt("opinion"));
 			list.add(dto);
 		}
 		con.close();
@@ -38,13 +39,35 @@ public class QnaBoardDao {
 		return list;
 	}
 	
+	/*
+	 * //댓글순 목록 기능 public List<QnaBoardDto> select_opinion() throws Exception {
+	 * Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 * 
+	 * String sql = "select* from qna_board order by opinion desc;";
+	 * 
+	 * PreparedStatement ps = con.prepareStatement(sql); ResultSet rs =
+	 * ps.executeQuery();
+	 * 
+	 * List<QnaBoardDto> list = new ArrayList<>();
+	 * 
+	 * while(rs.next()) { QnaBoardDto dto = new QnaBoardDto();
+	 * dto.setBoard_no(rs.getInt("board_no"));
+	 * dto.setBoard_writer(rs.getString("board_writer"));
+	 * dto.setBoard_title(rs.getString("board_title"));
+	 * dto.setBoard_content(rs.getString("board_content"));
+	 * dto.setRegist_time(rs.getDate("regist_time"));
+	 * dto.setOpinion(rs.getInt("opinion")); list.add(dto); } con.close();
+	 * 
+	 * return list; }
+	 */
+	
 	//등록 기능 - QnaBoardWriteServlet
 	public void write(QnaBoardDto qnadto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 
 		String sql = "insert into qna_board("
-				+ "board_no, board_writer, board_title, board_content"
-				+ ") values(qna_board_seq.nextval, ?, ?, ?, sysdate, 0)";
+				+ "board_no, board_writer, board_title, board_content, regist_time, vote, opinion"
+				+ ") values(qna_board_seq.nextval, ?, ?, ?, sysdate, 0, 0)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, qnadto.getBoard_writer());
@@ -73,7 +96,7 @@ public class QnaBoardDao {
 	public void writeWithPrimaryKey(QnaBoardDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
 		
-		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, 0)";
+		String sql = "insert into qna_board values(?, ?, ?, ?, sysdate, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, dto.getBoard_no());
 		ps.setString(2, dto.getBoard_writer());
@@ -133,6 +156,7 @@ public class QnaBoardDao {
 			dto.setBoard_content(rs.getString("board_content"));
 			dto.setRegist_time(rs.getDate("regist_time"));
 			dto.setVote(rs.getInt("vote"));
+			dto.setOpinion(rs.getInt("opinion"));
 		}
 		else {//결과가 없다면 잘못된 번호니까 null이라는 값을 반환하겠다
 			dto = null;
@@ -142,6 +166,7 @@ public class QnaBoardDao {
 			
 			return dto;
 		}
+	
 	//메인 선택글(최신순6개)
 	public List<QnaSearchVO> selectMain() throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
@@ -172,6 +197,58 @@ public class QnaBoardDao {
 		con.close();
 		
 		return list;
+	}
+	
+	
+	//댓글 개수 증가 기능
+	public void plusOpinion(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 
+		String sql = "update qna_board set opinion=opinion+1 where board_no=?";
+	
+		PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
+		ps.execute();
+	
+		con.close();
+	}
+	
+	//댓글 개수 감소(취소) 기능
+	public void minusOpinion(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+	 
+		String sql = "update qna_board set opinion=opinion-1 where board_no=?";
+	 
+		PreparedStatement ps = con.prepareStatement(sql); ps.setInt(1, board_no);
+		ps.execute();
+	 
+		con.close();
+	}
+	 
+		
+	//좋아요 증가 기능
+	public void plusVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+		
+		String sql = "update qna_board set vote=vote+1 where board_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+		
+		con.close();
+	}
+	
+	//좋아요 감소(취소) 기능
+	public void minusVote(int board_no) throws Exception {
+		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+			
+		String sql = "update qna_board set vote=vote-1 where board_no=?";
+			
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, board_no);
+		ps.execute();
+			
+		con.close();
 	}
 	
 	//검색 결과 DAO
@@ -209,106 +286,23 @@ public class QnaBoardDao {
 		}
 		
 	//페이징을 위한 검색 
-	public List<QnaBoardDto> pagingList(String type, String key, int startRow, int endRow) throws Exception {
-		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-		String sql = "select * from(" + 
-							"select rownum rn, TMP.* from(" + 
-								"select * from Qna_board "
-								+ "where instr(#1, ?) > 0 "
-								+ "order by board_no desc" + 
-							")TMP" + 
-						") where rn between ? and ?";
-		sql = sql.replace("#1", type);
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, key);
-		ps.setInt(2, startRow);
-		ps.setInt(3, endRow);
-		ResultSet rs = ps.executeQuery();
-			
-		List<QnaBoardDto> list = new ArrayList<>();
-		while(rs.next()) {
-			QnaBoardDto dto = new QnaBoardDto();
-			dto.setBoard_no(rs.getInt("board_no"));
-			dto.setBoard_writer(rs.getString("board_writer"));
-			dto.setBoard_title(rs.getString("board_title"));
-			dto.setBoard_content(rs.getString("board_content"));
-			dto.setRegist_time(rs.getDate("regist_time"));
-			dto.setVote(rs.getInt("vote"));
-			list.add(dto);
-		}
-			
-			con.close();
-			
-			return list;
-			
-		}
-	
-	//페이징을 이용한 검색
-		public List<QnaSearchVO> searchPagingList(String keyword, int startRow, int endRow) throws Exception{
+		public List<QnaBoardDto> pagingList(String type, String key, int startRow, int endRow) throws Exception {
 			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-			String sql = "select * from ("
-					+ "select rownum rn, TMP.* from ("
-					+ "select * from("
-						+ "select Q.board_title, Q.board_content, Q.regist_time, Q.board_no, M.member_nick from "
-						+ "qna_board Q inner join member M "
-						+ "on M.member_id = Q.board_writer "
-						+ "where instr(board_title, ?) > 0 order by board_no desc)"
-					+ ")TMP"
-					+ ") where rn between ? and ?";
+				
+			String sql = "select * from(" + 
+								"select rownum rn, TMP.* from(" + 
+									"select * from Qna_board "
+									+ "where instr(#1, ?) > 0 "
+									+ "order by board_no desc" + 
+								")TMP" + 
+							") where rn between ? and ?";
+			sql = sql.replace("#1", type);
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, keyword);
+			ps.setString(1, key);
 			ps.setInt(2, startRow);
 			ps.setInt(3, endRow);
 			ResultSet rs = ps.executeQuery();
-			
-			List<QnaSearchVO> list = new ArrayList<>();
-			while(rs.next()) {
-				QnaSearchVO qnasearchVO = new QnaSearchVO();
-				qnasearchVO.setBoard_no(rs.getInt("board_no"));
-				qnasearchVO.setBoard_title(rs.getString("board_title"));
-				qnasearchVO.setBoard_content(rs.getString("board_content"));
-				qnasearchVO.setRegist_time(rs.getDate("regist_time"));
-				qnasearchVO.setMember_nick(rs.getString("member_nick"));
-				list.add(qnasearchVO);
-			}
 				
-				con.close();
-				
-				return list;
-		}
-	
-	//검색 개수 구하는 메소드
-		public int searchCount(String keyword) throws Exception{
-			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-			String sql = "select count(*) from qna_board where instr(board_title, ?) > 0";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, keyword);
-			ResultSet rs = ps.executeQuery();
-			
-			rs.next();
-			int count = rs.getInt(1);
-			con.close();
-			
-			return count;
-			
-		}
-		//페이징을 이용한 목록
-		public List<QnaBoardDto> pagingList(int startRow, int endRow) throws Exception {
-			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-			String sql = 	"select * from(" + 
-								"select rownum rn, TMP.* from(" + 
-									"select * from Qna_board order by board_no desc" + 
-								")TMP" + 
-							") where rn between ? and ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, endRow);
-			ResultSet rs = ps.executeQuery();
-			
 			List<QnaBoardDto> list = new ArrayList<>();
 			while(rs.next()) {
 				QnaBoardDto dto = new QnaBoardDto();
@@ -318,31 +312,206 @@ public class QnaBoardDao {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setRegist_time(rs.getDate("regist_time"));
 				dto.setVote(rs.getInt("vote"));
+				dto.setOpinion(rs.getInt("opinion"));
 				list.add(dto);
-
 			}
-			con.close();
-			
-			return list; 
-		}
+				
+				con.close();
+				
+				return list;
+				
+			}
 		
-		//검색 개수를 구하는 메소드 
-		public int getCount(String type, String key) throws Exception {
-			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
-			
-			String sql = "select count(*) from board where instr(#1,?) > 0";
-			sql = sql.replace("#1", type);
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, key);
-			
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-			con.close();
-			return count; 
-			
-		}
-		
+		//페이징을 이용한 검색
+			public List<QnaSearchVO> searchPagingList(String keyword, int startRow, int endRow) throws Exception{
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+				String sql = "select * from ("
+						+ "select rownum rn, TMP.* from ("
+						+ "select * from("
+							+ "select Q.board_title, Q.board_content, Q.regist_time, Q.board_no, M.member_nick from "
+							+ "qna_board Q inner join member M "
+							+ "on M.member_id = Q.board_writer "
+							+ "where instr(board_title, ?) > 0 order by board_no desc)"
+						+ ")TMP"
+						+ ") where rn between ? and ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, keyword);
+				ps.setInt(2, startRow);
+				ps.setInt(3, endRow);
+				ResultSet rs = ps.executeQuery();
+				
+				List<QnaSearchVO> list = new ArrayList<>();
+				while(rs.next()) {
+					QnaSearchVO qnasearchVO = new QnaSearchVO();
+					qnasearchVO.setBoard_no(rs.getInt("board_no"));
+					qnasearchVO.setBoard_title(rs.getString("board_title"));
+					qnasearchVO.setBoard_content(rs.getString("board_content"));
+					qnasearchVO.setRegist_time(rs.getDate("regist_time"));
+					qnasearchVO.setMember_nick(rs.getString("member_nick"));
+					list.add(qnasearchVO);
+				}
+					
+					con.close();
+					
+					return list;
+			}
+
+		//검색 개수 구하는 메소드
+			public int searchCount(String keyword) throws Exception{
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+				String sql = "select count(*) from qna_board where instr(board_title, ?) > 0";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, keyword);
+				ResultSet rs = ps.executeQuery();
+				
+				rs.next();
+				int count = rs.getInt(1);
+				con.close();
+				
+				return count;
+				
+			}
+			//페이징을 이용한 목록
+			public List<QnaBoardDto> pagingList(int startRow, int endRow) throws Exception {
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+				String sql = 	"select * from(" + 
+									"select rownum rn, TMP.* from(" + 
+										"select * from qna_board order by board_no desc" + 
+									")TMP" + 
+								") where rn between ? and ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, startRow);
+				ps.setInt(2, endRow);
+				ResultSet rs = ps.executeQuery();
+				
+				List<QnaBoardDto> list = new ArrayList<>();
+				while(rs.next()) {
+					QnaBoardDto dto = new QnaBoardDto();
+					dto.setBoard_no(rs.getInt("board_no"));
+					dto.setBoard_writer(rs.getString("board_writer"));
+					dto.setBoard_title(rs.getString("board_title"));
+					dto.setBoard_content(rs.getString("board_content"));
+					dto.setRegist_time(rs.getDate("regist_time"));
+					dto.setVote(rs.getInt("vote"));
+					dto.setOpinion(rs.getInt("opinion"));
+					list.add(dto);
+
+				}
+				con.close();
+				
+				return list; 
+			}
+
+			//검색 개수를 구하는 메소드 
+			public int getCount(String type, String key) throws Exception {
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+				String sql = "select count(*) from qna_board where instr(#1,?) > 0";
+				sql = sql.replace("#1", type);
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, key);
+				
+				ResultSet rs = ps.executeQuery();
+				rs.next();
+				int count = rs.getInt(1);
+				con.close();
+				return count; 
+				
+			}
+
+
+			//페이징을 이용한 목록
+			public List<QnaBoardDto> pagingListByOpinion(String type, String key, int startRow, int endRow) throws Exception {
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+
+				String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+										+ "B.regist_time, B.vote, "
+										+ "count(R.opinion_no) opinion_count "
+									+ "from "
+									+ "qna_board B left outer join qna_opinion R on B.board_no = R.board_no "
+									+ "where instr(#1, ?) > 0 "
+									+ "group by "
+										+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+										+ "B.regist_time, B.vote "
+									+ "order by count(R.opinion_no) desc "
+								+ ")TMP "
+							+ ") where rn between ? and ?";
+
+				sql = sql.replace("#1", type);
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, key);
+				ps.setInt(2, startRow);
+				ps.setInt(3, endRow);
+				ResultSet rs = ps.executeQuery();
+				
+				List<QnaBoardDto> list = new ArrayList<>();
+				while(rs.next()) {
+					QnaBoardDto dto = new QnaBoardDto();
+					dto.setBoard_no(rs.getInt("board_no"));
+					dto.setBoard_writer(rs.getString("board_writer"));
+					dto.setBoard_title(rs.getString("board_title"));
+					dto.setBoard_content(rs.getString("board_content"));
+					dto.setRegist_time(rs.getDate("regist_time"));
+					dto.setVote(rs.getInt("vote"));
+//					dto.setOpinion(rs.getInt("opinion"));
+					dto.setOpinion(rs.getInt("opinion_count"));
+					list.add(dto);
+				}
+				con.close();
+				
+				return list; 
+			}
+
+			//페이징을 이용한 목록
+			public List<QnaBoardDto> pagingListByOpinion(int startRow, int endRow) throws Exception {
+				Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
+				
+
+				String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+										+ "B.regist_time, B.vote, "
+										+ "count(R.opinion_no) opinion_count "
+									+ "from "
+									+ "qna_board B left outer join qna_opinion R on B.board_no = R.board_no "
+									+ "group by "
+										+ "B.board_no, B.board_writer, B.board_title, B.board_content, "
+										+ "B.regist_time, B.vote "
+									+ "order by count(R.opinion_no) desc "
+								+ ")TMP "
+							+ ") where rn between ? and ?";
+
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, startRow);
+				ps.setInt(2, endRow);
+				ResultSet rs = ps.executeQuery();
+				
+				List<QnaBoardDto> list = new ArrayList<>();
+				while(rs.next()) {
+					QnaBoardDto dto = new QnaBoardDto();
+					dto.setBoard_no(rs.getInt("board_no"));
+					dto.setBoard_writer(rs.getString("board_writer"));
+					dto.setBoard_title(rs.getString("board_title"));
+					dto.setBoard_content(rs.getString("board_content"));
+					dto.setRegist_time(rs.getDate("regist_time"));
+					dto.setVote(rs.getInt("vote"));
+//					dto.setOpinion(rs.getInt("opinion"));
+					dto.setOpinion(rs.getInt("opinion_count"));
+					list.add(dto);
+				}
+				con.close();
+				
+				return list;
+			}
+
 		//목록개수를 구하는 메소드 
 		public int getCount() throws Exception {
 			Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);
