@@ -21,6 +21,7 @@
 <title>디비go</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/common.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
 	/* 화면 레이아웃 스타일 */
 	
@@ -88,7 +89,7 @@
 	.menu,
     .menu ul {
         list-style: none;
-        padding: 1.4rem;
+        padding: 2rem;
         height:68px;
         margin-top: 10px;
         background-color: #5edfdf;
@@ -104,7 +105,7 @@
         color: #fff;
     }
     
-    .menu>li>a:hover{
+    .menu>li>a:hover {
     	color: #119e9e;
     	font-weight: 900;
     	font-size:19px;
@@ -394,7 +395,7 @@ function slide() {
 	            <!-- 회원이 마주할 메뉴 -->
 	            <%}else{ %>
 	            <div class="dropdown">
-	            	<span class="log-btn dropbtn">  <%=session.getAttribute("nick") %>님 환영합니다 </span>	
+	            	<span class="log-btn dropbtn" ><%=session.getAttribute("nick") %>님 환영합니다 </span>	
 	            	<div class="dropdown-content">
 	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a></p>
 	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a></p>
@@ -403,9 +404,11 @@ function slide() {
 	            
 	            <%} %>
 	            
-	            <form action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 1rem">
-		            <input type="text" name="keyword" placeholder="검색어 입력" class="input input-inline">
-		            <input type="submit" value="검색" class="input input-inline">
+	            <form class="form-inline" action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 1rem">
+		        	<div class="form-group">    
+			            <input type="text" name="keyword" placeholder="검색어 입력" class="form-control">
+			            <input type="submit" value="검색" class="btn btn-info">
+			        </div>
 	            </form>
             </div>
 		</header>

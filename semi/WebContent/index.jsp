@@ -89,8 +89,8 @@
     	line-height: 70px;
     	font-size: 23px;
     	font-weight: 700;
-    	color: #119e9e;
-    	border-bottom: 3px solid #119e9e;
+    	color: #454545;
+    	border-bottom: 3px solid #454545;
     }
     
     .btn-box{
