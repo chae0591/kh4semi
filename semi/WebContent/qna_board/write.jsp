@@ -75,7 +75,7 @@ window.onload = function() {
 		</div>
 		<textarea style="display:none;" name="board_content" class="input"></textarea>
 		<div id="textEditor" class="input" contenteditable="true">
-			<br><br><br><br><br><br><br><br><br><br><br>
+			
 		</div>
 	</div>
 	
