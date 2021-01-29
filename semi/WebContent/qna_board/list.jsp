@@ -85,49 +85,99 @@
 %>
 
 <style>
-	.outbox {
-		width:100%;
+	
+		/* width:100%;
 		height: auth;
 		min-height: 700px;
-		position: relative;
-		border: 1px solid black;
-		overflow: auto;
+		margine: 0;
+		padding: 0;
+		border: 1px solid #ededed; */
+	
+	.information > span {
+		margin-bottom: 10px;
+		font-size: 14px;
+   	 	line-height: 20px;
+    	font-weight: 500;
+		color: #000;
 	}
-	aside {
-		border: 1px solid blue;
-		float: left;
-		width: 20%;
-		height: auth;
-		min-height: 700px;
-		padding: 1.5rem;
-		position: relative;
-		height: 560px;
-	}
-	aside li{
-		list-style: none;
-	}
-	article {
-		border: 1px solid red;
-		float: right;
-		width: 80%;
-		height: auth;
-		min-height: 700px;
-		padding: 1rem;
-		position: relative;
-	}
-	.table-box {
-		width: 100%;
-		text-aligh: left;
+	.category li {
+		margin-bottom: 10px;
+		font-size: 14px;
+   	 	line-height: 20px;
+    	font-weight: 500;
+		color: #000;
 	}
 	.main-title{
 		margin-bottom: 10px;
+		font-size: 20px;
+   	 	line-height: 20px;
+    	font-weight: 500;
+		color: #000;
+		text-align: center;
 	}
+	<!-- 게시글 -->
 	.text-box {
+		width:100%;
+		height: 150px;
 		margin-bottom: 10px;
 		padding: 0.5rem;
-		border: 1px solid black;
-		height: 560px;
+		border: 1px solid #ededed;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: normal;
+    	border-radius: 10px;
 	}
+	.question {
+		font-size: 14px;
+   	 	line-height: 20px;
+    	font-weight: 500;
+		color: #00EDF5;
+	}
+	.title {
+	    font-size: 16px;
+    	line-height: 24px;
+    	font-weight: 500;
+    	color: #222;
+	}
+	.content{
+		width: 100%;
+		font-size: 14px;
+		line-height: 24px;
+    	font-weight: 300;
+    	color: #8c8c8c;
+    	display: inline-block;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: normal;
+    	line-height: 1.5;
+    	height: 3em;
+    	word-wrap: break-word;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 2;
+    	-webkit-box-orient: vertical;
+	}
+	.member {
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 500;
+    	color: #222;
+	}
+	.who {
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #8c8c8c;
+	}
+	.time, .vote, .heart, .reply, .opinion{
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #8c8c8c;
+	}
+	
+	<!-- 페이지 네이션 -->
 	.pagination {
 		text-align: center;
 		width: 100%;
@@ -136,17 +186,19 @@
 	.pagination > ul> li {
 		display: inline-block;
 		text-decoration: none;
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #e5e5e5;
 	}
-	table {
-		border-collapse: collapse;
-		table-layout:fixed; 
-	}
-	thead{
-		text-align:center;
-	}
-	td {
-		text-overflow:ellipsis; 
-		overflow:hidden; 
+	.pagination > ul> li:hover {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 500;
+    	color: #00EDF5;
+    	border-color: #e5e5e5;
 	}
 	.board_title {
 		width:100%;
@@ -160,21 +212,14 @@
 		overflow:hidden;
 		white-space:nowrap;
 	}
-	/* .regist_time {
-		position: absolute;
-   	 	top: 20px;
-    	right: 20px;
-    	line-height: 1.4;
-    	font-size: 12px;
-	} */
-	.tb-top {
-		border-top: 1px solid black;
-	}
-	.tb-bottom {
-		border-bottom: 1px solid black;
-	}
-	.font-bold {
-		font-weight: bold; 
+	.search-btn {
+		width: 50px;
+		height: 30px;
+    	border: 1px solid  #00EDF5;
+    	background-color: #8c8c8c;
+    	color: #fff;
+    	font-size: 14px;
+    	border-radius: 10px;
 	}
 
 </style>
@@ -194,70 +239,51 @@ $(function(){
 	});
 });
 </script>
-
-
+		
 	<!— 상단 부분 —>
-	<div>
-		<a href="/semi">전체</a>
+	<div class="information">
+		<span><a href="/semi">전체</a></span>
 		<span> > </span>
-		<a href="/semi/qna_board/list.jsp">여행Q&A</a>
+		<span><a href="/semi/qna_board/list.jsp">여행Q&A</a></span>
 	</div>
 	
 	<!— 최신순, 댓글순 —>
-	<aside>
+	<div class="category">
 		<ul>
 		<%QnaBoardDto boardDto = new QnaBoardDto();%>
 			<%if(isSearch){%>
-				<li><a href="list.jsp?type=<%=type%>&key=<%=key%><">최신순</a></li>
+				<li class="dateRank"><a href="list.jsp?isSearch&type=<%=type%>&key=<%=key%>">최신순</a></li>
 			<%}else{ %>
-				<li><a href="list.jsp">최신순</a></li>
+				<li class="dateRank"><a href="list.jsp">최신순</a></li>
 			<%} %>
 			<%if(isSearch){%>
-				<li><a href="list.jsp?isOrder&type=<%=type%>&key=<%=key%><">댓글순</a></li>
+				<li class="countRank"><a href="list.jsp?isOrder&type=<%=type%>&key=<%=key%>">댓글순</a></li>
 			<%}else{ %>
-				<li><a href="list.jsp?isOrder">댓글순</a></li>
+				<li class="countRank"><a href="list.jsp?isOrder">댓글순</a></li>
 			<%} %>
 		</ul>
-	</aside>
+	</div>
 	
-	<article>
-		<table class="table-box"> 
-		
-			<thead>
-				<tr>
-					<th>
-						<h4 class="main-title">답변을 기다려요!</h4>
-					</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<%for(QnaBoardDto dto : list){ %>
-				<tr>
-					<td>
-						<div class="text-box">
-							<!-- 타이틀 -->
-							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left">
-								<span>[질문]</span><span><%=dto.getBoard_title()%></span></a>		
-							<!-- 내용 -->				
-							<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><p><%=dto.getBoard_content()%></p></a>
-							<!-- 작성자 -->
-							<span><%=dto.getBoard_writer()%></span><span>님의 질문입니다</span>
-							<!-- 작성날짜 -->
-							<span><%=dto.getRegist_time()%></span>
-							<!-- 좋아요 -->
-							<span>♡</span><span><%=dto.getVote()%></span>
-							<!-- 댓글개수 -->
-							<span>댓글</span><span><%=dto.getOpinion()%></span>
-						</div>
-					</td>	
-				</tr>
-				<%} %>
-			</tbody>
-			
-		</table>
-
-	</article>
+	<span class="main-title">답변을 기다려요!</span>
+	
+ 	<div class="text-outbox">
+	<%for(QnaBoardDto dto : list){ %>
+			<div class="text-box">
+			<!-- 타이틀 -->
+			<span class="question">질문</span><span class="title"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left"><%=dto.getBoard_title()%></a></span>		
+			<!-- 내용 -->				
+			<p class="content"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></a></p>
+			<!-- 작성자 -->
+			<span class="member"><%=dto.getBoard_writer()%></span><span class="who">님의 질문입니다</span>
+			<!-- 작성날짜 -->
+			<span class="time"><%=dto.getRegist_time()%></span>
+			<!-- 좋아요 -->
+			<span class="heart">♡</span><span class="vote"><%=dto.getVote()%></span>
+			<!-- 댓글개수 -->
+			<span class="reply">댓글</span><span class="opinion"><%=dto.getOpinion()%></span>
+			</div>
+	<%} %>
+	</div>
 	
 	<div class="row right">
 		<button class="write-btn input input-inline">글쓰기</button>
@@ -274,14 +300,14 @@ $(function(){
 		<%}else{ %>
 		<input type="text" class="input input-inline" name="key" required>
 		<%} %>
-		<input type="submit" class="input input-inline" value="검색">
+		<input type="submit" class="input input-inline search-btn" value="검색">
 	</div>
 	</form>
 	
 	
 	<!— 페이지 네비게이션 —>
-	<div class="row">
-		<ul class="pagination">
+	<div class="pagination">
+		<ul>
 			<%if(isSearch) {%>
 				<li><a href="list.jsp?p=<%=startBlock-1%>&type=<%=type%>&key=<%=key%>">&lt;</a></li>
 			<%}else { %>
@@ -306,5 +332,5 @@ $(function(){
 			<%} %>
 		</ul>
 	</div>
-
+	
 <jsp:include page="/template/footer.jsp"></jsp:include>
