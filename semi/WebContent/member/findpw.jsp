@@ -52,7 +52,7 @@
 		pointer-events: auto;
 		background-color: #fff;
 		background-clip: padding-box;
-		border: 1px solid rgba(0,0,0,.2);
+		border: 1px solid #5edfdf;
 		border-radius: 1.1rem;
 		outline: 0;
 		max-width: 500px;
@@ -107,12 +107,20 @@
 		.login_form {
 		    width: 300px;
 		    height: 300px;
-		
 		    border-radius: 10px;
-		
 		    margin: 0;
 		    padding: 0;
 		}
+		.findpw_button_color {
+			background-color: #5edfdf;
+			 border: none;
+		}
+		
+		.hover_color:hover{
+			background-color:  #5edfdf;
+			font-weight: bold; 
+		}
+		
 </style>
 
 
@@ -143,36 +151,12 @@
 							<%} %>
 				           <br>               
                            <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">비밀번호 찾기</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm findpw_button_color hover_color">비밀번호 찾기</button>
                            </div>
                         </form>
                      </div>
 			</div>
 		</div>
       </div>   
-
-
-
-
-
-
-
-<!-- 
-	<form method="post" action="findpw.do">
-		<h3>비밀번호 찾기</h3>
-		<div>
-			<input type ="text" placeholder="아이디" name ="member_id" maxlength='20'>
-		</div><br>
-		<div>
-			<input type ="text" placeholder="닉네임" name ="member_nick" maxlength='20'>
-		</div><br>
-		<div>
-			<input type="submit" value="비밀번호 찾기">
-		</div> 
-		
-	</form> -->
-
-
-	
 </body>
 </html>
