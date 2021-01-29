@@ -249,7 +249,6 @@ $(function(){
 		<span> > </span>
 		<span><a href="/semi/qna_board/list.jsp">여행Q&A</a></span>
 	</div>
-	
 	<!— 최신순, 댓글순 —>
 	<div class="category">
 		<ul>
