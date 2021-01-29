@@ -191,7 +191,7 @@
     	font-weight: 300;
     	color: #e5e5e5;
 	}
-	.pagination > ul> li:hover {
+	/* .pagination > ul> li:hover {
 		display: inline-block;
 		text-decoration: none;
 		font-size: 14px;
@@ -199,7 +199,7 @@
     	font-weight: 500;
     	color: #00EDF5;
     	border-color: #e5e5e5;
-	}
+	} */
 	.board_title {
 		width:100%;
 		height:20px;
