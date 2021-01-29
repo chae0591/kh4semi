@@ -34,7 +34,7 @@
 		  font-weight: bold;
 		  vertical-align: top;
 		  border-bottom: 1px solid #ccc;
-		  background: #f3f6f7;
+		  background: #DFF9F9;
 	}
 	
 	table.myList td {
@@ -44,7 +44,7 @@
 		  border-bottom: 1px solid #ccc;
 	}
 	.button {
-		background-color: #f3f6f7;
+		background-color: #DFF9F9;
 		  border: none;
 		  color: black;
 		  padding: 15px;

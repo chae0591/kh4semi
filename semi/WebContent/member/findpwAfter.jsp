@@ -54,7 +54,7 @@
 		pointer-events: auto;
 		background-color: #fff;
 		background-clip: padding-box;
-		border: 1px solid rgba(0,0,0,.2);
+		border: 1px solid #5edfdf;
 		border-radius: 1.1rem;
 		outline: 0;
 		max-width: 500px;
@@ -109,9 +109,7 @@
 		.login_form {
 		    width: 300px;
 		    height: 300px;
-		
 		    border-radius: 10px;
-		
 		    margin: 0;
 		    padding: 0;
 		}
@@ -186,19 +184,4 @@
 		</div>
       </div>   
 </body>
-
-
-<%-- 
-<body onLoad="Timer()">
-<div id="JunDiv"></div>
-
-<script>countdown();</script>
-
-	<div>
-		회원님의 비밀번호는 <%=dto.getMember_pw()%>
-	</div>
-</body>
- --%>
-
-
 </html>
