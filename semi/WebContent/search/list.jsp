@@ -177,8 +177,8 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>">
-		<span class="font">여행꿀팁 더보기&gt;</span>
+	<a class="btn-more input" style="background-color: #5edfdf" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>">
+		<span class="font" style="background-color: #5edfdf">여행꿀팁 더보기&gt;</span>
 	</a>
 </div>
 
@@ -208,7 +208,7 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">
+	<a class="btn-more input" style="background-color: #5edfdf" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">
 		<span class="font">여행Q&amp;A 더보기&gt;</span>
 	</a>
 </div>
