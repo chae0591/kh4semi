@@ -243,7 +243,7 @@ $(function(){
 });
 </script>
 		
-	
+	<!— 상단 부분 —>
 	<div class="information">
 		<span><a href="/semi">전체</a></span>
 		<span> > </span>
