@@ -89,7 +89,7 @@
 	}
 %>
 
-<h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1>
+<%-- <h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1> --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
 	
@@ -160,7 +160,14 @@
 	$(function(){
 		//글쓰기버튼 -> write.jsp
 		$(".write-btn").click(function(){
-			location.href = "write.jsp";
+			var sessionCheck = '<%=session.getAttribute("check")%>';
+			if(! sessionCheck == '' && sessionCheck == 'null'){
+				alert("로그인이 필요합니다.")
+				location.href = "<%=request.getContextPath()%>/member/login.jsp";
+			}
+			else{
+				location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+			}
 		});
 		
 		//수정버튼 -> edit.jsp
@@ -175,7 +182,14 @@
 		
 		//좋아요 버튼 -> vote_write_delete.do
 		$(".vote-btn").click(function(){
+			var sessionCheck = '<%=session.getAttribute("check")%>';
+			if(! sessionCheck == '' && sessionCheck == 'null'){
+				alert("로그인이 필요합니다.")
+				location.href = "<%=request.getContextPath()%>/member/login.jsp";
+			}
+			else{	
 			location.href = "vote_write_delete.do?board_no=<%=board_no%>";//절대경로
+			}
 		});
 		
 		<!-- 댓글 버튼 -->
@@ -355,10 +369,12 @@
 					<th>
 					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
 					<%if(isMember){ %>
-						<button class="vote-btn">좋아요</button>
 						<button class="write-btn">글쓰기</button>
 						<button class="edit-btn">수정</button>
 						<button class="delete-btn">삭제</button>
+					<%}else{ %>
+						<button class="vote-btn">좋아요</button>
+						<button class="write-btn">글쓰기</button>
 					<%} %>
 					</th>
 				</tr>
