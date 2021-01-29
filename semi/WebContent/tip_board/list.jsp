@@ -62,6 +62,11 @@
 	}
 %>
 <style>
+	.pagination > .remove-hover-style:hover {
+		box-shadow: none;
+	    /*border:1px solid gray;*/
+	    cursor: default;
+	}
 	.container-content {
 		padding: 10px;
 	}
@@ -70,6 +75,9 @@
 	}
 	.black {
 		color: #000;
+	}
+	.white {
+		color: #fff;
 	}
 	.border-gray-1 {
 		border: 1px solid #999 !important;
@@ -184,11 +192,11 @@
 	}
 	function setUrlParamByArr(arr){
 		var urlParams = new URLSearchParams(window.location.search);
-		arr.map(el=>{
+		arr.map(function(el){
 			var key = el[0];
 			var value = el[1];
 			urlParams.set(key, value);
-		})
+		});
 		window.location.search = urlParams;
 	}
 	$(function(){
@@ -235,16 +243,26 @@
 <div class="btn-box center">
 	<div class="row">
 		<ul class="pagination">
-			<li onclick="setUrlParam('p', '<%=startBlock-1%>');">&lt;</li>
+			<li 
+				<%if(startBlock == 1){%>
+					class="remove-hover-style"
+				<%}else{%>
+					onclick="setUrlParam('p', '<%=startBlock-1%>');"
+				<%}%>>&lt;
+			</li>
 			<%for(int i=startBlock; i<=endBlock; i++){ %>
 				<li 
 					class="<%if(i == p){%> active <%}%>"
-					onclick="setUrlParam('p', '<%=i%>');"
-				>
-					<%=i%>
+					onclick="setUrlParam('p', '<%=i%>');"><%=i%>
 				</li>
 			<%} %>
-			<li onclick="setUrlParam('p', '<%=endBlock+1%>');">&gt;</li>
+			<li 
+				<%if(endBlock == pageSize){%>
+					class="remove-hover-style"
+				<%}else{%>
+					onclick="setUrlParam('p', '<%=endBlock+1%>');"
+				<%}%>>&gt;
+			</li>
 		</ul>
 	</div>
 </div>
