@@ -52,21 +52,23 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
+		margin-left: 1.2rem;
 	}
 	
 	.container-qna{
 		display: grid;
 		grid-template-columns: repeat(2,1fr);
 		grid-auto-rows: minmax(1em, auto);
-		grid-gap: 0.5rem;
+		grid-gap: 1rem;
 		justify-items: start;
 		align-items: start;	
 		padding: 10px 0 0 ;	
+		margin-left: 1.2rem !important;
 	}	
 
 	.item{
 		padding: 1rem;
-		width: 440px;
+		width: 500px;
 	}
 	
 	.border-gray-1 {
@@ -127,13 +129,19 @@
     	border-radius: 10px;
     }
     
+    .right-line{
+    	float:right; 
+    	margin-right: 1rem;
+    }
+    
 	/* 글 제목 글자수 제한 */
     .title-line{
     	float:left; 
     	font-size:1.1em; 
     	font-weight:600;
     	display: inline-block;
-    	width:250px;
+    	width:280px;
+    	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
@@ -163,6 +171,7 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
 </style>
 
 
@@ -175,17 +184,18 @@
 	<%for(QnaSearchVO qnasearchVO : qnaList){ %>
 	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/qna_board/detail.jsp?board_no=<%=qnasearchVO.getBoard_no()%>">
-			<span style="float:left; color:red;">Q&amp;A&nbsp;</span>
+			<span style="float:left; color:red;">Q&amp;A</span>
 			<span class="title-line"><%=qnasearchVO.getBoard_title()%></span>
-			<span style="float:right"><%=qnasearchVO.getRegist_time()%></span>
+			<span class="right-line"><%=qnasearchVO.getRegist_time()%></span>
 			<br><br>
-			<span class="content-line"><%=qnasearchVO.getBoard_content()%></span>
+			<span class="content-line" style="margin-left: 2.9rem"><%=qnasearchVO.getBoard_content()%></span>
 			<br>
-			<span style="color:#8C8C8C"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
+			<span style="color:#8C8C8C; margin-left: 2.9rem"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
 </div>
+
 <div class="btn-box">
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>

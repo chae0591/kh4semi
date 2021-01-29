@@ -39,7 +39,6 @@
 	}
 
 	List<TipSearchVO> tipList = tipboardDao.searchPagingList(keyword, startRow, endRow);
-	//List<TipSearchVO> tipList = tipboardDao.select1(keyword);
 %>
 <!DOCTYPE html>
 <style>
@@ -53,6 +52,7 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
+		margin-left: 1.2rem !important;
 	}
 	
 	.container-qna{
@@ -62,12 +62,13 @@
 		grid-gap: 0.5rem;
 		justify-items: start;
 		align-items: start;	
-		padding: 10px 0 0 ;	
+		padding: 10px 0 0 ;
+		margin-left: 1.2rem;	
 	}	
 
 	.item{
 		padding: 1rem;
-		width: 440px;
+		width: 500px;
 	}
 	
 	.border-gray-1 {
@@ -128,13 +129,19 @@
     	border-radius: 10px;
     }
     
+    .right-line{
+    	float:right; 
+    	margin-right: 1rem;
+    }
+    
 	/* 글 제목 글자수 제한 */
     .title-line{
     	float:left; 
     	font-size:1.1em; 
     	font-weight:600;
     	display: inline-block;
-    	width:250px;
+    	width:280px;
+    	margin-left: 0.5rem;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
@@ -164,6 +171,8 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+    
+    
 </style>
 
 
@@ -182,18 +191,19 @@
 	<%for(TipSearchVO tipsearchVO : tipList){ %>
 	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=tipsearchVO.getBoard_no()%>">
-			<span style="float:left; color:blue;">Tip&nbsp;</span>
-			<span style="float:left; font-size:1.1em; font-weight:600; width:250px;"><%=tipsearchVO.getBoard_title() %></span>
-			<span style="float:right"><%=tipsearchVO.getRegist_time() %></span>
+			<span style="float:left; color:blue;">Tip</span>
+			<span class="title-line"><%=tipsearchVO.getBoard_title() %></span>
+			<span class="right-line"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span class="content-line"><%=tipsearchVO.getBoard_content()%></span>
+			<span class="content-line" style="margin-left: 2rem;"><%=tipsearchVO.getBoard_content()%></span>
 			<br><br>
-			<span style="float:left; font-size:14px;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
-			<span style="float:right; color:#8C8C8C;"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
+			<span style="float:left; font-size:14px; margin-left: 2rem;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span class="right-line" style="color:#8C8C8C"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
 		</a>
 	</div>
 	<%} %>
 </div>
+	
 <div class="btn-box">	
 	 <ul class="pagination center">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
