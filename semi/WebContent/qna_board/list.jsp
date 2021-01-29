@@ -93,12 +93,12 @@
 		padding: 0;
 		border: 1px solid #ededed; */
 	
-	.information > span {
+	.information > span, span > a {
 		margin-bottom: 10px;
-		font-size: 14px;
+		font-size: 12px;
    	 	line-height: 20px;
     	font-weight: 500;
-		color: #000;
+		color: #888888;
 	}
 	.category li {
 		margin-bottom: 10px;
@@ -116,17 +116,20 @@
 		text-align: center;
 	}
 	<!-- 게시글 -->
-	.text-box {
-		width:100%;
-		height: 150px;
-		margin-bottom: 10px;
+	.text-outbox {
+		width: 700px;
 		padding: 0.5rem;
-		border: 1px solid #ededed;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
     	white-space: normal;
+	}
+	.text-box {
+		width: 700px;
+		height: 130px;
+		border: 1px solid #ededed;
     	border-radius: 10px;
+    	margin-bottom: 10px;
 	}
 	.question {
 		font-size: 14px;

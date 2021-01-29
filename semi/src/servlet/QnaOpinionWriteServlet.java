@@ -27,9 +27,9 @@ public class QnaOpinionWriteServlet extends HttpServlet{
 			opinionDto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
 			
 			//현재 로그인한 사용자 정보를 불러오는 코드
-			int memeber_no = (int)req.getSession().getAttribute("check");
+			int member_no = (int)req.getSession().getAttribute("check");
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.find(memeber_no);
+			MemberDto memberDto = memberDao.find(member_no);
 			
 			//MemberDto의 member_id를 QnaOpinionDto의 opinion_writer에 설정
 			opinionDto.setOpinion_writer(memberDto.getMember_id());
