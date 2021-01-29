@@ -249,7 +249,7 @@ td {
 	<div class="aside">
 		<div class="container-content center">
 			<div class="padding-top-20"> 
-				<img src="https://via.placeholder.com/100" alt="Avatar" style="border-radius: 50%">
+				<img src="https://placeimg.com/100/100/summer" alt="Avatar" style="border-radius: 50%">
 			</div>
 			<br>
 			<h3>
