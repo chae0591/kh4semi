@@ -48,38 +48,41 @@
 	}
 	
 	/* 전체 화면의 폭은 1100px 로 한다 */
-	main {
+	header, section, .slide {
 		width:1100px;
 		margin:auto;
 		min-height: 700px;
 	}
 	
+	nav, footer {
+		width:100%;
+	}
+	
+	.top{
+		width:1100px;
+		margin:auto;
+		margin-top: 1.2rem;
+	}
+	
 	/* 각각의 레이아웃 영역에 여백을 설정한다 */
-	header, footer, nav, section {
+	header, footer, section {
 		padding:1rem;
 	}
 	
 	/* 본문에 내용이 없어도 최소높이를 설정하여 일정 크기만큼 표시되도록 한다 */
 	section {
 		min-height: 500px;
-		margin-left: 5rem;
-        margin-right: 5rem;
 	}
 	
 	footer {
-		min-height: 250px;
-		padding-left:6rem;
+		min-height: 300px;
 		padding-top: 8rem;
-		background-color: #E7E7E7;
+		background-color: #DFF9F9;
 		font-size: 12px;
 		font-weight:700;
 		color: #5D5D5D;
+		margin: auto;
 	}
-	/* 로고있는 상단 부분 좌우 마진 */
-	.top{
-        margin-left: 5rem;
-        margin-right: 5rem;
-    }
 	
 	.logo {
 	    float: left;
@@ -93,20 +96,27 @@
 	.menu,
     .menu ul {
         list-style: none;
-        margin: 0;
-        padding: 1rem;
-        border-top: 2px solid #454545;
-        border-bottom: 2px solid #454545;
-        font-weight: 600;
-        
+        padding: 1.4rem;
+        height:68px;
+        margin-top: 10px;
+        background-color: #5edfdf;
+        font-weight: 500;
+        font-size: 17px;
     }
-
+    
     .menu>li,
     .menu>li>a {
-        width: 200px;
+        width: 250px;
         display: inline-block;
         position: relative;
-        color: #454545;
+        color: #fff;
+    }
+    
+    .menu>li>a:hover{
+    	color: #119e9e;
+    	font-weight: 900;
+    	font-size:18px;
+    	text-decoration: underline;
     }
         
     a{
@@ -133,7 +143,7 @@
 	
 	.slide {
 	  position: relative;
-	  padding-top: 10px;
+	  padding-top: 30px;
 	  overflow: hidden;
 	}
 	
