@@ -254,7 +254,7 @@ $(function(){
 			<%if(isSearch){%>
 				<li class="dateRank"><a href="list.jsp?isSearch&type=<%=type%>&key=<%=key%>">최신순</a></li>
 			<%}else{ %>
-				<li class="dateRank"><a href="list.jsp">최신순</a></li>
+				<li class="dateRank"><a href="list.jsp?isSearch">최신순</a></li>
 			<%} %>
 			<%if(isSearch){%>
 				<li class="countRank"><a href="list.jsp?isOrder&type=<%=type%>&key=<%=key%>">댓글순</a></li>
