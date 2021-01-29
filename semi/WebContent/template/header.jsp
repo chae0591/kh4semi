@@ -38,13 +38,13 @@
 		font-family :'나눔고딕', 'Malgun Gothic', sans-serif;
 	}
 	
-	/* 전체 화면의 폭은 1100px 로 한다 */
-	header, section, .slide {
+	/* 헤더와 섹션의 폭은 1100px 로 한다 */
+	header, section {
 		width:1100px;
 		margin:auto;
 	}
 	
-	nav, footer {
+	nav, footer, .slide {
 		width:100%;
 	}
 	
@@ -76,6 +76,8 @@
 	
 	.logo {
 	    float: left;
+	    width: 200px;
+	    height: 90px;
     }
     
     .log-btn {
@@ -90,8 +92,8 @@
         height:68px;
         margin-top: 10px;
         background-color: #5edfdf;
-        font-weight: 500;
-        font-size: 17px;
+        font-weight: 600;
+        font-size: 18px;
     }
     
     .menu>li,
@@ -105,7 +107,7 @@
     .menu>li>a:hover{
     	color: #119e9e;
     	font-weight: 900;
-    	font-size:18px;
+    	font-size:19px;
     	text-decoration: underline;
     }
         
@@ -149,7 +151,7 @@
 	
 	.panel>li {
 	  width: 25%;
-	  height: 320px;
+	  height: 370px;
 	  float: left;
 	  background-repeat: no-repeat;
 	  background-size: 100% 100%;
@@ -373,7 +375,7 @@ function slide() {
 		<header>
 			<div class="right top">
 				<a href="<%=request.getContextPath()%>">
-	            	<img class="logo" alt="디비go" src="https://placehold.it/200x105?text=dibigo">
+	            	<img class="logo" alt="디비go" src="http://localhost:8888/semi/images/logo.png">
 	            </a>
 	            
 	            <!-- 비회원이 마주할 메뉴 -->
@@ -410,17 +412,17 @@ function slide() {
   			<ul class="panel">
 				<li>
 					<a href="<%=request.getContextPath()%>">
-						<img src="https://media.istockphoto.com/vectors/cartoon-banner-of-the-flying-plane-and-cloud-on-blue-sky-background-vector-id911262920?k=6&m=911262920&s=170667a&w=0&h=FBPrLChHXnlZEy_k0_-lXtICgL0h4T_yrglyJt1sEmQ=" width="1100" height="320px">
+						<img src="https://media.istockphoto.com/vectors/cartoon-banner-of-the-flying-plane-and-cloud-on-blue-sky-background-vector-id911262920?k=6&m=911262920&s=170667a&w=0&h=FBPrLChHXnlZEy_k0_-lXtICgL0h4T_yrglyJt1sEmQ=" width="100%" height="370px">
 					</a>
 				</li>
 				<li>
 					<a href="<%=request.getContextPath()%>/tip_board/list.jsp">
-						<img src="https://image.freepik.com/free-vector/various-travel-attractions-in-paper-art-style_67590-514.jpg" width="1100" height="320px">
+						<img src="https://image.freepik.com/free-vector/various-travel-attractions-in-paper-art-style_67590-514.jpg" width="100%" height="370px">
 					</a>
 				</li>
 				<li>
 					<a href="<%=request.getContextPath()%>/qna_board/list.jsp">
-						<img src="https://img.freepik.com/free-vector/summer-holidays-retro-van-and-surf-boards-travel-and-people-concept-smiling-young-hippie-friends-in-minivan-car-on-beach_108939-334.jpg?size=626&ext=jpg&uid=R33195769&ga=GA1.2.300558524.1610501897" width="1100" height="320px">
+						<img src="https://img.freepik.com/free-vector/summer-holidays-retro-van-and-surf-boards-travel-and-people-concept-smiling-young-hippie-friends-in-minivan-car-on-beach_108939-334.jpg?size=626&ext=jpg&uid=R33195769&ga=GA1.2.300558524.1610501897" width="100%" height="370px">
 					</a>
 				</li>
 			</ul>
