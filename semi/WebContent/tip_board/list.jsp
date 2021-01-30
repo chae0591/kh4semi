@@ -215,7 +215,7 @@
 <div class="contents left">
 	<a href="<%=request.getContextPath()%>">전체</a>
 	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>/tip_board/list.jdsp">여행꿀팁</a>
+	<a href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a>
 </div>
 
 <div class="bigTitle">여행꿀팁</div>
