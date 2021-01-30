@@ -346,7 +346,7 @@ $(function(){
 <div class="contents left">
 	<a href="<%=request.getContextPath()%>">전체</a>
 	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>/qna_board">여행Q&amp;A</a>
+	<a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a>
 </div>
 
 <div class="bigTitle">여행Q&amp;A</div>

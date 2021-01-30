@@ -92,24 +92,83 @@
 <%-- <h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1> --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
-
+	.img-container img{
+		max-width:100%;
+	}
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.btn{
+		cursor: pointer;
+	}
+	div, span, a {
+		border: none !important;
+	}
+	hr {
+		height: 2px;
+		color: #999;
+		background-color: #ddd;
+		border: none;
+	}
+	.outbox::after {
+		width:100%;
+		height: auth;
+		min-height: 700px;
+		display: block;
+		clear: both;
+		content: "";
+	}
+	.padding-top-20 {
+  		padding-top: 20px;
+	}
+	.padding-top-10 {
+  		padding-top: 10px;
+	}
+	.padding-bottom-20 {
+  		padding-bottom: 20px;
+	}
+	.padding-bottom-10 {
+  		padding-bottom: 10px;
+	}
+	.padding-left-10 {
+  		padding-bottom: 10px;
+	}
+	.gray {
+		color: #999;
+	}
+	.border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
 	.contents{
 		min-height: 50px;
     	margin: 0 auto;
     	padding: 10px 0 0 ;
     	border-bottom: 1px solid #eeeeee;
     }
-	
-	.outbox {
-		width:100%;
-		height: auth;
-		min-height: 700px;
-		position: relative;
-		border: 1px solid black;
-		overflow: auto;
-	}
+    .contents span{
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color : #bbbbbb;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    .contents a{
+    	display: block;
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color: #666666;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
 	aside {
-		border: 1px solid blue;
 		float: left;
 		width: 20%;
 		height: auth;
@@ -121,7 +180,6 @@
 		list-style: none;
 	}
 	article {
-		border: 1px solid red;
 		float: right;
 		width: 80%;
 		height: auth;
@@ -129,39 +187,30 @@
 		padding: 1rem;
 		position: relative;
 	}
-	.table-box {
+	.container-content {
+		padding: 10px;
+	}
+	.opinion-box {
 		width: 100%;
-		text-aligh: left;
-	}
-	.all-content-box {
-		width: 100%;
-		margin-bottom: 10px;
-	}
-	.text-box {
-		margin-bottom: 10px;
-		padding: 0.5rem;
-	}
-	.opinion-input-box {
-		width: 100%;
-		border: 1px solid black;
-		border-radius: 6px;
-	}
-	.opinion-input-box > .content-box {
-		outline: none;
-	}
-	.opinion-input-box > .input-btn {
-		float: right;
-		display: block;
+		height: auto;
+		margin: 10px;
+		border: 1px solid #999;
 	}
 	.opinion-list-box {
 		width: 100%;
 	}
-	.opinion-list-box > .opinion-normal {
+	.pagination {
+		text-align: center;
 		width: 100%;
-		border: 1px solid black;
-		margin-bottom: 10px;
-		padding: 0.5rem;
 	}
+	.pagination > ul> li {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #e5e5e5;
+	}	
 </style>
 <script>
 	$(function(){
@@ -185,6 +234,11 @@
 		//삭제버튼 -> delete.do
 		$(".delete-btn").click(function(){
 			location.href = "delete.do?board_no=<%=board_no%>";//절대경로
+		});
+		
+		//목록으로 -> list.jsp
+		$(".before-btn").click(function(){
+			location.href = "list.jsp";
 		});
 		
 		//좋아요 버튼 -> vote_write_delete.do
@@ -235,163 +289,166 @@
 	});
 
 </script>
-	<!-- 상단 부분 -->
-	<div class="contents left">
-	<a href="<%=request.getContextPath()%>">전체</a>
-	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>/qna_board">여행Q&amp;A</a>
+
+
+
+<!-- 상단 부분 -->
+<div class="contents left">
+	<a href="<%=request.getContextPath()%>">전체</a><span> &gt; </span> 
+	<a href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A</a>
 </div>
 	
-	
-	<div class="outbox">
-	<!-- 목록으로 -->
+<div class="outbox">
+
 	<aside>
-		<ul>
-			<li><a href="/semi/qna_board/list.jsp">목록으로</a></li>
-		</ul>
+		<div class="container-content center">
+			<div class="padding-top-20"> 
+				<img src="https://placeimg.com/100/100/summer" alt="Avatar" style="border-radius: 50%">
+			</div>
+			<br>
+			<h3>
+				<%=writerDto.getMember_nick()%>
+			</h3>
+			<div class="gray">여행작가</div>
+			<div>
+				<a class="gray"
+					href="list.jsp?type=board_writer&key=<%=boardDto.getBoard_writer()%>">
+					작성글 (<%=boardDao.getCount("board_writer", boardDto.getBoard_writer())%>)
+				</a>
+			</div>
+		</div>
 	</aside>
 	
 	<article>
-		<table class="table-box">
-			<tbody>
-			<!-- 게시글 -->
-				<tr>
-					<td>
-						<div class="all-content-box">
-						<div class="text-box">
-							<p><%=boardDto.getBoard_writer()%><%=boardDto.getRegist_time()%></p>
-					
-							<span>질문</span><span><%=boardDto.getBoard_title()%></span>
-					
-							<p><%=boardDto.getBoard_content()%></p>
-						
-							<span class="vote">좋아요</span><span><%=boardDto.getVote()%></span>
-						</div>
-			<!-- 댓글 작성란 -->
-						<div class="opinion-box">
-							<form action="opinion_write.do" method="post">
-							<div class="row">
-								<input type="hidden" name="board_no" value="<%=board_no%>">
-							</div>
-							<div class="row opinion-input-box">
-								<textarea class="input content-box form-control" name="opinion_content" style="border:none" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
-							</div>
-							<br>
-							<div class="row input-btn">
-								<input type="submit" value="댓글 등록" class="input btn btn-info">
-							</div>
-							</form>
-						</div>
-						</div>
-					</td>
-				</tr>
-					
-				
-			<!-- 댓글 목록 -->	
-				<tr>
-					<td>
-						<div class="opinion-list-box">
-							<%for(QnaOpinionDto opinionDto : list){ %>
-							
-							<!-- 일반 출력 화면 -->
-							<div class="opinion-normal">
-								<div><%=opinionDto.getOpinion_writer()%></div>
-									<%if(boardDto.getBoard_writer().equals(opinionDto.getOpinion_writer())){ %>
-										<span style="color:red;">(작성자)</span>
-									<%} %>
-								<div><%=opinionDto.getOpinion_content()%></div>
-								<div>
-									<% 
-										SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd E a h:mm:ss");
-										String timeFormat = f.format(opinionDto.getRegist_time());
-									%>
-									<%=timeFormat%>
-								</div>
-								<div>	
-									<!-- 수정은 댓글 작성자만, 삭제는 댓글 작성자, 게시글 작성자 가능 -->
-									<%
-										//댓글 작성자
-										boolean isReplyWriter;
-										try{
-											isReplyWriter = memberDto.getMember_id().equals(opinionDto.getOpinion_writer());
-										}catch(Exception e){
-											isReplyWriter = false;
-										}
-									%>
-									<%if(isReplyWriter){ %>
-									<a href="#" class="opinion-edit-btn">수정</a> |
-									<%} %>
-									
-									<%if(isReplyWriter || isMember){ %>
-									<a href="opinion_delete.do?opinion_no=<%=opinionDto.getOpinion_no()%>&board_no=<%=board_no%>" class="opinion-delete-btn">삭제</a>
-									<%} %>
-								</div>
-							</div>
-							
-							<!-- 수정을 위한 화면 : 댓글 작성자에게만 나오도록 조건 설정 -->
-							<%if(isReplyWriter){ %>
-							<div class="opinion-edit">
-								<form action="opinion_write.do" method="post">
-									<input type="hidden" name="opinion_no" value="<%=opinionDto.getOpinion_no()%>">
-									<input type="hidden" name="board_no" value="<%=board_no%>">
-									<div class="row">
-										<textarea class="input" name="opinion_content" required rows="5" 
-											placeholder="댓글 작성"><%=opinionDto.getOpinion_content()%></textarea>
-									</div>
-									<div class="row">
-										<input type="submit" value="댓글 수정" class="input input-inline opinion-re-edit-btn">
-										<input type="button" value="작성 취소" class="input input-inline opinion-edit-cancel-btn">
-									</div>
-								</form>
-							</div>
-							<%} %>
-							<%} %>
-						</div>
-						
-						<!-- 페이지 네비게이션 -->
-						<div class="row">
-							<ul class="pagination center">
-							
-								<li><a href="detail.jsp?p=<%=startBlock-1%>&board_no=<%=board_no%>">&lt;</a></li>
-								
-							<%for(int i=startBlock; i<=endBlock; i++){ %>
-								<%if(i == p){ %>
-								<li class="active"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
-								<%}else{ %>
-								<li><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
-								<%} %>
-							<%} %>
-								
-								<%if(endBlock != pageSize){ %>
-								<li><a href="detail.jsp?p=<%=endBlock+1%>&board_no=<%=board_no%>">&gt;</a></li>
-								<%} %>
-							</ul>
-						</div>
-					</td>
-				</tr>
-				
-			</tbody>
-			<tfoot>
-			
-				<tr>
-					<th>
-					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
-					<%if(isMember){ %>
-						<button class="write-btn btn btn-default">글쓰기</button>
-						<button class="edit-btn btn btn-default">수정</button>
-						<button class="delete-btn btn btn-default">삭제</button>
-					<%}else{ %>
-						<button class="vote-btn btn btn-default">좋아요</button>
-						<button class="write-btn btn btn-default">글쓰기</button>
-					<%} %>
-					</th>
-				</tr>
-				
-			</tfoot>
-		</table>
+	<!-- 게시글 -->
+		<div class="container-content">
+			<h3> <%=boardDto.getBoard_title()%></h3>
+
+			<div class="regist_time">
+				<div>작성일 : <%=boardDto.getRegist_time()%></div>
+			</div>
+			<hr>
+			<div style="word-break: break-all;" class="container-content padding-top-20 padding-bottom-20 img-container"><%=boardDto.getBoard_content()%></div>
+			<hr>
+			<div class="container-content gray">
+				<span class="btn input input-inline vote-btn">좋아요(<%=boardDto.getVote()%>)</span>
+			<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
+			<%if(isMember){ %>
+				<span class="btn input input-inline write-btn">글쓰기</span>
+				<span class="btn input input-inline edit-btn">수정</span>
+				<span class="btn input input-inline delete-btn">삭제</span>
+				<span class="btn input input-inline before-btn">목록으로</span>
+			<%}else{ %>
+				<span class="btn input input-inline vote-btn">좋아요</span>
+				<span class="btn input input-inline write-btn">글쓰기</span>
+				<span class="btn input input-inline before-btn">목록으로</span>
+			<%} %>
+			</div>
+			<hr>
+		</div>
 		
+	<!-- 댓글 작성란 -->
+	<div class="opinion-box">
+		<div class="gray padding-bottom-10">
+			댓글 (<%=list.size()%>)
+		</div>
+		<form style="padding-left:10px;" action="opinion_write.do" method="post">
+				<input type="hidden" name="board_no" value="<%=board_no%>">
+				<div class="row">
+					<textarea class="input form-control" name=opinion_text required rows="3"
+						placeholder="댓글 작성"></textarea>
+				</div>
+				<br>
+				<div class="row">
+					<input type="submit" value="댓글 작성" class="input btn btn-info">
+				</div>
+			</form>
+	</div>		
+			
+	<!-- 댓글 목록 -->	
+	<div class="opinion-list-box">
+		<%for(QnaOpinionDto opinionDto : list){ %>
+							
+		<!-- 일반 출력 화면 -->
+		<div class="opinion-normal padding-top-10 padding-left-10 row left">
+			<div>
+				<%=opinionDto.getOpinion_writer()%>
+				<%if(boardDto.getBoard_writer().equals(opinionDto.getOpinion_writer())){ %>
+					<span class="gray">(작성자)</span>
+				<%} %>
+				<% 
+					SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd E a h:mm:ss");
+					String timeFormat = f.format(opinionDto.getRegist_time());
+				%>
+				<span class="gray">
+				| <%=timeFormat%>
+				</span>
+
+				<!-- 수정은 댓글 작성자만, 삭제는 댓글 작성자, 게시글 작성자 가능 -->
+				<%
+					//댓글 작성자
+					boolean isReplyWriter;
+					try{
+						isReplyWriter = memberDto.getMember_id().equals(opinionDto.getOpinion_writer());
+					}catch(Exception e){
+						isReplyWriter = false;
+					}
+				%>
+				<%if(isReplyWriter){ %>
+					<span class="gray"> | </span>
+					<a href="#" class="opinion-edit-btn gray">수정</a>
+				<%} %>
+									
+				<%if(isReplyWriter || isMember){ %>
+					<span class="gray"> | </span>
+					<a href="opinion_delete.do?opinion_no=<%=opinionDto.getOpinion_no()%>&board_no=<%=board_no%>" class="opinion-delete-btn gray">삭제</a>
+				<%} %>
+			</div>
+			<div><%=opinionDto.getOpinion_content()%></div>
+		</div>
+							
+			<!-- 수정을 위한 화면 : 댓글 작성자에게만 나오도록 조건 설정 -->
+			<%if(isReplyWriter){ %>
+			<div class="opinion-edit">
+				<form action="opinion_write.do" method="post">
+					<input type="hidden" name="opinion_no" value="<%=opinionDto.getOpinion_no()%>">
+					<input type="hidden" name="board_no" value="<%=board_no%>">
+					<div class="row padding-bottom-10">
+						<textarea class="input form-control" name="opinion_content" required rows="5" 
+						placeholder="댓글 작성"><%=opinionDto.getOpinion_content()%></textarea>
+					</div>
+					<div class="row">
+						<input type="submit" value="댓글 수정" class="input btn btn-info input-inline opinion-re-edit-btn">
+						<input type="button" value="작성 취소" class="input btn btn-info input-inline opinion-edit-cancel-btn">
+					</div>
+				</form>
+			</div>
+			<%} %>
+	<%} %>
+						
+		</div>
+		
+		<!-- 페이지 네비게이션 -->
+		<div class="row">
+			<ul class="pagination">
+				<li><a href="detail.jsp?p=<%=startBlock-1%>&board_no=<%=board_no%>">&lt;</a></li>
+								
+				<%for(int i=startBlock; i<=endBlock; i++){ %>
+					<%if(i == p){ %>
+						<li class="active"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+					<%}else{ %>
+						<li><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+					<%} %>
+				<%} %>
+								
+				<%if(endBlock != pageSize){ %>
+					<li><a href="detail.jsp?p=<%=endBlock+1%>&board_no=<%=board_no%>">&gt;</a></li>
+				<%} %>
+			</ul>
+		</div>
 	</article>
-	</div>
+	
+</div>
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
