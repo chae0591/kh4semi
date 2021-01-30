@@ -204,8 +204,8 @@
 	<%} %>
 </div>
 	
-<div class="btn-box">	
-	 <ul class="pagination center">
+<div class="btn-box center">	
+	 <ul class="pagination">
 	    <li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=startBlock-1%>">&lt;</a></li>
 	    
 	 <%for(int i=startBlock ; i <=  endBlock ; i++){ %>
@@ -219,7 +219,7 @@
       
       <%if(endBlock != pageSize){ %>
       	<li><a href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>&p=<%=endBlock+1%>">&gt;</a></li>
-      <%}%>	 
+      <%}%>
     </ul>
 </div>
 

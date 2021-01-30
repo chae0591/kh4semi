@@ -186,7 +186,7 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" style="border-radius: 10px;" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기&gt;</a>
+	<a class="btn-more input" style="border-radius: 10px;" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>">여행꿀팁 더보기&gt;</a>
 </div>
 
 <%} else{%>
@@ -216,7 +216,7 @@
 </div>
 
 <div class="btn-box center" style="margin-bottom: 3rem">
-	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A 더보기&gt;</a>
+	<a class="btn-more input" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">여행Q&amp;A 더보기&gt;</a>
 </div>
 
 <%} else{%>
