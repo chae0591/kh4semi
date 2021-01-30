@@ -355,12 +355,12 @@
 		<form style="padding-left:10px;" action="opinion_write.do" method="post">
 				<input type="hidden" name="board_no" value="<%=board_no%>">
 				<div class="row">
-					<textarea class="input form-control" name=opinion_text required rows="3"
+					<textarea class="input form-control" name=opinion_content required rows="3"
 						placeholder="댓글 작성"></textarea>
 				</div>
 				<br>
 				<div class="row">
-					<input type="submit" value="댓글 작성" class="input btn btn-info">
+					<input type="submit" value="댓글 작성" class="input btn btn-info input-btn">
 				</div>
 			</form>
 	</div>		
