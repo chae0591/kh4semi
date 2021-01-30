@@ -62,6 +62,9 @@
 	}
 %>
 <style>
+	.v-center{
+		 vertical-align: middle;
+	}
 	.pagination > .remove-hover-style:hover {
 		box-shadow: none;
 	    /*border:1px solid gray;*/
@@ -212,7 +215,7 @@
 <div class="contents left">
 	<a href="<%=request.getContextPath()%>">전체</a>
 	<span> &gt; </span> 
-	<a href="<%=request.getContextPath()%>/tip_board">여행꿀팁</a>
+	<a href="<%=request.getContextPath()%>/tip_board/list.jdsp">여행꿀팁</a>
 </div>
 
 <div class="bigTitle">여행꿀팁</div>
@@ -271,5 +274,21 @@
 		</ul>
 	</div>
 </div>
+
+
+<form class="form-group" action="list.jsp" method="get">
+<div class="row center">
+	<select name="type" class="input input-inline v-center" style="vertical-align: middle;">
+		<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
+		<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
+	</select>
+	<%if(isSearch){ %>
+	<input type="text" class="input input-inline v-center" name="key" required value="<%=key%>">
+	<%}else{ %>
+	<input type="text" class="input input-inline v-center" name="key" required>
+	<%} %>
+	<input type="submit" class="btn btn-info" value="검색">
+</div>
+</form>
 <jsp:include page="/template/footer.jsp"></jsp:include>		
 		
