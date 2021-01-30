@@ -52,7 +52,7 @@
 	.top{
 		width:1100px;
 		margin:auto;
-		margin-top: 1.2rem;
+		margin-top: 1.5rem;
 	}
 	
 	/* 각각의 레이아웃 영역에 여백을 설정한다 */
@@ -78,7 +78,8 @@
 	.logo {
 	    float: left;
 	    width: 200px;
-	    height: 80px;
+	    height: 60px;
+	    margin-top: 0.9rem;
     }
     
     .log-btn {
