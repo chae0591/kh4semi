@@ -26,7 +26,7 @@
 		justify-items: start;
 		align-items: start;		
 		padding: 10px 0 0 ;
-		margin-left: 1.2rem;
+		margin-left: 2.3rem;
 	}
 	
 	.container-qna{
@@ -37,7 +37,7 @@
 		justify-items: start;
 		align-items: start;	
 		padding: 10px 0 0 ;	
-		margin-left: 1.2rem;
+		margin-left: 2.3rem;
 	}	
 
 	.item{
@@ -94,15 +94,14 @@
     }
     
     .btn-more{
-    	padding: 0 35px;
-    	height: 35px;
-    	line-height: 35px;
-    	border: 1px solid #999;
-    	border-radius: 2px;
-    	font-size: 14px;
-    	color: #333;
-  		border-radius: 10px;
+    	padding: 0.9rem !important;
+    	height: 40px;
+    	line-height: 40px;
     	border-radius: 10px;
+    	font-size: 14px;
+    	color: white;
+    	background-color: #5edfdf;
+    	border-style: none !important;
     }
     
     .right-line{
@@ -114,13 +113,14 @@
     .title-line{
     	float:left; 
     	font-size:1.1em; 
-    	font-weight:600;
+    	font-weight:500;
     	display: inline-block;
     	width:280px;
     	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
     	text-overflow: ellipsis;
+    	color: #222;
     }
     
     .title-line:hover{
@@ -142,6 +142,7 @@
     	display: -webkit-box;
     	-webkit-line-clamp: 2;
     	-webkit-box-orient: vertical;
+    	color: #8c8c8c;
     }
     
     .content-line:hover{
@@ -174,9 +175,9 @@
 			<span class="font title-line"><%=tipsearchVO.getBoard_title() %></span>
 			<span class="font right-line"><%=tipsearchVO.getRegist_time() %></span>
 			<br><br>
-			<span class="font content-line" style="margin-left: 2rem"><%=tipsearchVO.getBoard_content()%></span>
+			<span class="font content-line" style="margin-left: 2.5rem"><%=tipsearchVO.getBoard_content()%></span>
 			<br>
-			<span class="font" style="float:left; font-size:14px; margin-left: 2rem;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
+			<span class="font" style="float:left; font-size:14px; margin-left: 2.5rem;">일정 <%=tipsearchVO.getStart_date()%> ~ <%=tipsearchVO.getEnd_date() %></span>
 			<span class="font right-line" style="color:#8C8C8C"><%=tipsearchVO.getMember_nick()%> 여행작가</span>
 		</a>
 	</div>
@@ -185,13 +186,12 @@
 </div>
 
 <div class="btn-box center">
-	<a class="btn-more input" style="background-color: #5edfdf" href="<%=request.getContextPath()%>/search/tiplist_more.jsp?keyword=<%=keyword%>">
-		<span class="font" style="color: white;">여행꿀팁 더보기 &gt;</span>
-	</a>
+	<a class="btn-more input" style="border-radius: 10px;" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁 더보기&gt;</a>
 </div>
 
 <%} else{%>
 	<h3 class="font">'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
+	<br><br><br><br><br><br>
 <%} %>
 
 <div class="bigTitle font">여행Q&amp;A</div>
@@ -206,23 +206,22 @@
 			<span class="title-line font"><%=qnasearchVO.getBoard_title()%></span>
 			<span class="font right-line"><%=qnasearchVO.getRegist_time()%></span>
 			<br><br>
-			<span class="content-line font" style="margin-left: 2.9rem"><%=qnasearchVO.getBoard_content()%></span>
+			<span class="content-line font" style="margin-left: 3.6rem"><%=qnasearchVO.getBoard_content()%></span>
 			<br>
-			<span class="font" style="color:#8C8C8C; margin-left: 2.9rem"><%=qnasearchVO.getMember_nick()%> 님의 질문입니다</span>
+			<span style="margin-left: 3.6rem;"><%=qnasearchVO.getMember_nick()%></span><span style="color:#8C8C8C"> 님의 질문입니다</span>
 		</a>
 	</div>
 	<%} %>
 	
 </div>
 
-<div class="btn-box center">
-	<a class="btn-more input" style="background-color: #5edfdf" href="<%=request.getContextPath()%>/search/qnalist_more.jsp?keyword=<%=keyword%>">
-		<span class="font" style="color: white;">여행Q&amp;A 더보기 &gt;</span>
-	</a>
+<div class="btn-box center" style="margin-bottom: 3rem">
+	<a class="btn-more input" href="<%=request.getContextPath()%>/qna_board/list.jsp">여행Q&amp;A 더보기&gt;</a>
 </div>
 
 <%} else{%>
 	<h3 class="font">'<%=keyword%>'에 대한 검색결과가 없습니다.</h3>
+	<br><br><br><br><br><br><br><br><br>
 <%} %>
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
