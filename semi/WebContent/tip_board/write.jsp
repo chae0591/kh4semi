@@ -64,6 +64,7 @@ label, div, span, a {
 #textEditor {
 	border: 1px solid #ccc !important;
 	border-radius: 5px;
+	min-height: 500px;
 }
 
 </style>
@@ -101,7 +102,6 @@ label, div, span, a {
 			<br>
 			<textarea style="display:none;" name="board_content" class="input"></textarea>
 			<div id="textEditor" class="input img-container" contenteditable="true">
-				<br><br><br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
 		

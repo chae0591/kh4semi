@@ -71,6 +71,7 @@ label, div, span, a {
 #textEditor {
 	border: 1px solid #ccc !important;
 	border-radius: 5px;
+	min-height: 500px;
 }
 
 </style>
