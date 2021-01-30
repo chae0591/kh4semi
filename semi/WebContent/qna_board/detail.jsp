@@ -89,9 +89,16 @@
 	}
 %>
 
-<h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1>
+<%-- <h1>count = <%=count%>, Size = <%=pageSize%>, startBlock = <%=startBlock%>, endBlock = <%=endBlock%></h1> --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <style>
+
+	.contents{
+		min-height: 50px;
+    	margin: 0 auto;
+    	padding: 10px 0 0 ;
+    	border-bottom: 1px solid #eeeeee;
+    }
 	
 	.outbox {
 		width:100%;
@@ -160,7 +167,14 @@
 	$(function(){
 		//글쓰기버튼 -> write.jsp
 		$(".write-btn").click(function(){
-			location.href = "write.jsp";
+			var sessionCheck = '<%=session.getAttribute("check")%>';
+			if(! sessionCheck == '' && sessionCheck == 'null'){
+				alert("로그인이 필요합니다.")
+				location.href = "<%=request.getContextPath()%>/member/login.jsp";
+			}
+			else{
+				location.href = "<%=request.getContextPath()%>/qna_board/write.jsp";
+			}
 		});
 		
 		//수정버튼 -> edit.jsp
@@ -175,7 +189,14 @@
 		
 		//좋아요 버튼 -> vote_write_delete.do
 		$(".vote-btn").click(function(){
+			var sessionCheck = '<%=session.getAttribute("check")%>';
+			if(! sessionCheck == '' && sessionCheck == 'null'){
+				alert("로그인이 필요합니다.")
+				location.href = "<%=request.getContextPath()%>/member/login.jsp";
+			}
+			else{	
 			location.href = "vote_write_delete.do?board_no=<%=board_no%>";//절대경로
+			}
 		});
 		
 		<!-- 댓글 버튼 -->
@@ -215,11 +236,11 @@
 
 </script>
 	<!-- 상단 부분 -->
-	<div>
-		<a href="/semi">전체</a>
-		<span> > </span>
-		<a href="/semi/qna_board/list.jsp">여행Q&A</a>
-	</div>
+	<div class="contents left">
+	<a href="<%=request.getContextPath()%>">전체</a>
+	<span> &gt; </span> 
+	<a href="<%=request.getContextPath()%>/qna_board">여행Q&amp;A</a>
+</div>
 	
 	
 	<div class="outbox">
@@ -253,10 +274,11 @@
 								<input type="hidden" name="board_no" value="<%=board_no%>">
 							</div>
 							<div class="row opinion-input-box">
-								<textarea class="input content-box" name="opinion_content" style="border:none" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
+								<textarea class="input content-box form-control" name="opinion_content" style="border:none" required rows="5" placeholder="댓글을 작성해주세요(최대 80자)"></textarea>
 							</div>
+							<br>
 							<div class="row input-btn">
-								<input type="submit" value="댓글 등록" class="input">
+								<input type="submit" value="댓글 등록" class="input btn btn-info">
 							</div>
 							</form>
 						</div>
@@ -355,10 +377,12 @@
 					<th>
 					<!-- 로그인한 회원만 볼 수 있도록 구현 -->	
 					<%if(isMember){ %>
-						<button class="vote-btn">좋아요</button>
-						<button class="write-btn">글쓰기</button>
-						<button class="edit-btn">수정</button>
-						<button class="delete-btn">삭제</button>
+						<button class="write-btn btn btn-default">글쓰기</button>
+						<button class="edit-btn btn btn-default">수정</button>
+						<button class="delete-btn btn btn-default">삭제</button>
+					<%}else{ %>
+						<button class="vote-btn btn btn-default">좋아요</button>
+						<button class="write-btn btn btn-default">글쓰기</button>
 					<%} %>
 					</th>
 				</tr>

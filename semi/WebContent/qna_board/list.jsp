@@ -85,6 +85,102 @@
 %>
 
 <style>
+
+	.contents{
+		min-height: 50px;
+    	margin: 0 auto;
+    	padding: 10px 0 0 ;
+    	border-bottom: 1px solid #eeeeee;
+    }
+    .contents span{
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color : #bbbbbb;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    .contents a{
+    	display: block;
+    	float: left;
+    	position: relative;
+    	height: 40px;
+    	line-height:40px;
+    	color: #666666;
+    	font-size: 14px;
+    	font-weight: 500;
+    }
+    .bigTitle{
+    	position: relative;
+    	height: 60px;
+    	line-height: 70px;
+    	font-size: 23px;
+    	font-weight: 700;
+    	color: #454545;
+    	border-bottom: 3px solid #454545;
+    }
+    .btn-box{
+    	margin-top: 15px;
+    }
+    .container-tip{
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		grid-auto-rows: minmax(1em, auto);
+		grid-gap: 1rem;
+		justify-items: start;
+		align-items: start;		
+		padding: 10px 0 0 ;
+		margin-left: 2.3rem;
+	}
+
+	.item{
+		padding: 1rem;
+		width: 500px;
+	}
+	.right-line{
+    	float:right; 
+    	margin-right: 1rem;
+    }
+    .title-line{
+    	float:left; 
+    	font-size:1.1em; 
+    	font-weight:500;
+    	display: inline-block;
+    	width:280px;
+    	margin-left: 0.5em;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	color: #222;
+    }
+    .title-line:hover{
+    	text-decoration: underline;
+    }
+    .content-line{
+    	font-size: 0.9em;
+    	display: inline-block;
+    	width:280px;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: normal;
+    	line-height: 1.5;
+    	height: 3em;
+    	word-wrap: break-word;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 2;
+    	-webkit-box-orient: vertical;
+    	color: #8c8c8c;
+    }
+    .content-line:hover{
+    	text-decoration: underline;
+    }
+    .border-gray-1 {
+		border: 1px solid #999 !important;
+  		border-radius: 10px;
+	}
+	div{ box-sizing: border-box; }
 	
 		/* width:100%;
 		height: auth;
@@ -106,6 +202,8 @@
    	 	line-height: 20px;
     	font-weight: 500;
 		color: #000;
+		list-style: none;
+		display:inline-block;
 	}
 	.main-title{
 		margin-bottom: 10px;
@@ -123,6 +221,7 @@
     	overflow: hidden;
     	text-overflow: ellipsis;
     	white-space: normal;
+    	border-radius: 10px;
 	}
 	.text-box {
 		width: 700px;
@@ -243,14 +342,17 @@ $(function(){
 });
 </script>
 		
-	<!— 상단 부분 —>
-	<div class="information">
-		<span><a href="/semi">전체</a></span>
-		<span> > </span>
-		<span><a href="/semi/qna_board/list.jsp">여행Q&A</a></span>
-	</div>
-	<!— 최신순, 댓글순 —>
-	<div class="category">
+	<!-- 상단 부분 -->
+<div class="contents left">
+	<a href="<%=request.getContextPath()%>">전체</a>
+	<span> &gt; </span> 
+	<a href="<%=request.getContextPath()%>/qna_board">여행Q&amp;A</a>
+</div>
+
+<div class="bigTitle">여행Q&amp;A</div>
+
+	<!-- 최신순, 댓글순 -->
+	<div class="category btn-box">
 		<ul>
 		<%QnaBoardDto boardDto = new QnaBoardDto();%>
 			<%if(isSearch){%>
@@ -268,46 +370,52 @@ $(function(){
 	
 	<span class="main-title">답변을 기다려요!</span>
 	
- 	<div class="text-outbox">
+ 	<div class="container-tip">
 	<%for(QnaBoardDto dto : list){ %>
-			<div class="text-box">
-			<!-- 타이틀 -->
-			<span class="question">질문</span><span class="title"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>" style="float: left"><%=dto.getBoard_title()%></a></span>		
-			<!-- 내용 -->				
-			<p class="content"><a href="detail.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_content()%></a></p>
-			<!-- 작성자 -->
-			<span class="member"><%=dto.getBoard_writer()%></span><span class="who">님의 질문입니다</span>
-			<!-- 작성날짜 -->
-			<span class="time"><%=dto.getRegist_time()%></span>
-			<!-- 좋아요 -->
-			<span class="heart">♡</span><span class="vote"><%=dto.getVote()%></span>
-			<!-- 댓글개수 -->
-			<span class="reply">댓글</span><span class="opinion"><%=dto.getOpinion()%></span>
+			<div class="item border-gray-1">
+				<a href="detail.jsp?board_no=<%=dto.getBoard_no()%>">
+					<span style="float:left" class="question">질문</span>
+					<!-- 타이틀 -->
+					<span class="title-line"> <%=dto.getBoard_title()%></span>
+					<!-- 작성날짜 -->
+					<span class="right-line"><%=dto.getRegist_time()%></span>
+					<br><br>		
+					<!-- 내용 -->				
+					<span class="content-line" style="margin-left: 3.4rem"><%=dto.getBoard_content()%></span>
+					<!-- 작성자 -->
+					<br>
+					<span style="margin-left: 3.6rem;"><%=dto.getBoard_writer()%></span><span style="color:#8C8C8C">님의 질문입니다</span>
+					<!-- 좋아요 -->
+					<span class="heart">♡</span><span class="vote"><%=dto.getVote()%></span>
+					<!-- 댓글개수 -->
+					<span class="reply">댓글</span><span class="opinion"><%=dto.getOpinion()%></span>
+				</a>
 			</div>
 	<%} %>
 	</div>
 	
+	<br>
 	<div class="row right">
-		<button class="write-btn input input-inline">글쓰기</button>
+		<button class="write-btn input input-inline btn btn-info">글쓰기</button>
 	</div>
-	<!— 검색창 —>
-	<form action="list.jsp" method="post">
-	<div class="row">
-		<select name="type" class="input input-inline">
+	<!-- 검색창  -->
+	<form action="list.jsp" method="post" class="form-inline">
+	<div class="row form-group">
+		<select name="type" class="input input-inline form-control">
 			<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
 			<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
 		</select>
 		<%if(isSearch){ %>
-		<input type="text" class="input input-inline" name="key" required value="<%=key%>">
+		<input type="text" class="input input-inline form-control" name="key" required value="<%=key%>">
 		<%}else{ %>
-		<input type="text" class="input input-inline" name="key" required>
+		<input type="text" class="input input-inline form-control" name="key" required>
 		<%} %>
-		<input type="submit" class="input input-inline search-btn" value="검색">
+		<input type="submit" class="btn btn-info" value="검색">
 	</div>
 	</form>
 	
 	
-	<!— 페이지 네비게이션 —>
+	<!-- 페이지 네비게이션 -->
 	<div class="pagination">
 		<ul>
 			<%if(isSearch) {%>
@@ -318,10 +426,10 @@ $(function(){
 			<%for(int i =startBlock; i<=endBlock; i++){ %>
 				<li>
 				<%if(isSearch){ %>
-					<!— 검색용 링크 —>
+					<!-- 검색용 링크 -->
 					<a href="list.jsp?p=<%=1%>&type=<%=type%>&key=<%=key%>"><%=i%></a>
 				<%}else{ %>
-					<!— 목록용 링크 —>
+					<!-- 목록용 링크 -->
 					<a href="list.jsp?p=<%=i%>"><%=i%></a>
 				<%} %>
 				</li>

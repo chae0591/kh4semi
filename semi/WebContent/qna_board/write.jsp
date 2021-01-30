@@ -54,6 +54,12 @@ window.onload = function() {
 
 };
 </script>
+<style>
+#textEditor {
+	border: 1px solid #ccc !important;
+	border-radius: 5px;
+}
+</style>
 <div class="outbox" style="width:800px">
 	<div class="row center">
 		<h2>게시글 작성</h2>
@@ -66,21 +72,24 @@ window.onload = function() {
 		
 	<div class="row">
 		<label>제목</label>
-		<input type="text" class="input" name="board_title" required>
+		<input type="text" class="input form-control" name="board_title" required>
 	</div>
+	<br>
 	<div class="row">
 		<label>내용</label>
 		<div>
-			<button id='btn-upload'>이미지 업로드</button>
+			<button id='btn-upload' class="btn btn-default">이미지 업로드</button>
 		</div>
+		<br>
 		<textarea style="display:none;" name="board_content" class="input"></textarea>
 		<div id="textEditor" class="input" contenteditable="true">
 			
 		</div>
 	</div>
 	
+	<br>
 	<div class="row">
-		<input type="submit" class="input" value="등록">
+		<input type="submit" class="input btn btn-info" value="등록">
 	</div>
 	 
 	</form>

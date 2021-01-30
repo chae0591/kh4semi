@@ -63,6 +63,7 @@ label, div, span, a {
 
 #textEditor {
 	border: 1px solid #ccc !important;
+	border-radius: 5px;
 }
 
 </style>
@@ -76,34 +77,39 @@ label, div, span, a {
 		<!-- 사용자 몰래 번호를 첨부 -->
 		<input type="hidden" name="file_no_list">
 		
-		<div class="row">
+		<div class="row form-inline">
 			<label>시작일</label>
-			<input type="date" name="start_date"
+			<input type="date" class="form-control" name="start_date"
 	       min="1900-01-01" max="2100-12-31" required>
 			<label>종료일</label>
-			<input type="date" name="end_date"
+			<input type="date" class="form-control" name="end_date"
 	       min="1900-01-01" max="2100-12-31" required>
 		</div>
 		
+		<br>
 		<div class="row">
 			<label>제목</label>
-			<input type="text" class="input" name="board_title" required>
+			<input type="text" class="input form-control" name="board_title" required>
 		</div>
 		
+		<br>
 		<div class="row">
 			<label>내용</label>
 			<div>
-				<button id='btn-upload'>이미지 업로드</button>
+				<button id='btn-upload' class="btn btn-default">이미지 업로드</button>
 			</div>
+			<br>
 			<textarea style="display:none;" name="board_content" class="input"></textarea>
 			<div id="textEditor" class="input img-container" contenteditable="true">
 				<br><br><br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
 		
+		<br>
 		<div class="row">
-			<input type="submit" class="input" value="등록">
+			<input type="submit" class="input  btn btn-info" value="등록">
 		</div>
+		<br>
 		 
 	</form>
 	<div style="display:none;">
