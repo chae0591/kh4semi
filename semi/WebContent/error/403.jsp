@@ -11,7 +11,6 @@ window.location.replace('<%=request.getContextPath()%>/member/login.jsp');
 		<h3>
 		로그인 페이지로 이동합니다.
 		</h3>
-		
 	</div>
 </div>
 
