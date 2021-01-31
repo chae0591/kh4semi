@@ -199,6 +199,9 @@
 	.opinion-list-box {
 		width: 100%;
 	}
+	.btn-box{
+    	margin-top: 15px;
+    }
 	.pagination {
 		text-align: center;
 		width: 100%;
@@ -210,7 +213,23 @@
     	line-height: 24px;
     	font-weight: 300;
     	color: #e5e5e5;
-	}	
+	}
+	.pagination li {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination li:hover, li:active {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination > li > a{
+		float: none;
+	}
+	.pagination > .remove-hover-style:hover {
+		box-shadow: none;
+	    /*border:1px solid gray;*/
+	    cursor: default;
+	}
 </style>
 <script>
 	$(function(){
@@ -429,23 +448,25 @@
 		</div>
 		
 		<!-- 페이지 네비게이션 -->
+	<div class="btn-box center">
 		<div class="row">
 			<ul class="pagination">
-				<li><a href="detail.jsp?p=<%=startBlock-1%>&board_no=<%=board_no%>">&lt;</a></li>
+				<li class="remove-hover-style"><a href="detail.jsp?p=<%=startBlock-1%>&board_no=<%=board_no%>" >&lt;</a></li>
 								
 				<%for(int i=startBlock; i<=endBlock; i++){ %>
 					<%if(i == p){ %>
-						<li class="active"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+						<li class="remove-hover-style active"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
 					<%}else{ %>
-						<li><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
+						<li class="remove-hover-style"><a href="detail.jsp?p=<%=i%>&board_no=<%=board_no%>"><%=i%></a></li>
 					<%} %>
 				<%} %>
 								
 				<%if(endBlock != pageSize){ %>
-					<li><a href="detail.jsp?p=<%=endBlock+1%>&board_no=<%=board_no%>">&gt;</a></li>
+					<li class="remove-hover-style"><a href="detail.jsp?p=<%=endBlock+1%>&board_no=<%=board_no%>">&gt;</a></li>
 				<%} %>
 			</ul>
 		</div>
+	</div>
 	</article>
 	
 </div>

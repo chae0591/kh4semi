@@ -284,7 +284,6 @@
 		text-align: center;
 		width: 100%;
 	}
-	
 	.pagination > ul> li {
 		display: inline-block;
 		text-decoration: none;
@@ -293,15 +292,22 @@
     	font-weight: 300;
     	color: #e5e5e5;
 	}
-	/* .pagination > ul> li:hover {
-		display: inline-block;
-		text-decoration: none;
-		font-size: 14px;
-    	line-height: 24px;
-    	font-weight: 500;
-    	color: #00EDF5;
-    	border-color: #e5e5e5;
-	} */
+	.pagination li {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination li:hover, li:active {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination > li > a{
+		float: none;
+	}
+	.pagination > .remove-hover-style:hover {
+		box-shadow: none;
+	    /*border:1px solid gray;*/
+	    cursor: default;
+	}
 	.board_title {
 		width:100%;
 		height:20px;
@@ -416,15 +422,16 @@ $(function(){
 	
 	
 	<!-- 페이지 네비게이션 -->
-	<div class="pagination">
-		<ul>
+	<div class="btn-box center">
+		<div class="row">
+			<ul class="pagination">
 			<%if(isSearch) {%>
-				<li><a href="list.jsp?p=<%=startBlock-1%>&type=<%=type%>&key=<%=key%>">&lt;</a></li>
+				<li class="remove-hover-style"><a href="list.jsp?p=<%=startBlock-1%>&type=<%=type%>&key=<%=key%>">&lt;</a></li>
 			<%}else { %>
-				<li><a href="list.jsp?p=<%=startBlock-1%>">&lt;</a></li>
+				<li class="remove-hover-style"><a href="list.jsp?p=<%=startBlock-1%>">&lt;</a></li>
 			<%} %>
 			<%for(int i =startBlock; i<=endBlock; i++){ %>
-				<li>
+				<li class="remove-hover-style">
 				<%if(isSearch){ %>
 					<!-- 검색용 링크 -->
 					<a href="list.jsp?p=<%=1%>&type=<%=type%>&key=<%=key%>"><%=i%></a>
@@ -436,11 +443,12 @@ $(function(){
 			<%} %>
 			
 			<%if(isSearch){ %>
-				<li><a href="list.jsp?p=<%=endBlock+1%>&type=<%=type%>&key=<%=key%>">&gt;</a></li>
+				<li class="remove-hover-style"><a href="list.jsp?p=<%=endBlock+1%>&type=<%=type%>&key=<%=key%>">&gt;</a></li>
 			<%}else{ %>
-				<li><a href="list.jsp?p=<%=endBlock+1%>">&gt;</a></li>
+				<li class="remove-hover-style"><a href="list.jsp?p=<%=endBlock+1%>">&gt;</a></li>
 			<%} %>
 		</ul>
+		</div>
 	</div>
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
