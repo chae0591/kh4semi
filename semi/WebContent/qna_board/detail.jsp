@@ -202,6 +202,7 @@
 	.btn-box{
     	margin-top: 15px;
     }
+    <!-- 페이지네이션 -->
 	.pagination {
 		text-align: center;
 		width: 100%;
