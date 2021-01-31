@@ -397,7 +397,7 @@ function slide() {
 	            <%}else{ %>
 	            <div class="dropdown">
 	            	<span class="log-btn dropbtn" ><%=session.getAttribute("nick") %>님 환영합니다 </span>	
-	            	<div class="dropdown-content">
+	            	<div class="dropdown-content dropdown-menu">
 	            		<p><a href="<%=request.getContextPath()%>/member/my.jsp" class="log-my">내정보</a></p>
 	            		<p><a href="<%=request.getContextPath()%>/member/logout.do" class="log-btn">로그아웃</a></p>
 	            	</div>
@@ -405,7 +405,7 @@ function slide() {
 	            
 	            <%} %>
 	            
-	            <form class="form-inline" action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 1rem">
+	            <form class="form-inline" action="<%=request.getContextPath()%>/search/list.jsp" method="post" style="margin-block-end: 0.8rem; margin-top: 0.5rem;">
 		        	<div class="form-group">    
 			            <input type="text" name="keyword" placeholder="검색어 입력" class="form-control">
 			            <input type="submit" value="검색" class="btn btn-info">

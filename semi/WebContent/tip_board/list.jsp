@@ -276,16 +276,16 @@
 </div>
 
 
-<form class="form-group" action="list.jsp" method="get">
+<form class="form-inline" action="list.jsp" method="get">
 <div class="row center">
-	<select name="type" class="input input-inline v-center" style="vertical-align: middle;">
+	<select name="type" class="input input-inline v-center form-control" style="vertical-align: middle;">
 		<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
 		<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
 	</select>
 	<%if(isSearch){ %>
-	<input type="text" class="input input-inline v-center" name="key" required value="<%=key%>">
+	<input type="text" class="input input-inline v-center form-control" name="key" required value="<%=key%>">
 	<%}else{ %>
-	<input type="text" class="input input-inline v-center" name="key" required>
+	<input type="text" class="input input-inline v-center form-control" name="key" required>
 	<%} %>
 	<input type="submit" class="btn btn-info" value="검색">
 </div>
