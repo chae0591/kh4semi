@@ -359,7 +359,7 @@
 				<span class="btn input input-inline delete-btn">삭제</span>
 				<span class="btn input input-inline before-btn">목록으로</span>
 			<%}else{ %>
-				<span class="btn input input-inline vote-btn">좋아요</span>
+				<!-- <span class="btn input input-inline vote-btn">좋아요</span> -->
 				<span class="btn input input-inline write-btn">글쓰기</span>
 				<span class="btn input input-inline before-btn">목록으로</span>
 			<%} %>
