@@ -386,7 +386,7 @@ function slide() {
 		<header>
 			<div class="right top">
 				<a href="<%=request.getContextPath()%>">
-	            	<img class="logo" alt="디비go" src="http://localhost:8888/semi/images/logo.png">
+	            	<img class="logo" alt="디비go" src="<%=request.getContextPath()%>/images/logo.png">
 	            </a>
 	            
 	            <!-- 비회원이 마주할 메뉴 -->
