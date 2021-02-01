@@ -239,8 +239,8 @@ td {
 </script>
 
 <div class="gray">
-	<a class="gray" href="/semi">전체</a> <span> &gt; </span> 
-	<a class="gray" href="/semi/qna_board/list.jsp">여행꿀팁</a>
+	<a class="gray" href="<%=request.getContextPath()%>">전체</a> <span> &gt; </span> 
+	<a class="gray" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a>
 </div>
 
 <hr>
