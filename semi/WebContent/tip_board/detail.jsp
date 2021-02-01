@@ -51,6 +51,7 @@
 	//	= select * from reply where reply_origin = ? order by reply_no asc
 	/////////////////////////////////////////////////////////////////
 	TipOpinionDao tipOpinionDao = new TipOpinionDao();
+	TipOpinionDto opinionDto = new TipOpinionDto();
 	List<TipOpinionDto> tipOpList = tipOpinionDao.select(board_no);
 %>
 
@@ -235,12 +236,19 @@ td {
 			$(this).parents(".reply-edit").hide();
 			$(this).parents(".reply-edit").prev().show();
 		});
+		
+		//삭제버튼 -> opinion_delete.do
+		$(".opinion-delete-btn").click(function(){
+			if(confirm("정말 지우시겠습니까?")){
+				location.href = "opinion_delete.do?opinion_no=<%=opinionDto.getOpinion_no()%>&board_no=<%=board_no%>";//절대경로
+			}
+		});
 	});
 </script>
 
 <div class="gray">
-	<a class="gray" href="<%=request.getContextPath()%>">전체</a> <span> &gt; </span> 
-	<a class="gray" href="<%=request.getContextPath()%>/tip_board/list.jsp">여행꿀팁</a>
+	<a class="gray" href="/semi">전체</a> <span> &gt; </span> 
+	<a class="gray" href="/semi/qna_board/list.jsp">여행꿀팁</a>
 </div>
 
 <hr>
@@ -330,7 +338,7 @@ td {
 			</form>
 			<div class="outbox container-content ">
 				<%
-					for (TipOpinionDto tipOpDto : tipOpList) {
+					for(TipOpinionDto tipOpDto : tipOpList) {
 				%>
 
 				<!-- 일반 출력 화면 -->
@@ -373,7 +381,7 @@ td {
 							if (isAdmin || isReplyOwner) {
 						%>
 						<span class="gray"> | </span>
-						<a class="gray" href="opinion_delete.do?opinion_no=<%=tipOpDto.getOpinion_no()%>&board_no=<%=board_no%>">삭제</a>
+						<a class="opinion-delete-btn gray" href="opinion_delete.do?opinion_no=<%=tipOpDto.getOpinion_no()%>&board_no=<%=board_no%>">삭제</a>
 						<%
 							}
 						%>
@@ -393,14 +401,14 @@ td {
 						<input type="hidden" name="opinion_no"
 							value="<%=tipOpDto.getOpinion_no()%>"> <input
 							type="hidden" name="board_no" value="<%=board_no%>">
-						<div class="row" style="margin-bottom: 10px">
-							<textarea class="input form-control" name="opinion_text" required rows="5"
+						<div class="row">
+							<textarea class="input" name="opinion_text" required rows="5"
 								placeholder="댓글 작성"><%=tipOpDto.getOpinion_text()%></textarea>
 						</div>
 						<div class="row">
-							<input type="submit" value="댓글 수정" class="input input-inline btn btn-info">
+							<input type="submit" value="댓글 수정" class="input input-inline">
 							<input type="button" value="작성 취소"
-								class="input input-inline reply-edit-cancel-btn btn btn-info">
+								class="input input-inline reply-edit-cancel-btn">
 						</div>
 					</form>
 				</div>
@@ -422,5 +430,3 @@ td {
 
 
 </div>
-
-<jsp:include page="/template/footer.jsp"></jsp:include>
