@@ -393,14 +393,14 @@ td {
 						<input type="hidden" name="opinion_no"
 							value="<%=tipOpDto.getOpinion_no()%>"> <input
 							type="hidden" name="board_no" value="<%=board_no%>">
-						<div class="row">
-							<textarea class="input" name="opinion_text" required rows="5"
+						<div class="row" style="margin-bottom: 10px">
+							<textarea class="input form-control" name="opinion_text" required rows="5"
 								placeholder="댓글 작성"><%=tipOpDto.getOpinion_text()%></textarea>
 						</div>
 						<div class="row">
-							<input type="submit" value="댓글 수정" class="input input-inline">
+							<input type="submit" value="댓글 수정" class="input input-inline btn btn-info">
 							<input type="button" value="작성 취소"
-								class="input input-inline reply-edit-cancel-btn">
+								class="input input-inline reply-edit-cancel-btn btn btn-info">
 						</div>
 					</form>
 				</div>
