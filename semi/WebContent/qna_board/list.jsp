@@ -234,7 +234,7 @@
 		font-size: 14px;
    	 	line-height: 20px;
     	font-weight: 500;
-		color: #00EDF5;
+		color: red;
 	}
 	.title {
 	    font-size: 16px;
@@ -404,25 +404,9 @@ $(function(){
 	<div class="row right">
 		<button class="write-btn input input-inline btn btn-info">글쓰기</button>
 	</div>
-	<!-- 검색창  -->
-	<form action="list.jsp" method="post" class="form-inline">
-	<div class="row form-group">
-		<select name="type" class="input input-inline form-control">
-			<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
-			<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
-		</select>
-		<%if(isSearch){ %>
-		<input type="text" class="input input-inline form-control" name="key" required value="<%=key%>">
-		<%}else{ %>
-		<input type="text" class="input input-inline form-control" name="key" required>
-		<%} %>
-		<input type="submit" class="btn btn-info" value="검색">
-	</div>
-	</form>
-	
 	
 	<!-- 페이지 네비게이션 -->
-	<div class="btn-box center">
+	<div class="btn-box row center">
 		<div class="row">
 			<ul class="pagination">
 			<%if(isSearch) {%>
@@ -450,5 +434,21 @@ $(function(){
 		</ul>
 		</div>
 	</div>
+	
+	<!-- 검색창  -->
+	<form action="list.jsp" method="post" class="form-inline">
+	<div class="row center">
+		<select name="type" class="input input-inline form-control">
+			<option value="board_title" <%if(type!=null&&type.equals("board_title")){%>selected<%}%>>제목</option>
+			<option value="board_writer" <%if(type!=null&&type.equals("board_writer")){%>selected<%}%>>작성자</option>
+		</select>
+		<%if(isSearch){ %>
+		<input type="text" class="input input-inline form-control" name="key" required value="<%=key%>">
+		<%}else{ %>
+		<input type="text" class="input input-inline form-control" name="key" required>
+		<%} %>
+		<input type="submit" class="btn btn-info" value="검색">
+	</div>
+	</form>
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>

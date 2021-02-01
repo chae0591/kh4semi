@@ -253,7 +253,9 @@
 		
 		//삭제버튼 -> delete.do
 		$(".delete-btn").click(function(){
-			location.href = "delete.do?board_no=<%=board_no%>";//절대경로
+			if(confirm("정말 지우시겠습니까?")){
+				location.href = "delete.do?board_no=<%=board_no%>";//절대경로
+			}
 		});
 		
 		//목록으로 -> list.jsp
@@ -285,6 +287,19 @@
 			$(this).parents(".opinion-normal").hide();
 			$(this).parents(".opinion-normal").next().show();
 		});	
+		
+		//삭제버튼 -> opinion_delete.do
+		$(".opinion-delete-btn").click(function(){
+			if(confirm("정말 지우시겠습니까?")){
+				location.href = "opinion_delete.do?opinion_no=<%=opiniondto.getOpinion_no()%>&board_no=<%=board_no%>";//절대경로
+			}
+		});
+		//수정 버튼을 누르면 수정화면을 숨기고 일반화면 표시
+		$(".opinion-re-edit-btn").click(function(){
+			location.href = "opinion_edit.do?opinion_no=<%=opiniondto.getOpinion_no()%>&board_no=<%=board_no%>";//절대경로
+			$(this).parents(".opinion-edit").hide();
+			$(this).parents(".opinion-edit").prev().show();
+		});
 		
 		//작성 취소 버튼을 누르면 수정화면을 숨기고 일반화면 표시
 		$(".opinion-edit-cancel-btn").click(function(){
@@ -430,7 +445,7 @@
 			<!-- 수정을 위한 화면 : 댓글 작성자에게만 나오도록 조건 설정 -->
 			<%if(isReplyWriter){ %>
 			<div class="opinion-edit">
-				<form action="opinion_write.do" method="post">
+				<form action="opinion_edit.do" method="post">
 					<input type="hidden" name="opinion_no" value="<%=opinionDto.getOpinion_no()%>">
 					<input type="hidden" name="board_no" value="<%=board_no%>">
 					<div class="row padding-bottom-10">
