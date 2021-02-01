@@ -55,6 +55,11 @@ $(document).ready(function() {
            }
 	     });
 	};
+	
+	//취소하고 이전 페이지로 넘어가기
+	$(".btn-cancel").click(function(){
+			history.go(-1);
+	});
 });
 </script>
 <style>
@@ -122,6 +127,7 @@ label, div, span, a {
 	
 	<div class="row">
 		<input type="submit" class="input btn btn-info" value="수정">
+		<input type="button" class="input btn btn-cancel" value="취소">
 	</div>
 	 
 	</form>

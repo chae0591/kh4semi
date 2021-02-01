@@ -51,6 +51,7 @@
 	//	= select * from reply where reply_origin = ? order by reply_no asc
 	/////////////////////////////////////////////////////////////////
 	TipOpinionDao tipOpinionDao = new TipOpinionDao();
+	TipOpinionDto opinionDto = new TipOpinionDto();
 	List<TipOpinionDto> tipOpList = tipOpinionDao.select(board_no);
 %>
 
@@ -235,6 +236,13 @@ td {
 			$(this).parents(".reply-edit").hide();
 			$(this).parents(".reply-edit").prev().show();
 		});
+		
+		//삭제버튼 -> opinion_delete.do
+		$(".opinion-delete-btn").click(function(){
+			if(confirm("정말 지우시겠습니까?")){
+				location.href = "opinion_delete.do?opinion_no=<%=opinionDto.getOpinion_no()%>&board_no=<%=board_no%>";//절대경로
+			}
+		});
 	});
 </script>
 
@@ -330,7 +338,7 @@ td {
 			</form>
 			<div class="outbox container-content ">
 				<%
-					for (TipOpinionDto tipOpDto : tipOpList) {
+					for(TipOpinionDto tipOpDto : tipOpList) {
 				%>
 
 				<!-- 일반 출력 화면 -->
@@ -373,7 +381,7 @@ td {
 							if (isAdmin || isReplyOwner) {
 						%>
 						<span class="gray"> | </span>
-						<a class="gray" href="opinion_delete.do?opinion_no=<%=tipOpDto.getOpinion_no()%>&board_no=<%=board_no%>">삭제</a>
+						<a class="opinion-delete-btn gray" href="opinion_delete.do?opinion_no=<%=tipOpDto.getOpinion_no()%>&board_no=<%=board_no%>">삭제</a>
 						<%
 							}
 						%>

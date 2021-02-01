@@ -65,6 +65,30 @@
 	.v-center{
 		 vertical-align: middle;
 	}
+	<!-- 페이지 네이션 -->
+	.pagination {
+		text-align: center;
+		width: 100%;
+	}
+	.pagination > ul> li {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #e5e5e5;
+	}
+	.pagination li {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination li:hover, li:active {
+		box-shadow: none;
+	    cursor: default;
+	}
+	.pagination > li > a{
+		float: none;
+	}
 	.pagination > .remove-hover-style:hover {
 		box-shadow: none;
 	    /*border:1px solid gray;*/
@@ -189,6 +213,13 @@
     .content-line:hover{
     	text-decoration: underline;
     }
+	.vote, .heart, .reply, .opinion{
+		font-size: 14px;
+    	line-height: 24px;
+    	font-weight: 300;
+    	color: #8c8c8c;
+	}    
+    
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script>
@@ -231,9 +262,13 @@
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=dto.getBoard_no()%>">
 			<span style="float:left; color:blue;">Tip</span>
 			<span class="title-line"><%=dto.getBoard_title() %>
-			<%if(dto.getOpinion_count() > 0){ %>
+			<%-- <%if(dto.getOpinion_count() > 0){ %>
 				[<%=dto.getOpinion_count()%>]
-			<%}%>
+			<%}%> --%>
+			<!-- 좋아요 -->
+			<span class="heart">♡</span><span class="vote"><%=dto.getVote()%></span>
+			<!-- 댓글개수 -->
+			<span class="reply">댓글</span><span class="opinion"><%=dto.getOpinion_count()%></span>
 			</span>
 			<span class="right-line"><%=dto.getRegist_time() %></span>
 			<br><br>
@@ -248,7 +283,7 @@
 <div class="btn-box row right">
 	<button class="write-btn input input-inline btn btn-info">글쓰기</button>
 </div>
-<div class="btn-box center">
+<div class="btn-box row center">
 	<div class="row">
 		<ul class="pagination">
 			<li 
