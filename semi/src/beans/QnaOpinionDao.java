@@ -10,8 +10,8 @@ import util.JdbcUtil;
 
 public class QnaOpinionDao {
 
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 	
 	//댓글 등록 기능
 	public void insert(QnaOpinionDto dto) throws Exception {

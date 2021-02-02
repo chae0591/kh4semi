@@ -10,8 +10,8 @@ import util.JdbcUtil;
 
 public class QnaBoardDao {
 	
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 	
 	//목록 기능
 	public List<QnaBoardDto> select() throws Exception {

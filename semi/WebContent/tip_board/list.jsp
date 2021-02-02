@@ -184,7 +184,7 @@
     	font-size:1.1em; 
     	font-weight:500;
     	display: inline-block;
-    	width:280px;
+    	width:200px;
     	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;
@@ -261,7 +261,7 @@
 	<div class="item border-gray-1">
   		<a href="<%=request.getContextPath()%>/tip_board/detail.jsp?board_no=<%=dto.getBoard_no()%>">
 			<span style="float:left; color:blue;">Tip</span>
-			<span class="title-line"><%=dto.getBoard_title() %>
+			<span class="title-line"><%=dto.getBoard_title() %></span>
 			<%-- <%if(dto.getOpinion_count() > 0){ %>
 				[<%=dto.getOpinion_count()%>]
 			<%}%> --%>
@@ -269,7 +269,7 @@
 			<span class="heart">♡</span><span class="vote"><%=dto.getVote()%></span>
 			<!-- 댓글개수 -->
 			<span class="reply">댓글</span><span class="opinion"><%=dto.getOpinion_count()%></span>
-			</span>
+			
 			<span class="right-line"><%=dto.getRegist_time() %></span>
 			<br><br>
 			<span class="content-line" style="margin-left: 2.5rem"><%=dto.getBoard_content()%></span>

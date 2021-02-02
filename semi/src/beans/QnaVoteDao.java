@@ -8,8 +8,8 @@ import util.JdbcUtil;
 
 public class QnaVoteDao {
 
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 	
 	//좋아요 기능
 	public void insert(QnaVoteDto dto) throws Exception {

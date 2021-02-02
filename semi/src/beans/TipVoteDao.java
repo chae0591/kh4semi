@@ -10,8 +10,8 @@ import util.JdbcUtil;
 
 public class TipVoteDao {
 
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 	
 	public void insert(TipVoteDto dto) throws Exception {
 		Connection con = JdbcUtil.getConnection(USERNAME, PASSWORD);

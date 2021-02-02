@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import util.JdbcUtil;
 
 public class MemberDao {
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 	
 	//로그인을 위한 맴버찾기 
 	public MemberDto find(String member_id) throws Exception {
