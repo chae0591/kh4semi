@@ -22,7 +22,7 @@ public class QnaFileUploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 //			수신 : req로 불가능하기 때문에 새로운 해석기를 생성해야 한다(MultipartRequest) - cos.jar 필요
-			String path = "C:/upload";
+			String path = "D:/upload/kh45";
 			int max = 10 * 1024 * 1024;//10MB
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
