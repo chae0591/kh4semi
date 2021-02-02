@@ -147,7 +147,7 @@
     	font-size:1.1em; 
     	font-weight:500;
     	display: inline-block;
-    	width:280px;
+    	width:260px;
     	margin-left: 0.5em;
     	white-space: nowrap;
     	overflow: hidden;

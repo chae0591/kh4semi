@@ -28,7 +28,7 @@ public class QnaFileDownloadServlet extends HttpServlet {
 			QnaTmpFileDao qnaFileDao = new QnaTmpFileDao();
 			QnaTmpFileDto qnaFileDto = qnaFileDao.find(file_no);
 			
-			String path = "C:/upload";
+			String path = "D:/upload/kh45";
 			File target = new File(path, qnaFileDto.getSave_name());
 			byte[] data = new byte[(int)target.length()];//파일크기만큼 배열 생성
 			FileInputStream in = new FileInputStream(target);//파일을 읽기 위한 통로 생성

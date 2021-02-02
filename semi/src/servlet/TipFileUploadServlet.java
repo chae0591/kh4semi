@@ -22,7 +22,7 @@ public class TipFileUploadServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 
-			String path = "C:/upload";
+			String path = "D:/upload/kh45";
 			int max = 10 * 1024 * 1024;
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
@@ -32,15 +32,7 @@ public class TipFileUploadServlet extends HttpServlet{
 			dir.mkdirs();
 			
 			MultipartRequest mRequest = new MultipartRequest(req, path, max, encoding, policy);
-			
-
-
-
-
-
-
-
-			
+				
 			TipTmpFileDto tmpFileDto = new TipTmpFileDto();
 			tmpFileDto.setSave_name(mRequest.getFilesystemName("f"));
 			tmpFileDto.setUpload_name(mRequest.getOriginalFileName("f"));
@@ -54,9 +46,6 @@ public class TipFileUploadServlet extends HttpServlet{
 			tmpFileDao.writeWithPrimaryKey(tmpFileDto);
 			
 			String imgUrl = req.getContextPath() + "/tip_tmp_file/download.do?file_no=" + file_no;
-
-
-			
 
 			String json = "{ "
 

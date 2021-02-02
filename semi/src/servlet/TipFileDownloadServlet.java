@@ -28,7 +28,7 @@ public class TipFileDownloadServlet extends HttpServlet{
 			TipTmpFileDao tmpFileDao = new TipTmpFileDao();
 			TipTmpFileDto tmpFileDto = tmpFileDao.find(file_no);
 			
-			String path = "C:/upload";
+			String path = "D:/upload/kh45";
 			File target = new File(path, tmpFileDto.getSave_name());
 			byte[] data = new byte[(int)target.length()];
 			FileInputStream in = new FileInputStream(target);
