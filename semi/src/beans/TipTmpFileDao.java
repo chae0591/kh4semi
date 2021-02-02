@@ -8,8 +8,8 @@ import util.JdbcUtil;
 
 public class TipTmpFileDao {
 	
-	public static final String USERNAME = "project5";
-	public static final String PASSWORD = "project5";
+	public static final String USERNAME = "kh45";
+	public static final String PASSWORD = "kh45";
 
 	
 	public boolean updateBoardNo(int file_no, int board_no) throws Exception {
