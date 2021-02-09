@@ -102,6 +102,12 @@
 
 <br><br>
 
+**검색 결과**
+![hajun_part](./ReadmeImages/hajun_part.png)
+
+이제 작성해야함.
+
+
 **여행 꿀팁**
 
 ![hajun_part](./ReadmeImages/hajun_part.png)
