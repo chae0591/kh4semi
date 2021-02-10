@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="beans.*" %>
-//테스트
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script>
 var state = {
